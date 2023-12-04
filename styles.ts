@@ -1,10 +1,19 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components/native';
+import LinearGradient from 'react-native-linear-gradient';
+import { Text } from 'react-native/types';
+interface ContainerProps {
+  colors: (string | number)[] | undefined;
+  backgroundColor?: string;
+}
 
-export const Container = styled.View`
+
+export const Container = styled(LinearGradient).attrs({
+  colors: ['#000000', '#333333'], // Substitua com as cores desejadas
+  start: { x: 0, y: 0 },
+  end: { x: 1, y: 1 },
+})`
   flex: 1;
-  background-color: #fff;
-
   justify-content: center;
 `;
 
@@ -23,6 +32,12 @@ export const ButtonPlayer = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
 `;
+export const ButtonPlayerText = styled.Text`
+font-weight: bold;
+  font-size: 18px;
+  color: #FFFFFF;
+  text-align: center;`;
+
 export const ContainerRadio = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -33,15 +48,16 @@ export const ContainerRadio = styled.View`
 export const ContainerDescRadio = styled.View`
   flex-direction: row;
 `;
-export const ContainerImgRadio = styled.View`
+
+export const ContainerImgRadio = styled(LinearGradient).attrs((props: ContainerProps) => ({
+  colors: props.colors,
+ }))<ContainerProps>`
   width: 90px;
   height: 90px;
   border-radius: 24px;
-  background-color: blue;
-
   margin-top: 16px;
   margin-left: 16px;
-`;
+ `;
 export const ImgRadio = styled.Image``;
 export const ContainerText = styled.View`
   margin-left: 16px;
@@ -49,13 +65,14 @@ export const ContainerText = styled.View`
 `;
 export const Titulo = styled.Text`
   font-weight: bold;
-  font-size: 17px;
- 
+  font-size: 26px;
+  color: #FFFFFF;
 `;
 
 export const Subtitulo = styled.Text`
-  font-size: 13px;
+  font-size: 18px;
   opacity: 0.6;
+  color: #FFFFFF;
 `;
 export const Line = styled.View`
   align-self: flex-end;
