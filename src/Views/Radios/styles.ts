@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Text } from 'react-native/types';
+
 interface ContainerProps {
   colors: (string | number)[] | undefined;
   backgroundColor?: string;

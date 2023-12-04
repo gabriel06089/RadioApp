@@ -17,7 +17,7 @@ import {
   ButtonPlayerText,
 } from './styles';
 
-export default function App() {
+export default function RadioScreen() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPlaying2, setIsPlaying2] = useState(false);
 
