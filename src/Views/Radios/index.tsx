@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
+import { StatusBar } from 'react-native';
 import TrackPlayer, { Event } from 'react-native-track-player';
+import { TouchableOpacity } from 'react-native';
 import {
   Container,
   Titulo,
@@ -15,9 +16,13 @@ import {
   Subtitulo,
   ContainerHeader,
   ButtonPlayerText,
+  ContainerNavigation,
+  ContainerHeaderText,
+  HeaderText,
 } from './styles';
-
-export default function RadioScreen() {
+import { CaretDown } from 'phosphor-react-native';
+import RadioPlayer from './radioText';
+export default function RadioScreen({ navigation }: { navigation: any }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPlaying2, setIsPlaying2] = useState(false);
 
@@ -28,6 +33,7 @@ export default function RadioScreen() {
       url: 'https://webradio.amsolution.com.br/radio/8020/plus',
       title: 'Radio Stream',
       artist: 'Your Radio Name',
+
     });
   };
 
@@ -42,24 +48,25 @@ export default function RadioScreen() {
   };
 
   const togglePlay = async () => {
-    if (isPlaying) {
+    const currentTrack = await TrackPlayer.getTrack(0); // Use 0 for the first radio
+    if (currentTrack && currentTrack.id === 'radio') {
       await TrackPlayer.stop();
     } else {
-      await TrackPlayer.play();
-      console.log('Radio PlusAPP is playing');
+      await TrackPlayer.skip(0); // Use 0 for the first radio
     }
     setIsPlaying(!isPlaying);
   };
 
   const togglePlay2 = async () => {
-    if (isPlaying2) {
+    const currentTrack = await TrackPlayer.getTrack(1); // Use 1 for the second radio
+    if (currentTrack && currentTrack.id === 'radio2') {
       await TrackPlayer.stop();
     } else {
-      await TrackPlayer.play();
-      console.log('Radio Aracati is playing');
+      await TrackPlayer.skip(1); // Use 1 for the second radio
     }
     setIsPlaying2(!isPlaying2);
   };
+
 
   useEffect(() => {
     setupTrackPlayer();
@@ -95,8 +102,23 @@ export default function RadioScreen() {
   };
   return (
     <Container colors={['#000', '#333333']}>
+
+      <StatusBar animated={true}
+        backgroundColor="transparent"
+
+        translucent={true} />
+
       <ContainerHeader>
-        <Text>PlusAPP</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <ContainerNavigation>
+            <CaretDown color="whitesmoke" weight="bold" />
+          </ContainerNavigation>
+        </TouchableOpacity>
+        <ContainerHeaderText>
+          <HeaderText>AFILIADOS</HeaderText>
+        </ContainerHeaderText>
+
+        <RadioPlayer />
       </ContainerHeader>
 
       <ContainerRadio>
@@ -180,6 +202,40 @@ export default function RadioScreen() {
       </ContainerRadio>
 
       <Line />
+
+      <ContainerRadio>
+        <ContainerDescRadio>
+          <ContainerImgRadio colors={['#2ecc71', '#3498db']} />
+
+          <ContainerText>
+            <Titulo>Redenção</Titulo>
+            <Subtitulo>98.7</Subtitulo>
+          </ContainerText>
+        </ContainerDescRadio>
+        <ButtonPlayer onPress={togglePlay}>
+          {isPlaying ? <ButtonPlayerText> Ouvir </ButtonPlayerText> : <ButtonPlayerText>Parar </ButtonPlayerText>}
+        </ButtonPlayer>
+      </ContainerRadio>
+
+      <Line />
+
+
+      <ContainerRadio>
+        <ContainerDescRadio>
+          <ContainerImgRadio colors={['#2ecc71', '#3498db']} />
+
+          <ContainerText>
+            <Titulo>Redenção</Titulo>
+            <Subtitulo>98.7</Subtitulo>
+          </ContainerText>
+        </ContainerDescRadio>
+        <ButtonPlayer onPress={togglePlay}>
+          {isPlaying ? <ButtonPlayerText> Ouvir </ButtonPlayerText> : <ButtonPlayerText>Parar </ButtonPlayerText>}
+        </ButtonPlayer>
+      </ContainerRadio>
+
+      <Line />
+
 
       <ContainerRadio>
         <ContainerDescRadio>

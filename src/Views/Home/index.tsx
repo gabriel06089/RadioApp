@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Easing, StatusBar } from 'react-native';
 import Svg, { Rect } from 'react-native-svg';
 import { CaretDown } from 'phosphor-react-native';
+
 import {
   AudioVisuContainer,
   ButtonPlayer,
@@ -21,6 +22,7 @@ import {
   Line3,
   MenuText,
 } from './styles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const INTERVAL = 100;
 const HEIGHT_MULTIPLIER = 45;
@@ -46,8 +48,8 @@ const AudioVisualizer = () => {
             y={50 - Easing.bezier(0.42, 0, 0.58, 1)(height) * HEIGHT_MULTIPLIER}
             width="3"
             height={Easing.bezier(0.42, 0, 0.58, 1)(height) * HEIGHT_MULTIPLIER}
-            rx="2" // Valor de rx define a borda horizontal
-            ry="2" // Valor de ry define a borda vertical
+            rx="2" 
+            ry="2" 
             fill="#fff"
           />
         </Svg>
@@ -56,7 +58,7 @@ const AudioVisualizer = () => {
   );
 };
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }: { navigation: any }) => {
   const [visibleLineIndex, setVisibleLineIndex] = useState(0);
   const [lineOpacities, setLineOpacities] = useState([1, 0.5, 0.5]);
 
@@ -91,7 +93,9 @@ const HomeScreen = () => {
           <ImageLogo source={require('../../../assets/plus-1.png')} />
           <ContainerMenu>
             <MenuText>CE - PLus</MenuText>
-            < CaretDown color="whitesmoke" weight="bold" size={20} />
+            <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
+              <CaretDown color="whitesmoke" weight="bold" size={20} />
+            </TouchableOpacity>
 
           </ContainerMenu>
         </ContainerLogo>
