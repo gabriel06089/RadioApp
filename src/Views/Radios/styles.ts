@@ -10,7 +10,7 @@ interface ContainerProps {
 
 
 export const Container = styled(LinearGradient).attrs({
-  colors: ['#000000', '#333333'], // Substitua com as cores desejadas
+  colors: ['#fff', '#333333'], // Substitua com as cores desejadas
   start: { x: 0, y: 0 },
   end: { x: 1, y: 1 },
 })`

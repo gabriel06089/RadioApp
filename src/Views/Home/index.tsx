@@ -24,6 +24,8 @@ import {
 } from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+
+
 const INTERVAL = 100;
 const HEIGHT_MULTIPLIER = 45;
 
@@ -48,8 +50,8 @@ const AudioVisualizer = () => {
             y={50 - Easing.bezier(0.42, 0, 0.58, 1)(height) * HEIGHT_MULTIPLIER}
             width="3"
             height={Easing.bezier(0.42, 0, 0.58, 1)(height) * HEIGHT_MULTIPLIER}
-            rx="2" 
-            ry="2" 
+            rx="2"
+            ry="2"
             fill="#fff"
           />
         </Svg>
@@ -118,7 +120,9 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
           </ContainerLine>
         </ContainerHeaderText>
       </ContainerHeader>
+
       <Text>Conteúdo da HomeScreen</Text>
+
     </Container>
   );
 };
