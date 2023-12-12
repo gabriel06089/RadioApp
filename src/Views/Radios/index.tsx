@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {StatusBar} from 'react-native';
 
 import {TouchableOpacity, ScrollView} from 'react-native';
@@ -22,26 +22,19 @@ import {
   ContainerPlayer,
 } from './styles';
 import {CaretDown} from 'phosphor-react-native';
-import AracatiPlayer from './RadioPlayers/Aracati';
-import PlusPlayer from './RadioPlayers/Plus';
-import CrateusPlayer from './RadioPlayers/Crateus';
-import IguatuPlayer from './RadioPlayers/Iguatu';
-import ParaipabaPlayer from './RadioPlayers/Paraipaba';
-import RedencaoPlayer from './RadioPlayers/Redencao';
-import CaririPlayer from './RadioPlayers/Cariri';
-import CascavelPlayer from './RadioPlayers/Cascavel';
-import PacajusPlayer from './RadioPlayers/Pacajus';
-import SobralPlayer from './RadioPlayers/Sobral';
-import SantaQuiteriaPlayer from './RadioPlayers/SantaQuiteria';
-import CatarinaPlayer from './RadioPlayers/Catarina';
+
+import GenericPlayer from './RadioPlayers/GenericPlayer';
 
 export default function RadioScreen({navigation}: {navigation: any}) {
+  const handlePlayerNavigation = (track: any) => {
+    navigation.navigate('Player', {track});
+  };
   const aracatiTrack = {
     id: 1,
-
     url: 'https://webradio.amsolution.com.br/radio/8180/aracati',
     title: 'Radio Aracati',
     artist: 'Radio Aracati',
+    isPlaying: false,
   };
 
   const plusTrack = {
@@ -49,71 +42,77 @@ export default function RadioScreen({navigation}: {navigation: any}) {
     url: 'https://webradio.amsolution.com.br/radio/8020/plus',
     title: 'Radio Plus',
     artist: 'Radio Plus',
+    isPlaying: false,
   };
   const caririTrack = {
     id: 3,
     url: 'https://webradio.amsolution.com.br/radio/8140/cariri',
     title: 'Radio Cariri',
     artist: 'Radio Cariri',
+    isPlaying: false,
   };
   const cascavelTrack = {
     id: 4,
     url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
     title: 'Radio Catarina',
     artist: 'Radio Catarina',
+    isPlaying: false,
   };
   const crateusTrack = {
     id: 5,
     url: 'https://webradio.amsolution.com.br/radio/8120/crateus',
     title: 'Radio Crateus',
     artist: 'Radio Crateus',
+    isPlaying: false,
   };
   const iguatuTrack = {
     id: 6,
     url: 'https://webradio.amsolution.com.br/radio/8070/iguatu',
     title: 'Radio Iguatu',
     artist: 'Radio Iguatu',
+    isPlaying: false,
   };
   const pacajusTrack = {
     id: 7,
     url: 'https://webradio.amsolution.com.br/radio/8130/pacajus',
     title: 'Radio Pacajus',
     artist: 'Radio Pacajus',
+    isPlaying: false,
   };
   const paraipabaTrack = {
     id: 8,
     url: 'https://webradio.amsolution.com.br/radio/8150/paraipaba',
     title: 'Radio Paraipaba',
     artist: 'Radio Paraipaba',
+    isPlaying: false,
   };
   const santaQuiteriaTrack = {
     id: 9,
     url: 'https://webradio.amsolution.com.br/radio/8170/santaquiteria',
     title: 'Radio SantaQuiteria',
     artist: 'Radio SantaQuiteria',
+    isPlaying: false,
   };
   const sobralTrack = {
     id: 10,
     url: 'https://webradio.amsolution.com.br/radio/8030/sobral',
     title: 'Radio Sobral',
     artist: 'Radio Sobral',
+    isPlaying: false,
   };
   const redencaoTrack = {
     id: 11,
     url: 'https://webradio.amsolution.com.br/radio/8090/redencao',
     title: 'Radio Redencao',
     artist: 'Radio Redencao',
+    isPlaying: false,
   };
   const catarinaTrack = {
     id: 12,
     url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
     title: 'Radio Catarina',
     artist: 'Radio Catarina',
-  };
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const handlePlaybackToggle = () => {
-    setIsPlaying(!isPlaying);
+    isPlaying: false,
   };
 
   return (
@@ -136,8 +135,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
       </ContainerHeader>
 
       <ScrollView>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Player', {track: aracatiTrack})}>
+        <TouchableOpacity onPress={() => handlePlayerNavigation(aracatiTrack)}>
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#541084', '#ff4500']}>
@@ -150,13 +148,14 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer>
-              <AracatiPlayer track={aracatiTrack} />
+              <GenericPlayer track={aracatiTrack} />
             </ContainerPlayer>
           </ContainerRadio>
         </TouchableOpacity>
 
         <Line />
 
+        <TouchableOpacity onPress={() => handlePlayerNavigation(caririTrack)}>
         <ContainerRadio>
           <ContainerDescRadio>
             <ContainerImgRadio colors={['#541084', '#000000']}>
@@ -170,10 +169,11 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           </ContainerDescRadio>
           <ContainerButton>
             <ContainerPlayer>
-              <CaririPlayer track={caririTrack} />
+              <GenericPlayer track={caririTrack} />
             </ContainerPlayer>
           </ContainerButton>
         </ContainerRadio>
+        </TouchableOpacity>
 
         <Line />
         <ContainerRadio>
@@ -188,7 +188,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerPlayer>
-            <CrateusPlayer track={crateusTrack} />
+            <GenericPlayer track={crateusTrack} />
           </ContainerPlayer>
         </ContainerRadio>
 
@@ -206,7 +206,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerPlayer>
-            <IguatuPlayer track={iguatuTrack} />
+            <GenericPlayer track={iguatuTrack} />
           </ContainerPlayer>
         </ContainerRadio>
 
@@ -223,7 +223,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerPlayer>
-            <ParaipabaPlayer track={paraipabaTrack} />
+            <GenericPlayer track={paraipabaTrack} />
           </ContainerPlayer>
         </ContainerRadio>
 
@@ -241,7 +241,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerPlayer>
-            <RedencaoPlayer track={redencaoTrack} />
+            <GenericPlayer track={redencaoTrack} />
           </ContainerPlayer>
         </ContainerRadio>
 
@@ -259,7 +259,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerPlayer>
-            <CascavelPlayer track={cascavelTrack} />
+            <GenericPlayer track={cascavelTrack} />
           </ContainerPlayer>
         </ContainerRadio>
 
@@ -277,7 +277,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerPlayer>
-            <PacajusPlayer track={pacajusTrack} />
+            <GenericPlayer track={pacajusTrack} />
           </ContainerPlayer>
         </ContainerRadio>
 
@@ -295,7 +295,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerPlayer>
-            <SantaQuiteriaPlayer track={santaQuiteriaTrack} />
+            <GenericPlayer track={santaQuiteriaTrack} />
           </ContainerPlayer>
         </ContainerRadio>
 
@@ -313,7 +313,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerPlayer>
-            <SobralPlayer track={sobralTrack} />
+            <GenericPlayer track={sobralTrack} />
           </ContainerPlayer>
         </ContainerRadio>
 
@@ -330,7 +330,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerPlayer>
-            <CatarinaPlayer track={catarinaTrack} />
+            <GenericPlayer track={catarinaTrack} />
           </ContainerPlayer>
         </ContainerRadio>
 
@@ -347,7 +347,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerPlayer>
-            <PlusPlayer track={plusTrack} />
+            <GenericPlayer track={plusTrack} />
           </ContainerPlayer>
         </ContainerRadio>
 

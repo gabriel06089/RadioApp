@@ -7,9 +7,9 @@ import {
   ShareNetwork,
   WhatsappLogo,
 } from 'phosphor-react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StatusBar, TouchableOpacity} from 'react-native';
-import AracatiPlayer from '../Radios/RadioPlayers/Aracati';
+import GenericPlayer from '../Radios/RadioPlayers/GenericPlayer';
 
 import {
   Container,
@@ -26,18 +26,33 @@ import {
   TextRadioDesc,
 } from './style';
 
-export default function Player({navigation}: {navigation: any}) {
+export default function Player({
+  navigation,
+  route,
+}: {
+  navigation: any;
+  route: any;
+}) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<any | null>(null);
+
+  useEffect(() => {
+    // Atualiza o estado da faixa quando a rota for alterada
+    if (route.params?.track) {
+      const {isPlaying, ...trackInfo} = route.params.track;
+      setCurrentTrack(trackInfo);
+      setIsPlaying(isPlaying || false);
+    }
+  }, [route.params?.track]);
 
   const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-  };
-  const aracatiTrack = {
-    id: 1,
-
-    url: 'https://webradio.amsolution.com.br/radio/8180/aracati',
-    title: 'Radio Aracati',
-    artist: 'Radio Aracati',
+    // Altera o estado de reprodução e atualiza o estado
+    const newIsPlaying = !isPlaying;
+    setIsPlaying(newIsPlaying);
+    setCurrentTrack((prevTrack: any) => ({
+      ...prevTrack,
+      isPlaying: newIsPlaying,
+    }));
   };
   return (
     <Container colors={['#000', '#333333']}>
@@ -53,8 +68,8 @@ export default function Player({navigation}: {navigation: any}) {
           </TouchableOpacity>
         </ContainerHome1>
         <ContainerTextRadio>
-          <TextRadio>PlusFM</TextRadio>
-          <TextRadioDesc>PlusFM</TextRadioDesc>
+          <TextRadio>{currentTrack?.title || 'PlusFM'}</TextRadio>
+          <TextRadioDesc>{currentTrack?.artist || 'PlusFM'}</TextRadioDesc>
         </ContainerTextRadio>
 
         <ContainerHome>
@@ -67,14 +82,14 @@ export default function Player({navigation}: {navigation: any}) {
       <ContainerPhoto />
 
       <ContainerTextMusic>
-        <TextMusic>PLUSFM</TextMusic>
-        <TextMusicDesc>PlusFM</TextMusicDesc>
+        <TextMusic>{currentTrack?.title || 'PLUSFM'}</TextMusic>
+        <TextMusicDesc>{currentTrack?.artist || 'PlusFM'}</TextMusicDesc>
       </ContainerTextMusic>
 
       <ContainerButtons>
         <ShareNetwork weight="fill" />
         <Browser />
-        <AracatiPlayer track={aracatiTrack} />
+        <GenericPlayer track={currentTrack} />
         <WhatsappLogo />
         <InstagramLogo />
       </ContainerButtons>

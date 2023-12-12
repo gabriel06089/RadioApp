@@ -5,7 +5,7 @@ import {View} from 'react-native';
 import TrackPlayer, {Event, State} from 'react-native-track-player';
 import {ButtonPlayer} from './styles';
 
-interface AracatiPlayerProps {
+interface GenericPlayerProps {
   track: {
     id: number;
     url: string;
@@ -14,7 +14,7 @@ interface AracatiPlayerProps {
   };
 }
 
-const AracatiPlayer: React.FC<AracatiPlayerProps> = ({track}) => {
+const GenericPlayer: React.FC<GenericPlayerProps> = ({track}) => {
   const [, setIsPlaying] = useState(false);
   const [, setCurrentTrack] = useState<number | null>(null);
   const [showStopButton, setShowStopButton] = useState(false);
@@ -108,4 +108,4 @@ const AracatiPlayer: React.FC<AracatiPlayerProps> = ({track}) => {
   );
 };
 
-export default AracatiPlayer;
+export default GenericPlayer;
