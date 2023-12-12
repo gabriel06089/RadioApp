@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import TrackPlayer, { Event, State } from 'react-native-track-player';
-import { ButtonPlayer, ButtonPlayerText } from './styles';
-
+import { ButtonPlayer } from './styles';
+import { Play, Stop } from 'phosphor-react-native';
 interface SobralPlayerProps {
     track: {
         id: number;
@@ -71,16 +71,15 @@ const SobralPlayer: React.FC<SobralPlayerProps> = ({ track }) => {
     return (
         <View>
 
-
             {showStopButton ? (
                 <ButtonPlayer onPress={stopPlayback}>
-                    <ButtonPlayerText>Parar</ButtonPlayerText>
+                    <Stop weight="fill" color="white" />
                 </ButtonPlayer>
             ) : null}
 
             {!showStopButton ? (
                 <ButtonPlayer onPress={togglePlayback}>
-                    <ButtonPlayerText>Tocar</ButtonPlayerText>
+                    <Play weight="fill" color="white" />
                 </ButtonPlayer>
             ) : null}
         </View>

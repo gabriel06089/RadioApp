@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
+
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import TrackPlayer, { Event, State } from 'react-native-track-player';
-import { ButtonPlayer, ButtonPlayerText } from './styles';
-
+import { ButtonPlayer } from './styles';
+import { Play, Stop } from 'phosphor-react-native';
 interface CaririPlayerProps {
     track: {
         id: number;
@@ -27,14 +28,19 @@ const CaririPlayer: React.FC<CaririPlayerProps> = ({ track }) => {
                 const currentTrackId = await TrackPlayer.getCurrentTrack();
                 setIsPlaying(currentTrackId === track.id && state === State.Playing);
                 setShowStopButton(currentTrackId === track.id && state === State.Playing);
+
+                // Log playback state
+                if (state === State.Playing) {
+                    console.log(`Track ${currentTrackId} is playing.`);
+                } else if (state === State.Paused) {
+                    console.log(`Track ${currentTrackId} is paused.`);
+                }
             });
 
-            TrackPlayer.addEventListener(
-                Event.PlaybackTrackChanged,
-                async ({ nextTrack }) => {
-                    setCurrentTrack(nextTrack);
-                },
-            );
+            TrackPlayer.addEventListener(Event.RemoteStop, async () => {
+                // Log when playback is stopped externally (e.g., notification stop button)
+                console.log('Playback stopped externally.');
+            });
         };
 
         setupPlayer();
@@ -54,11 +60,22 @@ const CaririPlayer: React.FC<CaririPlayerProps> = ({ track }) => {
             await TrackPlayer.add(track);
             await TrackPlayer.play();
             setShowStopButton(true);
+            setCurrentTrack(track.id);
+
+            // Log when a new track starts playing
+            console.log(`Starting playback of Track ${track.id}.`);
         } else if (currentState === State.Playing) {
             await TrackPlayer.pause();
+
+            // Log when playback is paused
+            console.log(`Paused playback of Track ${track.id}.`);
         } else {
             await TrackPlayer.play();
             setShowStopButton(true);
+            setCurrentTrack(track.id);
+
+            // Log when playback is resumed
+            console.log(`Resumed playback of Track ${track.id}.`);
         }
     };
 
@@ -66,7 +83,12 @@ const CaririPlayer: React.FC<CaririPlayerProps> = ({ track }) => {
         await TrackPlayer.stop();
         await TrackPlayer.reset();
         setShowStopButton(false);
+        setCurrentTrack(null);
+
+        // Log when playback is stopped
+        console.log(`Resumed playback of Track ${track.id}.`);
     };
+
 
     return (
         <View>
@@ -74,13 +96,13 @@ const CaririPlayer: React.FC<CaririPlayerProps> = ({ track }) => {
 
             {showStopButton ? (
                 <ButtonPlayer onPress={stopPlayback}>
-                    <ButtonPlayerText>Parar</ButtonPlayerText>
+                    <Stop weight="fill" color="white" />
                 </ButtonPlayer>
             ) : null}
 
             {!showStopButton ? (
                 <ButtonPlayer onPress={togglePlayback}>
-                    <ButtonPlayerText>Tocar</ButtonPlayerText>
+                    <Play weight="fill" color="white" />
                 </ButtonPlayer>
             ) : null}
         </View>

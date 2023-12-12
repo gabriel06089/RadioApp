@@ -10,7 +10,7 @@ interface ContainerProps {
 export const Container = styled(LinearGradient).attrs({
   colors: ['#541084', '#9248FF'], // Substitua com as cores desejadas
   start: {x: 0, y: 0},
-  end: {x: 1, y: 1},
+  end: {x: 0, y: 0.7},
 })`
   justify-content: center;
 `;
@@ -18,9 +18,8 @@ export const Container = styled(LinearGradient).attrs({
 export const ContainerHeader = styled.View`
   flex-direction: row;
 
-  height: 70px;
   background-color: #541084;
-  padding-top: 25px;
+  margin-top: 40px;
 
   border-bottom-width: 0.5px;
   border-bottom-color: whitesmoke;
@@ -28,7 +27,7 @@ export const ContainerHeader = styled.View`
 
 export const ContainerNavigation = styled.View`
   position: relative;
-
+  top: -3px;
   left: 50px;
   align-items: center;
 
@@ -39,6 +38,7 @@ export const ContainerHeaderText = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  right: 10px;
 `;
 export const HeaderText = styled.Text`
   font-weight: bold;
@@ -71,8 +71,14 @@ export const ContainerImgRadio = styled(LinearGradient).attrs(
   border-radius: 24px;
   margin-top: 16px;
   margin-left: 16px;
+  justify-content: center;
+  align-items: center;
 `;
-export const ImgRadio = styled.Image``;
+export const ImageLogo = styled.Image`
+  height: 40px;
+  width: 80px;
+`;
+
 export const ContainerText = styled.View`
   margin-left: 16px;
   justify-content: center;
@@ -94,4 +100,15 @@ export const Line = styled.View`
   height: 1px;
   background-color: #c8c7cc;
   margin-right: 16px;
+`;
+export const Line2 = styled.View`
+  align-self: flex-end;
+  width: 65%;
+  height: 1px;
+  background-color: #c8c7cc;
+  margin-right: 16px;
+  margin-bottom: 50px;
+`;
+export const ContainerPlayer = styled.View`
+  padding-right: 40px;
 `;

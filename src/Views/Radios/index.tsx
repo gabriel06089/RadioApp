@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import { StatusBar } from 'react-native';
+import React, { useState } from 'react';
+import {StatusBar} from 'react-native';
 
-import { TouchableOpacity, ScrollView } from 'react-native';
+import {TouchableOpacity, ScrollView} from 'react-native';
 import {
   Container,
   Titulo,
@@ -17,8 +17,11 @@ import {
   ContainerNavigation,
   ContainerHeaderText,
   HeaderText,
+  Line2,
+  ImageLogo,
+  ContainerPlayer,
 } from './styles';
-import { CaretDown } from 'phosphor-react-native';
+import {CaretDown} from 'phosphor-react-native';
 import AracatiPlayer from './RadioPlayers/Aracati';
 import PlusPlayer from './RadioPlayers/Plus';
 import CrateusPlayer from './RadioPlayers/Crateus';
@@ -30,10 +33,12 @@ import CascavelPlayer from './RadioPlayers/Cascavel';
 import PacajusPlayer from './RadioPlayers/Pacajus';
 import SobralPlayer from './RadioPlayers/Sobral';
 import SantaQuiteriaPlayer from './RadioPlayers/SantaQuiteria';
+import CatarinaPlayer from './RadioPlayers/Catarina';
 
-export default function RadioScreen({ navigation }: { navigation: any }) {
+export default function RadioScreen({navigation}: {navigation: any}) {
   const aracatiTrack = {
     id: 1,
+
     url: 'https://webradio.amsolution.com.br/radio/8180/aracati',
     title: 'Radio Aracati',
     artist: 'Radio Aracati',
@@ -94,49 +99,69 @@ export default function RadioScreen({ navigation }: { navigation: any }) {
     artist: 'Radio Sobral',
   };
   const redencaoTrack = {
-    id: 10,
+    id: 11,
     url: 'https://webradio.amsolution.com.br/radio/8090/redencao',
     title: 'Radio Redencao',
     artist: 'Radio Redencao',
   };
+  const catarinaTrack = {
+    id: 12,
+    url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
+    title: 'Radio Catarina',
+    artist: 'Radio Catarina',
+  };
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const handlePlaybackToggle = () => {
+    setIsPlaying(!isPlaying);
+  };
+
   return (
-    <ScrollView>
-      <Container colors={['#000', '#333333']}>
-        <StatusBar
-          animated={true}
-          backgroundColor="transparent"
-          translucent={true}
-        />
+    <Container colors={['#000', '#333333']}>
+      <StatusBar
+        animated={true}
+        backgroundColor="transparent"
+        translucent={true}
+      />
 
-        <ContainerHeader>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <ContainerNavigation>
-              <CaretDown color="whitesmoke" weight="bold" />
-            </ContainerNavigation>
-          </TouchableOpacity>
-          <ContainerHeaderText>
-            <HeaderText>AFILIADOS</HeaderText>
-          </ContainerHeaderText>
-        </ContainerHeader>
+      <ContainerHeader>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <ContainerNavigation>
+            <CaretDown color="whitesmoke" weight="bold" />
+          </ContainerNavigation>
+        </TouchableOpacity>
+        <ContainerHeaderText>
+          <HeaderText>AFILIADOS</HeaderText>
+        </ContainerHeaderText>
+      </ContainerHeader>
 
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#ff6347', '#ffa500']} />
+      <ScrollView>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Player', {track: aracatiTrack})}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#541084', '#ff4500']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
 
-            <ContainerText>
-              <Titulo>Aracati</Titulo>
-              <Subtitulo>98.1</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <AracatiPlayer track={aracatiTrack} />
-        </ContainerRadio>
-
+              <ContainerText>
+                <Titulo>Aracati</Titulo>
+                <Subtitulo>98.1</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer>
+              <AracatiPlayer track={aracatiTrack} />
+            </ContainerPlayer>
+          </ContainerRadio>
+        </TouchableOpacity>
 
         <Line />
 
         <ContainerRadio>
           <ContainerDescRadio>
-            <ContainerImgRadio colors={['#3498db', '#2ecc71']} />
+            <ContainerImgRadio colors={['#541084', '#000000']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
 
             <ContainerText>
               <Titulo>Cariri</Titulo>
@@ -144,136 +169,190 @@ export default function RadioScreen({ navigation }: { navigation: any }) {
             </ContainerText>
           </ContainerDescRadio>
           <ContainerButton>
-            <CaririPlayer track={caririTrack} />
+            <ContainerPlayer>
+              <CaririPlayer track={caririTrack} />
+            </ContainerPlayer>
           </ContainerButton>
         </ContainerRadio>
 
         <Line />
         <ContainerRadio>
           <ContainerDescRadio>
-            <ContainerImgRadio colors={['#f39c12', '#e67e22']} />
+            <ContainerImgRadio colors={['#f39c12', '#e67e22']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
 
             <ContainerText>
               <Titulo>Crateús</Titulo>
               <Subtitulo>93.3</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <CrateusPlayer track={crateusTrack} />
+          <ContainerPlayer>
+            <CrateusPlayer track={crateusTrack} />
+          </ContainerPlayer>
         </ContainerRadio>
 
         <Line />
 
         <ContainerRadio>
           <ContainerDescRadio>
-            <ContainerImgRadio colors={['#e74c3c', '#f39c12']} />
+            <ContainerImgRadio colors={['#e74c3c', '#f39c12']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
 
             <ContainerText>
               <Titulo>Iguatú/Cariús</Titulo>
               <Subtitulo>91.5</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <IguatuPlayer track={iguatuTrack} />
+          <ContainerPlayer>
+            <IguatuPlayer track={iguatuTrack} />
+          </ContainerPlayer>
         </ContainerRadio>
 
         <Line />
         <ContainerRadio>
           <ContainerDescRadio>
-            <ContainerImgRadio colors={['#3498db', '#8e44ad']} />
+            <ContainerImgRadio colors={['#3498db', '#8e44ad']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
 
             <ContainerText>
               <Titulo>Paraipaba</Titulo>
               <Subtitulo>88.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ParaipabaPlayer track={paraipabaTrack} />
+          <ContainerPlayer>
+            <ParaipabaPlayer track={paraipabaTrack} />
+          </ContainerPlayer>
         </ContainerRadio>
 
         <Line />
 
         <ContainerRadio>
           <ContainerDescRadio>
-            <ContainerImgRadio colors={['#2ecc71', '#3498db']} />
+            <ContainerImgRadio colors={['#ff6347', '#ffa500']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
 
             <ContainerText>
               <Titulo>Redenção</Titulo>
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <RedencaoPlayer track={redencaoTrack} />
+          <ContainerPlayer>
+            <RedencaoPlayer track={redencaoTrack} />
+          </ContainerPlayer>
         </ContainerRadio>
 
         <Line />
 
         <ContainerRadio>
           <ContainerDescRadio>
-            <ContainerImgRadio colors={['#2ecc71', '#3498db']} />
+            <ContainerImgRadio colors={['#f39c12', '#e67e22']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
 
             <ContainerText>
               <Titulo>Cascavel</Titulo>
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <CascavelPlayer track={cascavelTrack} />
+          <ContainerPlayer>
+            <CascavelPlayer track={cascavelTrack} />
+          </ContainerPlayer>
         </ContainerRadio>
 
         <Line />
 
         <ContainerRadio>
           <ContainerDescRadio>
-            <ContainerImgRadio colors={['#2ecc71', '#3498db']} />
+            <ContainerImgRadio colors={['#e74c3c', '#f39c12']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
 
             <ContainerText>
               <Titulo>Pacajus</Titulo>
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <PacajusPlayer track={pacajusTrack} />
+          <ContainerPlayer>
+            <PacajusPlayer track={pacajusTrack} />
+          </ContainerPlayer>
         </ContainerRadio>
 
         <Line />
 
         <ContainerRadio>
           <ContainerDescRadio>
-            <ContainerImgRadio colors={['#2ecc71', '#3498db']} />
+            <ContainerImgRadio colors={['#3498db', '#8e44ad']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
 
             <ContainerText>
               <Titulo>Santa Quitéria</Titulo>
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <SantaQuiteriaPlayer track={santaQuiteriaTrack} />
+          <ContainerPlayer>
+            <SantaQuiteriaPlayer track={santaQuiteriaTrack} />
+          </ContainerPlayer>
         </ContainerRadio>
 
         <Line />
 
         <ContainerRadio>
           <ContainerDescRadio>
-            <ContainerImgRadio colors={['#2ecc71', '#3498db']} />
+            <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
 
             <ContainerText>
               <Titulo>Sobral</Titulo>
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <SobralPlayer track={sobralTrack} />
+          <ContainerPlayer>
+            <SobralPlayer track={sobralTrack} />
+          </ContainerPlayer>
         </ContainerRadio>
 
         <Line />
-
         <ContainerRadio>
           <ContainerDescRadio>
-            <ContainerImgRadio colors={['#2ecc71', '#3498db']} />
+            <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
+
+            <ContainerText>
+              <Titulo>Catarina</Titulo>
+              <Subtitulo>98.7</Subtitulo>
+            </ContainerText>
+          </ContainerDescRadio>
+          <ContainerPlayer>
+            <CatarinaPlayer track={catarinaTrack} />
+          </ContainerPlayer>
+        </ContainerRadio>
+
+        <Line />
+        <ContainerRadio>
+          <ContainerDescRadio>
+            <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
+              <ImageLogo source={require('../../../assets/plus-1.png')} />
+            </ContainerImgRadio>
 
             <ContainerText>
               <Titulo>Plus</Titulo>
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <PlusPlayer track={plusTrack} />
+          <ContainerPlayer>
+            <PlusPlayer track={plusTrack} />
+          </ContainerPlayer>
         </ContainerRadio>
 
-        <Line />
-      </Container>
-    </ScrollView>
+        <Line2 />
+      </ScrollView>
+    </Container>
   );
 }
