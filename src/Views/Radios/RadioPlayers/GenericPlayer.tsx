@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import TrackPlayer, {Event, State} from 'react-native-track-player';
 import {ButtonPlayer} from './styles';
-
+import {useAudioPlayer} from '../../../Context/AudioPlayerContext';
 interface GenericPlayerProps {
   track: {
     id: number;
@@ -12,11 +12,12 @@ interface GenericPlayerProps {
     title: string;
     artist: string;
   };
+  isPlaying: boolean;
+  setIsPlaying: (isPlaying: boolean) => void;
 }
-
 const GenericPlayer: React.FC<GenericPlayerProps> = ({track}) => {
-  const [, setIsPlaying] = useState(false);
-  const [, setCurrentTrack] = useState<number | null>(null);
+  const {isPlaying, setIsPlaying, currentTrack, setCurrentTrack} =
+    useAudioPlayer();
   const [showStopButton, setShowStopButton] = useState(false);
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const GenericPlayer: React.FC<GenericPlayerProps> = ({track}) => {
     return () => {
       TrackPlayer.reset();
     };
-  }, [track]);
+  }, [track, setIsPlaying]);
 
   const togglePlayback = async () => {
     const currentState = await TrackPlayer.getState();

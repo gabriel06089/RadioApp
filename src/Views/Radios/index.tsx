@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+import React from 'react';
 import {StatusBar} from 'react-native';
-
+import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 import {TouchableOpacity, ScrollView} from 'react-native';
 import {
   Container,
@@ -23,12 +23,18 @@ import {
 } from './styles';
 import {CaretDown} from 'phosphor-react-native';
 
-import GenericPlayer from './RadioPlayers/GenericPlayer';
+import PlayPauseButton from './buttonPlayer';
 
 export default function RadioScreen({navigation}: {navigation: any}) {
+  const {setIsPlaying, setCurrentTrack} = useAudioPlayer();
+  const handlePlay = () => {
+    setIsPlaying(true); // Atualize o estado de reprodução quando necessário
+  };
   const handlePlayerNavigation = (track: any) => {
+    setCurrentTrack(track); // Defina a faixa atual
     navigation.navigate('Player', {track});
   };
+
   const aracatiTrack = {
     id: 1,
     url: 'https://webradio.amsolution.com.br/radio/8180/aracati',
@@ -147,32 +153,28 @@ export default function RadioScreen({navigation}: {navigation: any}) {
                 <Subtitulo>98.1</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
-            <ContainerPlayer>
-              <GenericPlayer track={aracatiTrack} />
-            </ContainerPlayer>
+            <ContainerPlayer />
           </ContainerRadio>
         </TouchableOpacity>
-
+        <PlayPauseButton track={aracatiTrack} />
         <Line />
 
         <TouchableOpacity onPress={() => handlePlayerNavigation(caririTrack)}>
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#541084', '#000000']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#541084', '#000000']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
 
-            <ContainerText>
-              <Titulo>Cariri</Titulo>
-              <Subtitulo>100.5</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerButton>
-            <ContainerPlayer>
-              <GenericPlayer track={caririTrack} />
-            </ContainerPlayer>
-          </ContainerButton>
-        </ContainerRadio>
+              <ContainerText>
+                <Titulo>Cariri</Titulo>
+                <Subtitulo>100.5</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerButton>
+              <ContainerPlayer />
+            </ContainerButton>
+          </ContainerRadio>
         </TouchableOpacity>
 
         <Line />
@@ -187,9 +189,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               <Subtitulo>93.3</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ContainerPlayer>
-            <GenericPlayer track={crateusTrack} />
-          </ContainerPlayer>
+          <ContainerPlayer />
         </ContainerRadio>
 
         <Line />
@@ -205,9 +205,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               <Subtitulo>91.5</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ContainerPlayer>
-            <GenericPlayer track={iguatuTrack} />
-          </ContainerPlayer>
+          <ContainerPlayer />
         </ContainerRadio>
 
         <Line />
@@ -222,9 +220,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               <Subtitulo>88.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ContainerPlayer>
-            <GenericPlayer track={paraipabaTrack} />
-          </ContainerPlayer>
+          <ContainerPlayer />
         </ContainerRadio>
 
         <Line />
@@ -240,9 +236,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ContainerPlayer>
-            <GenericPlayer track={redencaoTrack} />
-          </ContainerPlayer>
+          <ContainerPlayer />
         </ContainerRadio>
 
         <Line />
@@ -258,9 +252,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ContainerPlayer>
-            <GenericPlayer track={cascavelTrack} />
-          </ContainerPlayer>
+          <ContainerPlayer />
         </ContainerRadio>
 
         <Line />
@@ -276,9 +268,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ContainerPlayer>
-            <GenericPlayer track={pacajusTrack} />
-          </ContainerPlayer>
+          <ContainerPlayer />
         </ContainerRadio>
 
         <Line />
@@ -294,9 +284,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ContainerPlayer>
-            <GenericPlayer track={santaQuiteriaTrack} />
-          </ContainerPlayer>
+          <ContainerPlayer />
         </ContainerRadio>
 
         <Line />
@@ -312,9 +300,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ContainerPlayer>
-            <GenericPlayer track={sobralTrack} />
-          </ContainerPlayer>
+          <ContainerPlayer />
         </ContainerRadio>
 
         <Line />
@@ -329,9 +315,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ContainerPlayer>
-            <GenericPlayer track={catarinaTrack} />
-          </ContainerPlayer>
+          <ContainerPlayer />
         </ContainerRadio>
 
         <Line />
@@ -346,9 +330,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
               <Subtitulo>98.7</Subtitulo>
             </ContainerText>
           </ContainerDescRadio>
-          <ContainerPlayer>
-            <GenericPlayer track={plusTrack} />
-          </ContainerPlayer>
+          <ContainerPlayer />
         </ContainerRadio>
 
         <Line2 />

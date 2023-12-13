@@ -7,10 +7,9 @@ import {
   ShareNetwork,
   WhatsappLogo,
 } from 'phosphor-react-native';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {StatusBar, TouchableOpacity} from 'react-native';
-import GenericPlayer from '../Radios/RadioPlayers/GenericPlayer';
-
+import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 import {
   Container,
   ContainerButtons,
@@ -25,35 +24,11 @@ import {
   ContainerTextRadio,
   TextRadioDesc,
 } from './style';
+import PlayPauseButton from '../Radios/buttonPlayer';
 
-export default function Player({
-  navigation,
-  route,
-}: {
-  navigation: any;
-  route: any;
-}) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState<any | null>(null);
+export default function Player({navigation}: {navigation: any}) {
+  const {currentTrack} = useAudioPlayer(); // Use o hook useAudioPlayer para acessar o estado do player
 
-  useEffect(() => {
-    // Atualiza o estado da faixa quando a rota for alterada
-    if (route.params?.track) {
-      const {isPlaying, ...trackInfo} = route.params.track;
-      setCurrentTrack(trackInfo);
-      setIsPlaying(isPlaying || false);
-    }
-  }, [route.params?.track]);
-
-  const togglePlay = () => {
-    // Altera o estado de reprodução e atualiza o estado
-    const newIsPlaying = !isPlaying;
-    setIsPlaying(newIsPlaying);
-    setCurrentTrack((prevTrack: any) => ({
-      ...prevTrack,
-      isPlaying: newIsPlaying,
-    }));
-  };
   return (
     <Container colors={['#000', '#333333']}>
       <StatusBar
@@ -89,10 +64,11 @@ export default function Player({
       <ContainerButtons>
         <ShareNetwork weight="fill" />
         <Browser />
-        <GenericPlayer track={currentTrack} />
+
         <WhatsappLogo />
         <InstagramLogo />
       </ContainerButtons>
+      {currentTrack && <PlayPauseButton track={currentTrack} />}
     </Container>
   );
 }

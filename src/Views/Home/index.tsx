@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
-import React, { useState, useEffect } from 'react';
-import { View, Text, Easing, StatusBar } from 'react-native';
-import Svg, { Rect } from 'react-native-svg';
-import { CaretDown } from 'phosphor-react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, Easing, StatusBar} from 'react-native';
+import Svg, {Rect} from 'react-native-svg';
+import {CaretDown} from 'phosphor-react-native';
 
 import {
   AudioVisuContainer,
@@ -22,9 +22,8 @@ import {
   Line3,
   MenuText,
 } from './styles';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
-
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 
 const INTERVAL = 100;
 const HEIGHT_MULTIPLIER = 45;
@@ -42,7 +41,7 @@ const AudioVisualizer = () => {
   }, [bars]);
 
   return (
-    <View style={{ flexDirection: 'row', marginTop: 16, marginLeft: 16 }}>
+    <View style={{flexDirection: 'row', marginTop: 16, marginLeft: 16}}>
       {bars.map((height, index) => (
         <Svg key={index} height="24" width="5">
           <Rect
@@ -60,7 +59,9 @@ const AudioVisualizer = () => {
   );
 };
 
-const HomeScreen = ({ navigation }: { navigation: any }) => {
+const HomeScreen = ({navigation}: {navigation: any}) => {
+  const {currentTrack, isPlaying, setIsPlaying, setCurrentTrack} =
+    useAudioPlayer();
   const [visibleLineIndex, setVisibleLineIndex] = useState(0);
   const [lineOpacities, setLineOpacities] = useState([1, 0.5, 0.5]);
 
@@ -83,13 +84,27 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
 
     return () => clearInterval(interval);
   }, [visibleLineIndex]);
+  const plusTrack = {
+    id: 2,
+    url: 'https://webradio.amsolution.com.br/radio/8020/plus',
+    title: 'Radio Plus',
+    artist: 'Radio Plus',
+    isPlaying: false,
+  };
 
+  useEffect(() => {
+    setCurrentTrack(plusTrack);
+    if (!isPlaying) {
+      setIsPlaying(true);
+    }
+  }, []);
   return (
     <Container colors={['#000', '#333333']}>
-      <StatusBar animated={true}
+      <StatusBar
+        animated={true}
         backgroundColor="transparent"
-
-        translucent={true} />
+        translucent={true}
+      />
       <ContainerHeader>
         <ContainerLogo>
           <ImageLogo source={require('../../../assets/plus-1.png')} />
@@ -98,7 +113,6 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
               <CaretDown color="whitesmoke" weight="bold" size={20} />
             </TouchableOpacity>
-
           </ContainerMenu>
         </ContainerLogo>
 
@@ -114,15 +128,14 @@ const HomeScreen = ({ navigation }: { navigation: any }) => {
             <AudioVisualizer />
           </AudioVisuContainer>
           <ContainerLine>
-            <Line style={{ opacity: lineOpacities[0] }} />
-            <Line2 style={{ opacity: lineOpacities[1] }} />
-            <Line3 style={{ opacity: lineOpacities[2] }} />
+            <Line style={{opacity: lineOpacities[0]}} />
+            <Line2 style={{opacity: lineOpacities[1]}} />
+            <Line3 style={{opacity: lineOpacities[2]}} />
           </ContainerLine>
         </ContainerHeaderText>
       </ContainerHeader>
 
       <Text>Conteúdo da HomeScreen</Text>
-
     </Container>
   );
 };
