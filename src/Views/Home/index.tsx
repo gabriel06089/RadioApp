@@ -23,7 +23,7 @@ import {
   MenuText,
 } from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useAudioPlayer} from '../../Context/AudioPlayerContext';
+
 
 const INTERVAL = 100;
 const HEIGHT_MULTIPLIER = 45;
@@ -60,8 +60,6 @@ const AudioVisualizer = () => {
 };
 
 const HomeScreen = ({navigation}: {navigation: any}) => {
-  const {currentTrack, isPlaying, setIsPlaying, setCurrentTrack} =
-    useAudioPlayer();
   const [visibleLineIndex, setVisibleLineIndex] = useState(0);
   const [lineOpacities, setLineOpacities] = useState([1, 0.5, 0.5]);
 
@@ -84,20 +82,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
 
     return () => clearInterval(interval);
   }, [visibleLineIndex]);
-  const plusTrack = {
-    id: 2,
-    url: 'https://webradio.amsolution.com.br/radio/8020/plus',
-    title: 'Radio Plus',
-    artist: 'Radio Plus',
-    isPlaying: false,
-  };
 
-  useEffect(() => {
-    setCurrentTrack(plusTrack);
-    if (!isPlaying) {
-      setIsPlaying(true);
-    }
-  }, []);
   return (
     <Container colors={['#000', '#333333']}>
       <StatusBar

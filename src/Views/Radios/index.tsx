@@ -156,7 +156,7 @@ export default function RadioScreen({navigation}: {navigation: any}) {
             <ContainerPlayer />
           </ContainerRadio>
         </TouchableOpacity>
-        <PlayPauseButton track={aracatiTrack} />
+
         <Line />
 
         <TouchableOpacity onPress={() => handlePlayerNavigation(caririTrack)}>
@@ -178,161 +178,184 @@ export default function RadioScreen({navigation}: {navigation: any}) {
         </TouchableOpacity>
 
         <Line />
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#f39c12', '#e67e22']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
 
-            <ContainerText>
-              <Titulo>Crateús</Titulo>
-              <Subtitulo>93.3</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerPlayer />
-        </ContainerRadio>
+        <TouchableOpacity onPress={() => handlePlayerNavigation(crateusTrack)}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#f39c12', '#e67e22']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
 
-        <Line />
-
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#e74c3c', '#f39c12']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
-
-            <ContainerText>
-              <Titulo>Iguatú/Cariús</Titulo>
-              <Subtitulo>91.5</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerPlayer />
-        </ContainerRadio>
-
-        <Line />
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#3498db', '#8e44ad']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
-
-            <ContainerText>
-              <Titulo>Paraipaba</Titulo>
-              <Subtitulo>88.7</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerPlayer />
-        </ContainerRadio>
+              <ContainerText>
+                <Titulo>Crateús</Titulo>
+                <Subtitulo>93.3</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer />
+          </ContainerRadio>
+        </TouchableOpacity>
 
         <Line />
 
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#ff6347', '#ffa500']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
+        <TouchableOpacity onPress={() => handlePlayerNavigation(iguatuTrack)}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#e74c3c', '#f39c12']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
 
-            <ContainerText>
-              <Titulo>Redenção</Titulo>
-              <Subtitulo>98.7</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerPlayer />
-        </ContainerRadio>
-
-        <Line />
-
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#f39c12', '#e67e22']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
-
-            <ContainerText>
-              <Titulo>Cascavel</Titulo>
-              <Subtitulo>98.7</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerPlayer />
-        </ContainerRadio>
+              <ContainerText>
+                <Titulo>Iguatú/Cariús</Titulo>
+                <Subtitulo>91.5</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer />
+          </ContainerRadio>
+        </TouchableOpacity>
 
         <Line />
 
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#e74c3c', '#f39c12']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
+        <TouchableOpacity onPress={() => handlePlayerNavigation(paraipabaTrack)}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#3498db', '#8e44ad']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
 
-            <ContainerText>
-              <Titulo>Pacajus</Titulo>
-              <Subtitulo>98.7</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerPlayer />
-        </ContainerRadio>
-
-        <Line />
-
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#3498db', '#8e44ad']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
-
-            <ContainerText>
-              <Titulo>Santa Quitéria</Titulo>
-              <Subtitulo>98.7</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerPlayer />
-        </ContainerRadio>
+              <ContainerText>
+                <Titulo>Paraipaba</Titulo>
+                <Subtitulo>88.7</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer />
+          </ContainerRadio>
+        </TouchableOpacity>
 
         <Line />
 
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
+        <TouchableOpacity onPress={() => handlePlayerNavigation(redencaoTrack)}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#ff6347', '#ffa500']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
 
-            <ContainerText>
-              <Titulo>Sobral</Titulo>
-              <Subtitulo>98.7</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerPlayer />
-        </ContainerRadio>
-
-        <Line />
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
-
-            <ContainerText>
-              <Titulo>Catarina</Titulo>
-              <Subtitulo>98.7</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerPlayer />
-        </ContainerRadio>
+              <ContainerText>
+                <Titulo>Redenção</Titulo>
+                <Subtitulo>98.7</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer />
+          </ContainerRadio>
+        </TouchableOpacity>
 
         <Line />
-        <ContainerRadio>
-          <ContainerDescRadio>
-            <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-            </ContainerImgRadio>
 
-            <ContainerText>
-              <Titulo>Plus</Titulo>
-              <Subtitulo>98.7</Subtitulo>
-            </ContainerText>
-          </ContainerDescRadio>
-          <ContainerPlayer />
-        </ContainerRadio>
+        <TouchableOpacity onPress={() => handlePlayerNavigation(cascavelTrack)}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#f39c12', '#e67e22']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
 
+              <ContainerText>
+                <Titulo>Cascavel</Titulo>
+                <Subtitulo>98.7</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer />
+          </ContainerRadio>
+        </TouchableOpacity>
+
+        <Line />
+
+        <TouchableOpacity onPress={() => handlePlayerNavigation(pacajusTrack)}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#e74c3c', '#f39c12']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
+
+              <ContainerText>
+                <Titulo>Pacajus</Titulo>
+                <Subtitulo>98.7</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer />
+          </ContainerRadio>
+        </TouchableOpacity>
+
+        <Line />
+
+        <TouchableOpacity onPress={() => handlePlayerNavigation(santaQuiteriaTrack)}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#3498db', '#8e44ad']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
+
+              <ContainerText>
+                <Titulo>Santa Quitéria</Titulo>
+                <Subtitulo>98.7</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer />
+          </ContainerRadio>
+        </TouchableOpacity>
+
+        <Line />
+
+        <TouchableOpacity onPress={() => handlePlayerNavigation(sobralTrack)}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
+
+              <ContainerText>
+                <Titulo>Sobral</Titulo>
+                <Subtitulo>98.7</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer />
+          </ContainerRadio>
+        </TouchableOpacity>
+
+        <Line />
+
+        <TouchableOpacity onPress={() => handlePlayerNavigation(catarinaTrack)}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
+
+              <ContainerText>
+                <Titulo>Catarina</Titulo>
+                <Subtitulo>98.7</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer />
+          </ContainerRadio>
+        </TouchableOpacity>
+
+        <Line />
+
+        <TouchableOpacity onPress={() => handlePlayerNavigation(plusTrack)}>
+          <ContainerRadio>
+            <ContainerDescRadio>
+              <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              </ContainerImgRadio>
+
+              <ContainerText>
+                <Titulo>Plus</Titulo>
+                <Subtitulo>98.7</Subtitulo>
+              </ContainerText>
+            </ContainerDescRadio>
+            <ContainerPlayer />
+          </ContainerRadio>
+        </TouchableOpacity>
         <Line2 />
       </ScrollView>
     </Container>

@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-// AudioPlayerContext.tsx
 import React, {
   createContext,
   useState,
@@ -7,7 +6,9 @@ import React, {
   useContext,
   useCallback,
 } from 'react';
-import TrackPlayer, {Event, State, Track} from 'react-native-track-player';
+import TrackPlayer, {Track} from 'react-native-track-player';
+
+TrackPlayer.registerPlaybackService(() => require('./service.js'));
 
 interface AudioPlayerContextData {
   isPlaying: boolean;
@@ -17,6 +18,8 @@ interface AudioPlayerContextData {
   playTrack: () => Promise<void>;
   pauseTrack: () => Promise<void>;
   stopPlayback: () => Promise<void>;
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
 }
 
 const AudioPlayerContext = createContext<AudioPlayerContextData>(
@@ -26,122 +29,76 @@ const AudioPlayerContext = createContext<AudioPlayerContextData>(
 export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
   children,
 }) => {
-  const plusTrack = {
-    id: 2,
-    url: 'https://webradio.amsolution.com.br/radio/8020/plus',
-    title: 'Radio Plus',
-    artist: 'Radio Plus',
-    isPlaying: false,
-  };
-  const [isPlayerInitialized, setIsPlayerInitialized] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrack, setCurrentTrack] = useState<Track | null>(plusTrack);
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
 
   const playTrack = useCallback(async () => {
-    const currentTrackId = await TrackPlayer.getCurrentTrack();
+    console.log('Iniciando a reprodução...');
+    setIsPlaying(true);
+    await TrackPlayer.play();
+    const track = await TrackPlayer.getTrack(
+      await TrackPlayer.getCurrentTrack() || 0,
+    );
+    console.log(`Reprodução iniciada. Tocando: ${track?.title}`);
+  }, []);
 
-    if (currentTrack && currentTrackId !== currentTrack.id) {
-      await TrackPlayer.stop();
-      await TrackPlayer.reset();
-      await TrackPlayer.add(currentTrack);
-      await TrackPlayer.play();
-      setCurrentTrack(currentTrack);
-      setIsPlaying(true); // Adicione esta linha
+  const pauseTrack = useCallback(async () => {
+    console.log('Pausando a reprodução...');
+    setIsPlaying(false);
+    await TrackPlayer.pause();
+    console.log('Reprodução pausada.');
+  }, []);
 
-      // Log when a new track starts playing
-      console.log(`Starting playback of Track ${currentTrack.id}.`);
-    } else {
-      await TrackPlayer.play();
-      setCurrentTrack(currentTrack);
-      setIsPlaying(true); // Adicione esta linha
-
-      // Log when playback is resumed
-      if (currentTrack) {
-        console.log(`Resumed playback of Track ${currentTrack.id}.`);
-      }
-    }
-  }, [currentTrack]);
-
-  const pauseTrack = async () => {
-    const currentState = await TrackPlayer.getState();
-
-    if (currentState === State.Playing) {
-      await TrackPlayer.pause();
-      setIsPlaying(true); // Adicione esta linha
-
-      // Log when playback is paused
-      if (currentTrack) {
-        console.log(`Paused playback of Track ${currentTrack.id}.`);
-      }
-    }
-  };
-  const [isPlayerReady, setIsPlayerReady] = useState(false);
-
-  useEffect(() => {
-    const setupPlayer = async () => {
-      console.log('Setting up player...');
-      await TrackPlayer.setupPlayer();
-      console.log('Player setup complete.');
-
-      if (currentTrack) {
-        console.log('Adding track to player...');
-        await TrackPlayer.add(currentTrack);
-        console.log('Track added to player.');
-        setIsPlayerReady(true); // Atualize o estado para indicar que o player está pronto
-      }
-
-      TrackPlayer.addEventListener(Event.PlaybackState, async ({state}) => {
-        if (state === State.Playing) {
-          setIsPlaying(true);
-          console.log('Track is playing.');
-        } else if (state === State.Paused || state === State.Stopped) {
-          setIsPlaying(false);
-          console.log('Track is paused or stopped.');
-        }
-      });
-
-      TrackPlayer.addEventListener(Event.RemoteStop, async () => {
-        setIsPlaying(false);
-        console.log('Playback stopped externally.');
-      });
-    };
-
-    setupPlayer();
-  }, [currentTrack]);
-
-  useEffect(() => {
-    if (isPlayerReady && !isPlayerInitialized) {
-      playTrack();
-      setIsPlayerInitialized(true);
-    }
-  }, [isPlayerReady, isPlayerInitialized, playTrack]);
-
-  useEffect(() => {
-    const setupPlayer = async () => {
-      await TrackPlayer.setupPlayer();
-
-      TrackPlayer.addEventListener(Event.PlaybackState, async ({state}) => {
-        setIsPlaying(state === State.Playing);
-      });
-    };
-
-    setupPlayer();
-
-    return () => {
-      TrackPlayer.reset();
-    };
-  }, [currentTrack]);
-
-  const stopPlayback = async () => {
+  const stopPlayback = useCallback(async () => {
+    console.log('Parando a reprodução...');
+    setIsPlaying(false);
     await TrackPlayer.stop();
-    await TrackPlayer.reset();
-    setCurrentTrack(null);
+    console.log('Reprodução parada.');
+  }, []);
 
-    // Log when playback is stopped
-    if (currentTrack) {
-      console.log(`Stopped playback ${currentTrack.id}.`);
-    }
-  };
+  const setTrack = useCallback(
+    async (track: Track | null) => {
+      console.log('Configurando a faixa...');
+      if (track === null) {
+        await TrackPlayer.stop();
+        setCurrentTrack(null);
+      } else {
+        setIsLoading(true);
+        await TrackPlayer.reset();
+        await TrackPlayer.add(track);
+        setCurrentTrack(track);
+        setIsLoading(false);
+        await playTrack(); // Adicionado aqui
+      }
+      console.log('Faixa configurada.');
+    },
+    [playTrack],
+  );
+
+  useEffect(() => {
+    const setupPlayer = async () => {
+      console.log('Configurando o player...');
+      setIsLoading(true);
+      await TrackPlayer.setupPlayer();
+      console.log('Player configurado.');
+
+      const plusTrack = {
+        id: 2,
+        url: 'https://webradio.amsolution.com.br/radio/8020/plus',
+        title: 'Radio Plus',
+        artist: 'Radio Plus',
+        isPlaying: false,
+      };
+
+      await setTrack(plusTrack);
+      await playTrack();
+
+      setIsLoading(false);
+    };
+
+    setupPlayer();
+  }, [setTrack, playTrack]);
 
   return (
     <AudioPlayerContext.Provider
@@ -149,10 +106,12 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
         isPlaying,
         setIsPlaying,
         currentTrack,
-        setCurrentTrack,
+        setCurrentTrack: setTrack,
         playTrack,
         pauseTrack,
         stopPlayback,
+        isLoading,
+        setIsLoading,
       }}>
       {children}
     </AudioPlayerContext.Provider>
