@@ -23,10 +23,11 @@ import {
 } from './styles';
 import {CaretDown} from 'phosphor-react-native';
 
-import PlayPauseButton from './buttonPlayer';
+
 
 export default function RadioScreen({navigation}: {navigation: any}) {
   const {setIsPlaying, setCurrentTrack} = useAudioPlayer();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handlePlay = () => {
     setIsPlaying(true); // Atualize o estado de reprodução quando necessário
   };
