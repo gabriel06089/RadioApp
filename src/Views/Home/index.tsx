@@ -1,88 +1,111 @@
 /* eslint-disable prettier/prettier */
-import React, {useState, useEffect} from 'react';
-import {View, Text, Easing, StatusBar} from 'react-native';
-import Svg, {Rect} from 'react-native-svg';
+import React, {useState} from 'react';
+import {Text, StatusBar, Animated, Easing} from 'react-native';
+
 import {CaretDown} from 'phosphor-react-native';
 
 import {
+  ArtistRadioText,
   AudioVisuContainer,
   ButtonPlayer,
   ButtonPlayerText,
   Container,
   ContainerHeader,
   ContainerHeaderText,
+  ContainerImgPlus,
   ContainerLine,
   ContainerLogo,
+  ContainerLogoText,
   ContainerMenu,
+  ContainerPlayerMusic,
   HeaderText,
   HeaderTitleText,
   ImageLogo,
+  ImagePlus,
+  ImagePlusPlayer,
   Line,
   Line2,
   Line3,
   MenuText,
+  MusicContainer,
+  MusicPhotoContainer,
+  MusicTextContainer,
+  TitleRadioText,
 } from './styles';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {
+  PanGestureHandler,
+  State,
+  TouchableOpacity,
+} from 'react-native-gesture-handler';
+import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 
-
-const INTERVAL = 100;
-const HEIGHT_MULTIPLIER = 45;
-
-const AudioVisualizer = () => {
-  const [bars, setBars] = useState([1, 2, 3, 4, 5]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const newBars = bars.map(() => Math.random());
-      setBars(newBars);
-    }, INTERVAL);
-
-    return () => clearInterval(interval);
-  }, [bars]);
-
-  return (
-    <View style={{flexDirection: 'row', marginTop: 16, marginLeft: 16}}>
-      {bars.map((height, index) => (
-        <Svg key={index} height="24" width="5">
-          <Rect
-            x="0"
-            y={50 - Easing.bezier(0.42, 0, 0.58, 1)(height) * HEIGHT_MULTIPLIER}
-            width="3"
-            height={Easing.bezier(0.42, 0, 0.58, 1)(height) * HEIGHT_MULTIPLIER}
-            rx="2"
-            ry="2"
-            fill="#fff"
-          />
-        </Svg>
-      ))}
-    </View>
-  );
-};
+import PlayPauseButton from '../Radios/buttonPlayer';
+import AudioVisualizer from './AudioVisualizer';
 
 const HomeScreen = ({navigation}: {navigation: any}) => {
-  const [visibleLineIndex, setVisibleLineIndex] = useState(0);
+  const [, setVisibleLineIndex] = useState(0);
   const [lineOpacities, setLineOpacities] = useState([1, 0.5, 0.5]);
-
+  const [opacity] = useState(new Animated.Value(1));
   const headerTexts = [
     'Pediu, Tocou! A Plus toca aquela música favorita e você ainda ganha prêmios.',
     'Qual é a sua? A sua música favorita vale muitos prêmios.',
     'Bom demais Plus: O melhor da programação da Plus em uma hora sem qualquer intervalo',
   ];
   const headerTitleTexts = ['NO AR', 'NO AR', 'A SEGUIR'];
+  const {currentTrack, isPlaying} = useAudioPlayer();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setVisibleLineIndex(prevIndex => (prevIndex + 1) % 3);
+  const [translateX] = useState(new Animated.Value(0));
+  const [headerTextIndex, setHeaderTextIndex] = useState(0);
 
-      // Atualiza as opacidades das linhas com base no índice atual
-      setLineOpacities(prevOpacities =>
-        prevOpacities.map((_, index) => (index === visibleLineIndex ? 1 : 0.5)),
-      );
-    }, 5000);
+  const onGestureEvent = Animated.event(
+    [
+      {
+        nativeEvent: {
+          translationX: translateX,
+        },
+      },
+    ],
+    {useNativeDriver: true},
+  );
 
-    return () => clearInterval(interval);
-  }, [visibleLineIndex]);
+  const onHandlerStateChange = ({nativeEvent}: {nativeEvent: any}) => {
+    if (nativeEvent.oldState === State.ACTIVE) {
+      Animated.timing(opacity, {
+        toValue: 0,
+        duration: 200,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      }).start(() => {
+        // Atualiza o índice do texto do cabeçalho com base na direção do arrasto
+        const newIndex =
+          ((nativeEvent.velocityX > 0
+            ? headerTextIndex + 1
+            : headerTextIndex - 1) +
+            headerTexts.length) %
+          headerTexts.length;
+        setHeaderTextIndex(newIndex);
 
+        // Atualiza o índice da linha visível
+        setVisibleLineIndex(newIndex);
+
+        // Atualiza as opacidades das linhas com base no novo índice
+        setLineOpacities(prevOpacities =>
+          prevOpacities.map((_, index) => (index === newIndex ? 1 : 0.5)),
+        );
+
+        // Anima a opacidade de volta a 1
+        Animated.timing(opacity, {
+          toValue: 1,
+          duration: 200,
+          easing: Easing.linear,
+          useNativeDriver: true,
+        }).start();
+
+        // Redefine translateX para 0
+        translateX.setValue(0);
+      });
+    }
+  };
   return (
     <Container colors={['#000', '#333333']}>
       <StatusBar
@@ -93,24 +116,36 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
       <ContainerHeader>
         <ContainerLogo>
           <ImageLogo source={require('../../../assets/plus-1.png')} />
-          <ContainerMenu>
-            <MenuText>CE - PLus</MenuText>
-            <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
+            <ContainerMenu>
+              <MenuText>{currentTrack?.title}</MenuText>
+
               <CaretDown color="whitesmoke" weight="bold" size={20} />
-            </TouchableOpacity>
-          </ContainerMenu>
+            </ContainerMenu>
+          </TouchableOpacity>
         </ContainerLogo>
 
+        <ContainerImgPlus>
+          <ImagePlus source={require('../../../assets/pluzinho.png')} />
+        </ContainerImgPlus>
+
         <ContainerHeaderText>
-          <HeaderTitleText>
-            {headerTitleTexts[visibleLineIndex]}
-          </HeaderTitleText>
-          <HeaderText>{headerTexts[visibleLineIndex]}</HeaderText>
+          <PanGestureHandler
+            onGestureEvent={onGestureEvent}
+            onHandlerStateChange={onHandlerStateChange}>
+            <Animated.View style={{transform: [{translateX}], opacity}}>
+              <HeaderTitleText>
+                {headerTitleTexts[headerTextIndex]}
+              </HeaderTitleText>
+              <HeaderText>{headerTexts[headerTextIndex]}</HeaderText>
+            </Animated.View>
+          </PanGestureHandler>
+
           <AudioVisuContainer>
             <ButtonPlayer>
               <ButtonPlayerText>AO VIVO</ButtonPlayerText>
             </ButtonPlayer>
-            <AudioVisualizer />
+            {isPlaying && <AudioVisualizer />}
           </AudioVisuContainer>
           <ContainerLine>
             <Line style={{opacity: lineOpacities[0]}} />
@@ -121,6 +156,24 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
       </ContainerHeader>
 
       <Text>Conteúdo da HomeScreen</Text>
+
+      <MusicContainer colors={['#000', '#333333']}>
+      <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
+        <ContainerLogoText>
+          <MusicPhotoContainer>
+            <ImagePlusPlayer source={require('../../../assets/pluzinho.png')} />
+          </MusicPhotoContainer>
+          <MusicTextContainer>
+            <TitleRadioText>{currentTrack?.title}</TitleRadioText>
+            <ArtistRadioText>{currentTrack?.artist}</ArtistRadioText>
+          </MusicTextContainer>
+        </ContainerLogoText>
+        </TouchableOpacity>
+        <ContainerPlayerMusic>
+          {currentTrack && <PlayPauseButton track={currentTrack} />}
+        </ContainerPlayerMusic>
+        
+      </MusicContainer>
     </Container>
   );
 };

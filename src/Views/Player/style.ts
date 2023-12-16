@@ -3,9 +3,9 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 
 export const Container = styled(LinearGradient).attrs({
-  colors: ['#F9E55C', '#F4E72D', '#FFC007'], // Adicione mais cores intermediárias se desejar
-  start: {x: 0.5, y: 0},
-  end: {x: 0.5, y: 1},
+  colors: ['#F9E55C', '#F4E72D', '#F4E72D'], // Adicione mais cores intermediárias se desejar
+  start: {x: 2, y: 2},
+  end: {x: 1, y: 1},
 })`
   flex: 1;
 `;
@@ -31,6 +31,7 @@ export const ContainerHome1 = styled.View`
 `;
 export const ContainerTextRadio = styled.View`
   align-items: center;
+  margin-top: 12px;
 `;
 export const TextRadio = styled.Text`
   font-weight: bold;
@@ -48,7 +49,11 @@ export const ContainerPhoto = styled.View`
   border-radius: 10px;
   margin-top: 50px;
 `;
-
+export const ImgPlus = styled.Image`
+  width: 300px;
+  height: 350px;
+  
+`;
 export const ContainerTextMusic = styled.View`
   align-self: center;
   margin-top: 50px;
@@ -74,10 +79,8 @@ export const ContainerButtons = styled.View`
   align-items: center;
 `;
 export const ButtonPlayer = styled.TouchableOpacity`
-
   height: 28px;
- 
-  
+
   align-items: center;
   justify-content: center;
 `;

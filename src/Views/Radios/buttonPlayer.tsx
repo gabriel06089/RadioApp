@@ -1,20 +1,21 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {Button, Text, View} from 'react-native';
+import {View, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {useAudioPlayer} from '../../Context/AudioPlayerContext';
-import {Track} from 'react-native-track-player';
+import {Track, } from 'react-native-track-player';
+import {Stop, Play} from 'phosphor-react-native';
 
 export default function PlayPauseButton({track}: {track: Track}) {
-  const {isPlaying, playTrack, stopPlayback, setCurrentTrack, pauseTrack} =
+  const {isPlaying, isLoading, playTrack, setCurrentTrack, pauseTrack} =
     useAudioPlayer();
 
   const handleSetTrack = async () => {
     setCurrentTrack(track);
   };
 
-  const handlePlayStop = () => {
+  const handlePlayPause = () => {
     if (isPlaying) {
-      stopPlayback();
+      pauseTrack();
     } else {
       handleSetTrack();
       playTrack();
@@ -23,9 +24,15 @@ export default function PlayPauseButton({track}: {track: Track}) {
 
   return (
     <View>
-      <Text>Is Playing: {isPlaying ? 'Yes' : 'No'}</Text>
-      <Button title={isPlaying ? 'Stop' : 'Play'} onPress={handlePlayStop} />
-      <Button title="Pause" onPress={pauseTrack} />
+      <TouchableOpacity onPress={handlePlayPause}>
+        {isLoading ? (
+          <ActivityIndicator size={44} color="#541084" />
+        ) : isPlaying ? (
+          <Stop weight="fill" size={44} color="#541084" />
+        ) : (
+          <Play weight="fill" size={44} color="#541084" />
+        )}
+      </TouchableOpacity>
     </View>
   );
 }

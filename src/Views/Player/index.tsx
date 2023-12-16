@@ -23,52 +23,66 @@ import {
   TextMusicDesc,
   ContainerTextRadio,
   TextRadioDesc,
+  ImgPlus,
 } from './style';
 import PlayPauseButton from '../Radios/buttonPlayer';
 
+import {PanGestureHandler, State, GestureHandlerGestureEvent} from 'react-native-gesture-handler'; // Import the GestureHandlerGestureEvent type
 export default function Player({navigation}: {navigation: any}) {
   const {currentTrack} = useAudioPlayer(); // Use o hook useAudioPlayer para acessar o estado do player
-
+  const onGestureEvent = React.useCallback(
+    ({nativeEvent}: GestureHandlerGestureEvent) => {
+      if (nativeEvent.oldState === State.ACTIVE) {
+        navigation.navigate('Home');
+      }
+    },
+    [navigation],
+  );
   return (
-    <Container colors={['#000', '#333333']}>
-      <StatusBar
-        animated={true}
-        backgroundColor="transparent"
-        translucent={true}
-      />
-      <ContainerHeader>
-        <ContainerHome1>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <CaretDown size={30} weight="bold" />
-          </TouchableOpacity>
-        </ContainerHome1>
-        <ContainerTextRadio>
-          <TextRadio>{currentTrack?.title || 'PlusFM'}</TextRadio>
-          <TextRadioDesc>{currentTrack?.artist || 'PlusFM'}</TextRadioDesc>
-        </ContainerTextRadio>
+    <PanGestureHandler
+      onGestureEvent={onGestureEvent}
+      onHandlerStateChange={onGestureEvent}>
+      <Container colors={['#000', '#333333']}>
+        <StatusBar
+          animated={true}
+          backgroundColor="transparent"
+          translucent={true}
+        />
+        <ContainerHeader>
+          <ContainerHome1>
+            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+              <CaretDown size={30} weight="bold" color="#541084" />
+            </TouchableOpacity>
+          </ContainerHome1>
+          <ContainerTextRadio>
+            <TextRadio>{currentTrack?.title || 'PlusFM'}</TextRadio>
+            <TextRadioDesc>{currentTrack?.frequency || 'PlusFM'}</TextRadioDesc>
+          </ContainerTextRadio>
 
-        <ContainerHome>
-          <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
-            <ListBullets size={30} weight="bold" />
-          </TouchableOpacity>
-        </ContainerHome>
-      </ContainerHeader>
+          <ContainerHome>
+            <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
+              <ListBullets size={30} weight="bold" color="#541084" />
+            </TouchableOpacity>
+          </ContainerHome>
+        </ContainerHeader>
 
-      <ContainerPhoto />
+        <ContainerPhoto>
+          <ImgPlus source={require('../../../assets/pluzinho.png')} />
+        </ContainerPhoto>
 
-      <ContainerTextMusic>
-        <TextMusic>{currentTrack?.title || 'PLUSFM'}</TextMusic>
-        <TextMusicDesc>{currentTrack?.artist || 'PlusFM'}</TextMusicDesc>
-      </ContainerTextMusic>
+        <ContainerTextMusic>
+          <TextMusic>{currentTrack?.artist || 'PlusFM'}</TextMusic>
+          
+        </ContainerTextMusic>
 
-      <ContainerButtons>
-        <ShareNetwork weight="fill" />
-        <Browser />
-
-        <WhatsappLogo />
-        <InstagramLogo />
-      </ContainerButtons>
-      {currentTrack && <PlayPauseButton track={currentTrack} />}
-    </Container>
+        <ContainerButtons>
+          <ShareNetwork weight="fill" color="#541084" />
+          <Browser color="#541084" />
+          {currentTrack && <PlayPauseButton track={currentTrack} />}
+          <WhatsappLogo color="#541084" />
+          <InstagramLogo color="#541084" />
+        </ContainerButtons>
+      </Container>
+    </PanGestureHandler>
   );
 }

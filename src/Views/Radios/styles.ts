@@ -28,7 +28,7 @@ export const ContainerHeader = styled.View`
 export const ContainerNavigation = styled.View`
   position: relative;
   top: -3px;
-  left: 50px;
+ right: 24px;
   align-items: center;
 
   justify-content: center;
@@ -38,7 +38,7 @@ export const ContainerHeaderText = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  right: 10px;
+  
 `;
 export const HeaderText = styled.Text`
   font-weight: bold;

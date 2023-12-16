@@ -23,8 +23,6 @@ import {
 } from './styles';
 import {CaretDown} from 'phosphor-react-native';
 
-
-
 export default function RadioScreen({navigation}: {navigation: any}) {
   const {setIsPlaying, setCurrentTrack} = useAudioPlayer();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -35,91 +33,213 @@ export default function RadioScreen({navigation}: {navigation: any}) {
     setCurrentTrack(track); // Defina a faixa atual
     navigation.navigate('Player', {track});
   };
+  const currentHour = new Date().getHours();
+  const currentDay = new Date().getDay();
+  let artist = 'Radio Plus';
 
+  if (currentHour >= 0 && currentHour < 5) {
+    artist = 'Corujao da Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 5 &&
+    currentHour < 6
+  ) {
+    artist = 'Clube Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 6 &&
+    currentHour < 7
+  ) {
+    artist = 'Deu B.O.';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 7 &&
+    currentHour < 8
+  ) {
+    artist = 'Ceara News';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 6 &&
+    currentHour >= 8 &&
+    currentHour < 9
+  ) {
+    artist = 'Ao Colo de Jesus e Maria';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 6 &&
+    currentHour >= 9 &&
+    currentHour < 11
+  ) {
+    artist = 'Manha da Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 12 &&
+    currentHour < 14
+  ) {
+    artist = 'Redação da Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 14 &&
+    currentHour < 17
+  ) {
+    artist = 'Tarde Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 17 &&
+    currentHour < 18
+  ) {
+    artist = 'Ta Todo Mundo Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 18 &&
+    currentHour < 19
+  ) {
+    artist = 'As Mais Pedidas';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 20 &&
+    currentHour < 22
+  ) {
+    artist = 'Plus Mania';
+  } else if (currentDay === 6 && currentHour >= 12 && currentHour < 14) {
+    artist = 'Festa Plus';
+  } else if (currentDay === 6 && currentHour >= 21 && currentHour < 22) {
+    artist = 'Time Machine';
+  } else if (currentDay === 6 && currentHour >= 22 && currentHour < 24) {
+    artist = 'Upgrade';
+  } else if (
+    currentDay === 0 &&
+    ((currentHour >= 5 && currentHour < 8) ||
+      (currentHour >= 20 && currentHour < 22))
+  ) {
+    artist = 'Playlist da Plus';
+  } else if (currentDay === 0 && currentHour >= 8 && currentHour < 9) {
+    artist = 'Terço da Misericordia';
+  } else if (currentDay === 0 && currentHour >= 10 && currentHour < 15) {
+    artist = 'Domingao da Plus';
+  } else if (currentDay === 0 && currentHour >= 15 && currentHour < 19) {
+    artist = 'Mega Plus';
+  } else if (currentDay === 0 && currentHour >= 19 && currentHour < 20) {
+    artist = 'A Grande Hora';
+  } else if (currentDay === 0 && currentHour >= 22 && currentHour < 24) {
+    artist = 'Sem Limites Para Amar';
+  }
   const aracatiTrack = {
     id: 1,
     url: 'https://webradio.amsolution.com.br/radio/8180/aracati',
-    title: 'Radio Aracati',
-    artist: 'Radio Aracati',
+    title: 'Plus Aracati',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+    frequency: '98.1',
   };
 
   const plusTrack = {
     id: 2,
     url: 'https://webradio.amsolution.com.br/radio/8020/plus',
     title: 'Radio Plus',
-    artist: 'Radio Plus',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
   };
   const caririTrack = {
     id: 3,
     url: 'https://webradio.amsolution.com.br/radio/8140/cariri',
     title: 'Radio Cariri',
-    artist: 'Radio Cariri',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+    frequency: '97.1',
   };
   const cascavelTrack = {
     id: 4,
     url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
     title: 'Radio Catarina',
-    artist: 'Radio Catarina',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+    frequency: '106.1',
   };
   const crateusTrack = {
     id: 5,
     url: 'https://webradio.amsolution.com.br/radio/8120/crateus',
     title: 'Radio Crateus',
-    artist: 'Radio Crateus',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+    frequency: '93.3',
   };
   const iguatuTrack = {
     id: 6,
     url: 'https://webradio.amsolution.com.br/radio/8070/iguatu',
     title: 'Radio Iguatu',
-    artist: 'Radio Iguatu',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+
+    frequency: '98.5',
   };
   const pacajusTrack = {
     id: 7,
     url: 'https://webradio.amsolution.com.br/radio/8130/pacajus',
     title: 'Radio Pacajus',
-    artist: 'Radio Pacajus',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+    frequency: '99.5',
   };
   const paraipabaTrack = {
     id: 8,
     url: 'https://webradio.amsolution.com.br/radio/8150/paraipaba',
     title: 'Radio Paraipaba',
-    artist: 'Radio Paraipaba',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+    frequency: '88.7',
   };
   const santaQuiteriaTrack = {
     id: 9,
     url: 'https://webradio.amsolution.com.br/radio/8170/santaquiteria',
     title: 'Radio SantaQuiteria',
-    artist: 'Radio SantaQuiteria',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+    frequency: '106.5',
   };
   const sobralTrack = {
     id: 10,
     url: 'https://webradio.amsolution.com.br/radio/8030/sobral',
     title: 'Radio Sobral',
-    artist: 'Radio Sobral',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+    frequency: '105.1',
   };
   const redencaoTrack = {
     id: 11,
     url: 'https://webradio.amsolution.com.br/radio/8090/redencao',
     title: 'Radio Redencao',
-    artist: 'Radio Redencao',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+    frequency: '98.7',
   };
   const catarinaTrack = {
     id: 12,
     url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
     title: 'Radio Catarina',
-    artist: 'Radio Catarina',
+    artist: artist,
     isPlaying: false,
+    artwork: require('../../../assets/pluzinho.png'),
+    frequency: '88.7',
   };
 
   return (
@@ -131,14 +251,15 @@ export default function RadioScreen({navigation}: {navigation: any}) {
       />
 
       <ContainerHeader>
+        <ContainerHeaderText>
+          <HeaderText>Radios</HeaderText>
+        </ContainerHeaderText>
+
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <ContainerNavigation>
             <CaretDown color="whitesmoke" weight="bold" />
           </ContainerNavigation>
         </TouchableOpacity>
-        <ContainerHeaderText>
-          <HeaderText>AFILIADOS</HeaderText>
-        </ContainerHeaderText>
       </ContainerHeader>
 
       <ScrollView>
@@ -216,7 +337,8 @@ export default function RadioScreen({navigation}: {navigation: any}) {
 
         <Line />
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(paraipabaTrack)}>
+        <TouchableOpacity
+          onPress={() => handlePlayerNavigation(paraipabaTrack)}>
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#3498db', '#8e44ad']}>
@@ -288,7 +410,8 @@ export default function RadioScreen({navigation}: {navigation: any}) {
 
         <Line />
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(santaQuiteriaTrack)}>
+        <TouchableOpacity
+          onPress={() => handlePlayerNavigation(santaQuiteriaTrack)}>
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#3498db', '#8e44ad']}>
