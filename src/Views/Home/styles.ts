@@ -113,7 +113,7 @@ export const ImagePlus = styled.Image`
 `;
 
 export const ImagePlusPlayer = styled.Image`
-  width: 40px;
+  width: 80px;
   height: 60px;
 `;
 export const ContainerMenu = styled.View`

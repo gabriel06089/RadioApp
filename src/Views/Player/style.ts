@@ -3,9 +3,9 @@ import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 
 export const Container = styled(LinearGradient).attrs({
-  colors: ['#F9E55C', '#F4E72D', '#F4E72D'], // Adicione mais cores intermediárias se desejar
-  start: {x: 2, y: 2},
-  end: {x: 1, y: 1},
+  colors: ['#FFD700', '#FFFF00'], 
+  start: {x: 0.5, y: 0}, 
+  end: {x: 0.5, y: 1},
 })`
   flex: 1;
 `;
@@ -52,7 +52,7 @@ export const ContainerPhoto = styled.View`
 export const ImgPlus = styled.Image`
   width: 300px;
   height: 350px;
-  
+  border-radius: 12px;
 `;
 export const ContainerTextMusic = styled.View`
   align-self: center;
@@ -65,9 +65,14 @@ export const TextMusic = styled.Text`
   color: black;
 `;
 export const TextMusicDesc = styled.Text`
+  font-weight: bold;
+  color: black;
+  font-size: 24px;
+`;
+export const TextMusicDescProg = styled.Text`
   font-weight: thin;
   color: black;
-  font-size: 12px;
+  font-size: 15px;
 `;
 export const ContainerButtons = styled.View`
   margin-top: 50px;

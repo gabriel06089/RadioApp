@@ -75,8 +75,9 @@ export const ContainerImgRadio = styled(LinearGradient).attrs(
   align-items: center;
 `;
 export const ImageLogo = styled.Image`
-  height: 40px;
-  width: 80px;
+  height: 90px;
+  width: 90px;
+  border-radius: 24px;
 `;
 
 export const ContainerText = styled.View`

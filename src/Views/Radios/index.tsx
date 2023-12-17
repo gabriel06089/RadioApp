@@ -37,7 +37,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
   const currentDay = new Date().getDay();
   let artist = 'Radio Plus';
 
-  if (currentHour >= 0 && currentHour < 5) {
+  if (
+    currentDay >= 0 &&
+    currentDay <= 6 &&
+    currentHour >= 0 &&
+    currentHour < 5
+  ) {
     artist = 'Corujao da Plus';
   } else if (
     currentDay >= 1 &&
@@ -131,114 +136,129 @@ export default function RadioScreen({navigation}: {navigation: any}) {
     artist = 'A Grande Hora';
   } else if (currentDay === 0 && currentHour >= 22 && currentHour < 24) {
     artist = 'Sem Limites Para Amar';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 6 &&
+    currentHour >= 11 &&
+    currentHour < 12
+  ) {
+    artist = 'As melhores da Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 22 &&
+    currentHour < 24
+  ) {
+    artist = 'Slow Motion';
   }
+
   const aracatiTrack = {
     id: 1,
     url: 'https://webradio.amsolution.com.br/radio/8180/aracati',
     title: 'Plus Aracati',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
     frequency: '98.1',
   };
 
   const plusTrack = {
     id: 2,
     url: 'https://webradio.amsolution.com.br/radio/8020/plus',
-    title: 'Radio Plus',
+    title: 'Plus FM',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
   };
   const caririTrack = {
     id: 3,
     url: 'https://webradio.amsolution.com.br/radio/8140/cariri',
-    title: 'Radio Cariri',
+    title: 'Plus Cariri',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
     frequency: '97.1',
   };
   const cascavelTrack = {
     id: 4,
     url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
-    title: 'Radio Catarina',
+    title: 'Plus Catarina',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
     frequency: '106.1',
   };
   const crateusTrack = {
     id: 5,
     url: 'https://webradio.amsolution.com.br/radio/8120/crateus',
-    title: 'Radio Crateus',
+    title: 'Plus Crateus',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
     frequency: '93.3',
   };
   const iguatuTrack = {
     id: 6,
     url: 'https://webradio.amsolution.com.br/radio/8070/iguatu',
-    title: 'Radio Iguatu',
+    title: 'Plus Iguatu',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
 
     frequency: '98.5',
   };
   const pacajusTrack = {
     id: 7,
     url: 'https://webradio.amsolution.com.br/radio/8130/pacajus',
-    title: 'Radio Pacajus',
+    title: 'Plus Pacajus',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
     frequency: '99.5',
   };
   const paraipabaTrack = {
     id: 8,
     url: 'https://webradio.amsolution.com.br/radio/8150/paraipaba',
-    title: 'Radio Paraipaba',
+    title: 'Plus Paraipaba',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
     frequency: '88.7',
   };
   const santaQuiteriaTrack = {
     id: 9,
     url: 'https://webradio.amsolution.com.br/radio/8170/santaquiteria',
-    title: 'Radio SantaQuiteria',
+    title: 'Plus SantaQuiteria',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
     frequency: '106.5',
   };
   const sobralTrack = {
     id: 10,
     url: 'https://webradio.amsolution.com.br/radio/8030/sobral',
-    title: 'Radio Sobral',
+    title: 'Plus Sobral',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
     frequency: '105.1',
   };
   const redencaoTrack = {
     id: 11,
     url: 'https://webradio.amsolution.com.br/radio/8090/redencao',
-    title: 'Radio Redencao',
+    title: 'Plus Redencao',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
     frequency: '98.7',
   };
   const catarinaTrack = {
     id: 12,
     url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
-    title: 'Radio Catarina',
+    title: 'Plus Catarina',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../assets/pluzinho.png'),
+    artwork: require('../../../assets/thumb2.png'),
     frequency: '88.7',
   };
 
@@ -261,18 +281,17 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           </ContainerNavigation>
         </TouchableOpacity>
       </ContainerHeader>
-
       <ScrollView>
-        <TouchableOpacity onPress={() => handlePlayerNavigation(aracatiTrack)}>
+        <TouchableOpacity onPress={() => handlePlayerNavigation(plusTrack)}>
           <ContainerRadio>
             <ContainerDescRadio>
-              <ContainerImgRadio colors={['#541084', '#ff4500']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
+                <ImageLogo source={require('../../../assets/Rede.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
-                <Titulo>Aracati</Titulo>
-                <Subtitulo>98.1</Subtitulo>
+                <Titulo>Plus</Titulo>
+                <Subtitulo>Rede</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
@@ -285,12 +304,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#541084', '#000000']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <ImageLogo source={require('../../../assets/Cariri.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
                 <Titulo>Cariri</Titulo>
-                <Subtitulo>100.5</Subtitulo>
+                <Subtitulo>{caririTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerButton>
@@ -305,12 +324,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#f39c12', '#e67e22']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <ImageLogo source={require('../../../assets/Crateús.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
                 <Titulo>Crateús</Titulo>
-                <Subtitulo>93.3</Subtitulo>
+                <Subtitulo>{crateusTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
@@ -323,12 +342,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#e74c3c', '#f39c12']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <ImageLogo source={require('../../../assets/Iguatu.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
                 <Titulo>Iguatú/Cariús</Titulo>
-                <Subtitulo>91.5</Subtitulo>
+                <Subtitulo>{iguatuTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
@@ -342,12 +361,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#3498db', '#8e44ad']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <ImageLogo source={require('../../../assets/Paraipaba.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
                 <Titulo>Paraipaba</Titulo>
-                <Subtitulo>88.7</Subtitulo>
+                <Subtitulo>{paraipabaTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
@@ -360,12 +379,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#ff6347', '#ffa500']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <ImageLogo source={require('../../../assets/Redenção.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
                 <Titulo>Redenção</Titulo>
-                <Subtitulo>98.7</Subtitulo>
+                <Subtitulo>{redencaoTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
@@ -378,12 +397,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#f39c12', '#e67e22']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <ImageLogo source={require('../../../assets/Cascavel.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
                 <Titulo>Cascavel</Titulo>
-                <Subtitulo>98.7</Subtitulo>
+                <Subtitulo>{cascavelTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
@@ -396,12 +415,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#e74c3c', '#f39c12']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <ImageLogo source={require('../../../assets/Pacajus.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
                 <Titulo>Pacajus</Titulo>
-                <Subtitulo>98.7</Subtitulo>
+                <Subtitulo>{pacajusTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
@@ -415,12 +434,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#3498db', '#8e44ad']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <ImageLogo source={require('../../../assets/SantaQuitéria.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
                 <Titulo>Santa Quitéria</Titulo>
-                <Subtitulo>98.7</Subtitulo>
+                <Subtitulo>{santaQuiteriaTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
@@ -433,12 +452,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <ImageLogo source={require('../../../assets/Sobral.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
                 <Titulo>Sobral</Titulo>
-                <Subtitulo>98.7</Subtitulo>
+                <Subtitulo>{sobralTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
@@ -451,12 +470,12 @@ export default function RadioScreen({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerDescRadio>
               <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <ImageLogo source={require('../../../assets/Catarina.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
                 <Titulo>Catarina</Titulo>
-                <Subtitulo>98.7</Subtitulo>
+                <Subtitulo>{catarinaTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
@@ -465,21 +484,22 @@ export default function RadioScreen({navigation}: {navigation: any}) {
 
         <Line />
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(plusTrack)}>
+        <TouchableOpacity onPress={() => handlePlayerNavigation(aracatiTrack)}>
           <ContainerRadio>
             <ContainerDescRadio>
-              <ContainerImgRadio colors={['#27ae60', '#2980b9']}>
-                <ImageLogo source={require('../../../assets/plus-1.png')} />
+              <ContainerImgRadio colors={['#541084', '#ff4500']}>
+                <ImageLogo source={require('../../../assets/Aracati.png')} />
               </ContainerImgRadio>
 
               <ContainerText>
-                <Titulo>Plus</Titulo>
-                <Subtitulo>98.7</Subtitulo>
+                <Titulo>Aracati</Titulo>
+                <Subtitulo>{aracatiTrack?.frequency}</Subtitulo>
               </ContainerText>
             </ContainerDescRadio>
             <ContainerPlayer />
           </ContainerRadio>
         </TouchableOpacity>
+
         <Line2 />
       </ScrollView>
     </Container>

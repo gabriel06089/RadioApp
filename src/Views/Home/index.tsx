@@ -161,7 +161,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
       <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
         <ContainerLogoText>
           <MusicPhotoContainer>
-            <ImagePlusPlayer source={require('../../../assets/pluzinho.png')} />
+            <ImagePlusPlayer source={require('../../../assets/thumb.png')} />
           </MusicPhotoContainer>
           <MusicTextContainer>
             <TitleRadioText>{currentTrack?.title}</TitleRadioText>

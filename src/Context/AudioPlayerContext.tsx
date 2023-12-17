@@ -99,7 +99,12 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
 
       let artist = 'Radio Plus';
 
-      if (currentHour >= 0 && currentHour < 5) {
+      if (
+        currentDay >= 0 &&
+        currentDay <= 6 &&
+        currentHour >= 0 &&
+        currentHour < 5
+      ) {
         artist = 'Corujao da Plus';
       } else if (
         currentDay >= 1 &&
@@ -196,8 +201,8 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
       } else if (
         currentDay >= 1 &&
         currentDay <= 6 &&
-        currentHour >= 9 &&
-        currentHour < 11
+        currentHour >= 11 &&
+        currentHour < 12
       ) {
         artist = 'As melhores da Plus';
       } else if (

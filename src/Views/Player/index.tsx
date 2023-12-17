@@ -19,15 +19,19 @@ import {
   ContainerPhoto,
   ContainerTextMusic,
   TextRadio,
-  TextMusic,
   TextMusicDesc,
   ContainerTextRadio,
   TextRadioDesc,
   ImgPlus,
+  TextMusicDescProg,
 } from './style';
 import PlayPauseButton from '../Radios/buttonPlayer';
 
-import {PanGestureHandler, State, GestureHandlerGestureEvent} from 'react-native-gesture-handler'; // Import the GestureHandlerGestureEvent type
+import {
+  PanGestureHandler,
+  State,
+  GestureHandlerGestureEvent,
+} from 'react-native-gesture-handler'; // Import the GestureHandlerGestureEvent type
 export default function Player({navigation}: {navigation: any}) {
   const {currentTrack} = useAudioPlayer(); // Use o hook useAudioPlayer para acessar o estado do player
   const onGestureEvent = React.useCallback(
@@ -67,12 +71,12 @@ export default function Player({navigation}: {navigation: any}) {
         </ContainerHeader>
 
         <ContainerPhoto>
-          <ImgPlus source={require('../../../assets/pluzinho.png')} />
+          <ImgPlus source={require('../../../assets/thumb2.png')} />
         </ContainerPhoto>
 
         <ContainerTextMusic>
-          <TextMusic>{currentTrack?.artist || 'PlusFM'}</TextMusic>
-          
+          <TextMusicDescProg>Tocando agora</TextMusicDescProg>
+          <TextMusicDesc>{currentTrack?.artist || 'PlusFM'}</TextMusicDesc>
         </ContainerTextMusic>
 
         <ContainerButtons>
