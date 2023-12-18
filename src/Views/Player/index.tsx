@@ -75,7 +75,7 @@ export default function Player({navigation}: {navigation: any}) {
         </ContainerPhoto>
 
         <ContainerTextMusic>
-          <TextMusicDescProg>Tocando agora</TextMusicDescProg>
+          <TextMusicDescProg>Você está escutando</TextMusicDescProg>
           <TextMusicDesc>{currentTrack?.artist || 'PlusFM'}</TextMusicDesc>
         </ContainerTextMusic>
 

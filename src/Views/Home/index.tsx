@@ -1,6 +1,12 @@
 /* eslint-disable prettier/prettier */
 import React, {useState} from 'react';
-import {Text, StatusBar, Animated, Easing} from 'react-native';
+import {
+  Text,
+  StatusBar,
+  Animated,
+  Easing,
+  ScrollView,
+} from 'react-native';
 
 import {CaretDown} from 'phosphor-react-native';
 
@@ -10,22 +16,28 @@ import {
   ButtonPlayer,
   ButtonPlayerText,
   Container,
+  ContainerBottom,
+  ContainerCarrousel,
   ContainerHeader,
   ContainerHeaderText,
   ContainerImgPlus,
   ContainerLine,
   ContainerLogo,
   ContainerLogoText,
+  ContainerMateria,
   ContainerMenu,
+  ContainerNoticiasColumn,
   ContainerPlayerMusic,
   HeaderText,
   HeaderTitleText,
   ImageLogo,
+  ImageMateria,
   ImagePlus,
   ImagePlusPlayer,
   Line,
   Line2,
   Line3,
+  MateriaTitle,
   MenuText,
   MusicContainer,
   MusicPhotoContainer,
@@ -108,71 +120,169 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
   };
   return (
     <Container colors={['#000', '#333333']}>
-      <StatusBar
-        animated={true}
-        backgroundColor="transparent"
-        translucent={true}
-      />
-      <ContainerHeader>
-        <ContainerLogo>
-          <ImageLogo source={require('../../../assets/plus-1.png')} />
-          <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
-            <ContainerMenu>
-              <MenuText>{currentTrack?.title}</MenuText>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
+        <StatusBar
+          animated={true}
+          backgroundColor="transparent"
+          translucent={true}
+        />
 
-              <CaretDown color="whitesmoke" weight="bold" size={20} />
-            </ContainerMenu>
-          </TouchableOpacity>
-        </ContainerLogo>
+        <ContainerHeader>
+          <ContainerLogo>
+            <ImageLogo source={require('../../../assets/plus-1.png')} />
+            <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
+              <ContainerMenu>
+                <MenuText>{currentTrack?.title}</MenuText>
 
-        <ContainerImgPlus>
-          <ImagePlus source={require('../../../assets/pluzinho.png')} />
-        </ContainerImgPlus>
+                <CaretDown color="whitesmoke" weight="bold" size={20} />
+              </ContainerMenu>
+            </TouchableOpacity>
+          </ContainerLogo>
 
-        <ContainerHeaderText>
-          <PanGestureHandler
-            onGestureEvent={onGestureEvent}
-            onHandlerStateChange={onHandlerStateChange}>
-            <Animated.View style={{transform: [{translateX}], opacity}}>
-              <HeaderTitleText>
-                {headerTitleTexts[headerTextIndex]}
-              </HeaderTitleText>
-              <HeaderText>{headerTexts[headerTextIndex]}</HeaderText>
-            </Animated.View>
-          </PanGestureHandler>
+          <ContainerImgPlus>
+            <ImagePlus source={require('../../../assets/pluzinho.png')} />
+          </ContainerImgPlus>
 
-          <AudioVisuContainer>
-            <ButtonPlayer>
-              <ButtonPlayerText>AO VIVO</ButtonPlayerText>
-            </ButtonPlayer>
-            {isPlaying && <AudioVisualizer />}
-          </AudioVisuContainer>
-          <ContainerLine>
-            <Line style={{opacity: lineOpacities[0]}} />
-            <Line2 style={{opacity: lineOpacities[1]}} />
-            <Line3 style={{opacity: lineOpacities[2]}} />
-          </ContainerLine>
-        </ContainerHeaderText>
-      </ContainerHeader>
+          <ContainerHeaderText>
+            <PanGestureHandler
+              onGestureEvent={onGestureEvent}
+              onHandlerStateChange={onHandlerStateChange}>
+              <Animated.View style={{transform: [{translateX}], opacity}}>
+                <HeaderTitleText>
+                  {headerTitleTexts[headerTextIndex]}
+                </HeaderTitleText>
+                <HeaderText>{headerTexts[headerTextIndex]}</HeaderText>
+              </Animated.View>
+            </PanGestureHandler>
 
-      <Text>Conteúdo da HomeScreen</Text>
+            <AudioVisuContainer>
+              <ButtonPlayer>
+                <ButtonPlayerText>AO VIVO</ButtonPlayerText>
+              </ButtonPlayer>
+              {isPlaying && <AudioVisualizer />}
+            </AudioVisuContainer>
+            <ContainerLine>
+              <Line style={{opacity: lineOpacities[0]}} />
+              <Line2 style={{opacity: lineOpacities[1]}} />
+              <Line3 style={{opacity: lineOpacities[2]}} />
+            </ContainerLine>
+          </ContainerHeaderText>
+        </ContainerHeader>
+
+        <Text
+          style={{
+            paddingTop: 12,
+            paddingLeft: 24,
+            paddingBottom: 12,
+            alignSelf: 'flex-start',
+            color: 'white',
+          }}>
+          Noticías
+        </Text>
+
+        <ScrollView
+          horizontal
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}>
+          <ContainerCarrousel>
+            <ContainerNoticiasColumn>
+              <ContainerMateria>
+                <ImageMateria
+                  source={{
+                    uri: 'https://s2-g1.glbimg.com/uCAIdX6BwNyegrPLVQNf0y2M-s0=/0x64:1920x1144/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/A/S/76jbhGQQAmT8Vd0GBN8g/chile-constituicao.jpg',
+                  }}
+                />
+              </ContainerMateria>
+              <MateriaTitle>
+                Chile rejeita Constituição cnservadora que substituiria texto da
+                era Pinochet
+              </MateriaTitle>
+            </ContainerNoticiasColumn>
+
+            <ContainerNoticiasColumn>
+              <ContainerMateria>
+                <ImageMateria
+                  source={{
+                    uri: 'https://s2-g1.glbimg.com/m8h6MLJulL_3O7SVGjhGQN5E4C0=/0x435:4176x2784/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/R/g/2uzislSBmbkZO7Z4BWsg/53395364846-a11c7226eb-o.jpg',
+                  }}
+                />
+              </ContainerMateria>
+              <MateriaTitle>
+                Com posse nesta 2ª na PGR, Gonet monta equipe para pacificar MP
+              </MateriaTitle>
+            </ContainerNoticiasColumn>
+
+            <ContainerNoticiasColumn>
+              <ContainerMateria>
+                <ImageMateria
+                  source={{
+                    uri: 'https://s2-g1.glbimg.com/ejheUTYlnSizXeAVEwsFFLDcyxM=/0x0:1920x1080/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/E/o/BymteFTiSEMBN8POakXg/globo-canal-4-20231217-2000-frame-274413.jpeg',
+                  }}
+                />
+              </ContainerMateria>
+              <MateriaTitle>
+                Caso Renato Cariani: PF descobre e-mail para farmacêutica e
+                notas falsas
+              </MateriaTitle>
+            </ContainerNoticiasColumn>
+          </ContainerCarrousel>
+        </ScrollView>
+        <ScrollView horizontal>
+          <ContainerCarrousel>
+            <ContainerNoticiasColumn>
+              <ContainerMateria />
+              <MateriaTitle>texto materia</MateriaTitle>
+            </ContainerNoticiasColumn>
+
+            <ContainerNoticiasColumn>
+              <ContainerMateria />
+              <MateriaTitle>texto materia</MateriaTitle>
+            </ContainerNoticiasColumn>
+
+            <ContainerNoticiasColumn>
+              <ContainerMateria />
+              <MateriaTitle>texto materia</MateriaTitle>
+            </ContainerNoticiasColumn>
+          </ContainerCarrousel>
+        </ScrollView>
+        <ScrollView horizontal>
+          <ContainerCarrousel>
+            <ContainerNoticiasColumn>
+              <ContainerMateria />
+              <MateriaTitle>texto materia</MateriaTitle>
+            </ContainerNoticiasColumn>
+
+            <ContainerNoticiasColumn>
+              <ContainerMateria />
+              <MateriaTitle>texto materia</MateriaTitle>
+            </ContainerNoticiasColumn>
+
+            <ContainerNoticiasColumn>
+              <ContainerMateria />
+              <MateriaTitle>texto materia</MateriaTitle>
+            </ContainerNoticiasColumn>
+          </ContainerCarrousel>
+          <ContainerBottom />
+        </ScrollView>
+      </ScrollView>
 
       <MusicContainer colors={['#000', '#333333']}>
-      <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
-        <ContainerLogoText>
-          <MusicPhotoContainer>
-            <ImagePlusPlayer source={require('../../../assets/thumb.png')} />
-          </MusicPhotoContainer>
-          <MusicTextContainer>
-            <TitleRadioText>{currentTrack?.title}</TitleRadioText>
-            <ArtistRadioText>{currentTrack?.artist}</ArtistRadioText>
-          </MusicTextContainer>
-        </ContainerLogoText>
+        <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
+          <ContainerLogoText>
+            <MusicPhotoContainer>
+              <ImagePlusPlayer source={require('../../../assets/thumb.png')} />
+            </MusicPhotoContainer>
+            <MusicTextContainer>
+              <TitleRadioText>{currentTrack?.title}</TitleRadioText>
+              <ArtistRadioText>{currentTrack?.artist}</ArtistRadioText>
+            </MusicTextContainer>
+          </ContainerLogoText>
         </TouchableOpacity>
         <ContainerPlayerMusic>
           {currentTrack && <PlayPauseButton track={currentTrack} />}
         </ContainerPlayerMusic>
-        
       </MusicContainer>
     </Container>
   );

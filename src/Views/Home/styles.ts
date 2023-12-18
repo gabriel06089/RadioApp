@@ -15,7 +15,7 @@ export const Container = styled(LinearGradient).attrs({
 export const ContainerHeader = styled.View`
   background-color: #541084;
   width: 100%;
-  height: 70%;
+  height: 600px;
   position: relative;
 `;
 export const ContainerHeaderText = styled.View`
@@ -141,7 +141,7 @@ export const MusicContainer = styled(LinearGradient).attrs({
   background-color: #f9e55c;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 70px;
 `;
 
 export const MusicPhotoContainer = styled.View`
@@ -149,7 +149,7 @@ export const MusicPhotoContainer = styled.View`
   justify-content: center;
   background-color: #ffc007;
   width: 80px;
-  height: 80px;
+  height: 70px;
 `;
 
 export const MusicTextContainer = styled.View`
@@ -165,7 +165,6 @@ export const TitleRadioText = styled.Text`
   color: #541084;
   font-weight: bold;
   font-size: 20px;
-  
 `;
 
 export const ArtistRadioText = styled.Text`
@@ -174,4 +173,42 @@ export const ArtistRadioText = styled.Text`
 `;
 export const ContainerPlayerMusic = styled.View`
   margin-right: 22px;
+`;
+
+export const ContainerNoticias = styled.View`
+  width: 100%;
+
+  padding: 20px;
+`;
+export const ContainerMateria = styled.View`
+  height: 100px;
+  width: 200px;
+  background-color: whitesmoke;
+  flex-direction: column;
+  border-radius: 8px;
+  
+`;
+export const ImageMateria = styled.Image`
+  height: 100px;
+  width: 200px;
+  border-radius: 8px;
+`;
+export const MateriaTitle = styled.Text`
+  margin-bottom: 12px;
+  margin-top: 12px;
+  color: white;
+`;
+export const ContainerCarrousel = styled.View`
+  flex-direction: row;
+  width: 100%;
+  margin-right: 24px;
+`;
+export const ContainerNoticiasColumn = styled.View`
+  flex-direction: column;
+  width: 200px;
+  margin-left: 24px;
+`;
+
+export const ContainerBottom = styled.View`
+  margin-bottom: 200px;
 `;
