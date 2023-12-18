@@ -186,7 +186,20 @@ export const ContainerMateria = styled.View`
   background-color: whitesmoke;
   flex-direction: column;
   border-radius: 8px;
-  
+`;
+export const ContainerPromo = styled.View`
+  height: 100px;
+  width: 150px;
+  background-color: whitesmoke;
+  flex-direction: column;
+  border-radius: 8px;
+  margin-left: 24px;
+
+`;
+export const ImagePromo = styled.Image`
+  height: 100px;
+  width: 150px;
+  border-radius: 8px;
 `;
 export const ImageMateria = styled.Image`
   height: 100px;
@@ -210,5 +223,5 @@ export const ContainerNoticiasColumn = styled.View`
 `;
 
 export const ContainerBottom = styled.View`
-  margin-bottom: 200px;
+  margin-bottom: 80px;
 `;

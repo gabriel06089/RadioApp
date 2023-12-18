@@ -9,7 +9,7 @@ import RadioScreen from './Views/Radios';
 import HomeScreen from './Views/Home';
 import Player from './Views/Player';
 import {AudioPlayerProvider} from './Context/AudioPlayerContext';
-
+import Posts from './Views/Posts';
 // Importe o AudioPlayerProvider
 
 // Crie uma instância de createStackNavigator
@@ -28,6 +28,7 @@ const App = () => {
             headerShown: false, // ou personalize conforme necessário
           }}>
           {/* Configuração das telas */}
+          <Stack.Screen name="Posts" component={Posts} />
           <Stack.Screen name="Player" component={Player} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Radio" component={RadioScreen} />

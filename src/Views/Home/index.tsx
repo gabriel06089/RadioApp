@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   StatusBar,
   Animated,
   Easing,
   ScrollView,
+  Linking,
 } from 'react-native';
 
 import {CaretDown} from 'phosphor-react-native';
@@ -28,12 +29,14 @@ import {
   ContainerMenu,
   ContainerNoticiasColumn,
   ContainerPlayerMusic,
+  ContainerPromo,
   HeaderText,
   HeaderTitleText,
   ImageLogo,
   ImageMateria,
   ImagePlus,
   ImagePlusPlayer,
+  ImagePromo,
   Line,
   Line2,
   Line3,
@@ -50,7 +53,7 @@ import {
   TouchableOpacity,
 } from 'react-native-gesture-handler';
 import {useAudioPlayer} from '../../Context/AudioPlayerContext';
-
+import DropShadow from 'react-native-drop-shadow';
 import PlayPauseButton from '../Radios/buttonPlayer';
 import AudioVisualizer from './AudioVisualizer';
 
@@ -65,10 +68,10 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
   ];
   const headerTitleTexts = ['NO AR', 'NO AR', 'A SEGUIR'];
   const {currentTrack, isPlaying} = useAudioPlayer();
-
+  const [promoImage, setPromoImage] = useState('');
   const [translateX] = useState(new Animated.Value(0));
   const [headerTextIndex, setHeaderTextIndex] = useState(0);
-
+  const [promoLink, setPromoLink] = useState('');
   const onGestureEvent = Animated.event(
     [
       {
@@ -118,6 +121,38 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
       });
     }
   };
+
+  const [posts, setPosts] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch('https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Notícias carregadas:'); // Adiciona log de console para depuração
+        setPosts(data);
+      })
+      .catch(error => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    fetch('https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=1')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Promoções carregadas:'); // Adiciona log de console para depuração
+        if (data.length > 0) {
+          const firstPost = data[0];
+          if (
+            firstPost.yoast_head_json &&
+            firstPost.yoast_head_json.og_image &&
+            firstPost.yoast_head_json.og_image[0]
+          ) {
+            setPromoImage(firstPost.yoast_head_json.og_image[0].url);
+            setPromoLink(firstPost.link);
+          }
+        }
+      })
+      .catch(error => console.error(error));
+  }, []);
   return (
     <Container colors={['#000', '#333333']}>
       <ScrollView
@@ -179,6 +214,41 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             alignSelf: 'flex-start',
             color: 'white',
           }}>
+          Promoções
+        </Text>
+        <ScrollView
+          horizontal
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}>
+          <ContainerCarrousel>
+            <TouchableOpacity onPress={() => Linking.openURL(promoLink)}>
+              <DropShadow
+                style={{
+                  shadowColor: '#000',
+                  shadowOffset: {
+                    width: 0,
+                    height: 5,
+                  },
+                  shadowOpacity: 0.55,
+                  shadowRadius: 3.84,
+                }}>
+                <ContainerPromo>
+                  {promoImage !== '' && (
+                    <ImagePromo source={{uri: promoImage}} />
+                  )}
+                </ContainerPromo>
+              </DropShadow>
+            </TouchableOpacity>
+          </ContainerCarrousel>
+        </ScrollView>
+        <Text
+          style={{
+            paddingTop: 12,
+            paddingLeft: 24,
+            paddingBottom: 12,
+            alignSelf: 'flex-start',
+            color: 'white',
+          }}>
           Noticías
         </Text>
 
@@ -187,85 +257,41 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}>
           <ContainerCarrousel>
-            <ContainerNoticiasColumn>
-              <ContainerMateria>
-                <ImageMateria
-                  source={{
-                    uri: 'https://s2-g1.glbimg.com/uCAIdX6BwNyegrPLVQNf0y2M-s0=/0x64:1920x1144/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/A/S/76jbhGQQAmT8Vd0GBN8g/chile-constituicao.jpg',
-                  }}
-                />
-              </ContainerMateria>
-              <MateriaTitle>
-                Chile rejeita Constituição cnservadora que substituiria texto da
-                era Pinochet
-              </MateriaTitle>
-            </ContainerNoticiasColumn>
-
-            <ContainerNoticiasColumn>
-              <ContainerMateria>
-                <ImageMateria
-                  source={{
-                    uri: 'https://s2-g1.glbimg.com/m8h6MLJulL_3O7SVGjhGQN5E4C0=/0x435:4176x2784/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/R/g/2uzislSBmbkZO7Z4BWsg/53395364846-a11c7226eb-o.jpg',
-                  }}
-                />
-              </ContainerMateria>
-              <MateriaTitle>
-                Com posse nesta 2ª na PGR, Gonet monta equipe para pacificar MP
-              </MateriaTitle>
-            </ContainerNoticiasColumn>
-
-            <ContainerNoticiasColumn>
-              <ContainerMateria>
-                <ImageMateria
-                  source={{
-                    uri: 'https://s2-g1.glbimg.com/ejheUTYlnSizXeAVEwsFFLDcyxM=/0x0:1920x1080/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/E/o/BymteFTiSEMBN8POakXg/globo-canal-4-20231217-2000-frame-274413.jpeg',
-                  }}
-                />
-              </ContainerMateria>
-              <MateriaTitle>
-                Caso Renato Cariani: PF descobre e-mail para farmacêutica e
-                notas falsas
-              </MateriaTitle>
-            </ContainerNoticiasColumn>
+            {posts.map((post, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => navigation.navigate('Posts', {post})}>
+                <ContainerNoticiasColumn>
+                  <DropShadow
+                    style={{
+                      shadowColor: '#000',
+                      shadowOffset: {
+                        width: 1,
+                        height: 5,
+                      },
+                      shadowOpacity: 0.45,
+                      shadowRadius: 3.84,
+                    }}>
+                    <ContainerMateria>
+                      {post ? (
+                        <ImageMateria
+                          source={{
+                            uri: post.yoast_head_json.og_image[0].url,
+                          }}
+                        />
+                      ) : null}
+                    </ContainerMateria>
+                  </DropShadow>
+                  <MateriaTitle>
+                    {post ? post.yoast_head_json.title : 'Carregando...'}
+                  </MateriaTitle>
+                </ContainerNoticiasColumn>
+              </TouchableOpacity>
+            ))}
           </ContainerCarrousel>
         </ScrollView>
-        <ScrollView horizontal>
-          <ContainerCarrousel>
-            <ContainerNoticiasColumn>
-              <ContainerMateria />
-              <MateriaTitle>texto materia</MateriaTitle>
-            </ContainerNoticiasColumn>
 
-            <ContainerNoticiasColumn>
-              <ContainerMateria />
-              <MateriaTitle>texto materia</MateriaTitle>
-            </ContainerNoticiasColumn>
-
-            <ContainerNoticiasColumn>
-              <ContainerMateria />
-              <MateriaTitle>texto materia</MateriaTitle>
-            </ContainerNoticiasColumn>
-          </ContainerCarrousel>
-        </ScrollView>
-        <ScrollView horizontal>
-          <ContainerCarrousel>
-            <ContainerNoticiasColumn>
-              <ContainerMateria />
-              <MateriaTitle>texto materia</MateriaTitle>
-            </ContainerNoticiasColumn>
-
-            <ContainerNoticiasColumn>
-              <ContainerMateria />
-              <MateriaTitle>texto materia</MateriaTitle>
-            </ContainerNoticiasColumn>
-
-            <ContainerNoticiasColumn>
-              <ContainerMateria />
-              <MateriaTitle>texto materia</MateriaTitle>
-            </ContainerNoticiasColumn>
-          </ContainerCarrousel>
-          <ContainerBottom />
-        </ScrollView>
+        <ContainerBottom />
       </ScrollView>
 
       <MusicContainer colors={['#000', '#333333']}>
