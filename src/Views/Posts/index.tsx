@@ -3,18 +3,22 @@ import React from 'react';
 import {useRoute, RouteProp} from '@react-navigation/native';
 import {
   Container,
+  ContainerButton,
+  ContainerImg,
   ContainerImgPost,
   ContainerWebview,
   TitleText,
 } from './style';
 import {WebView} from 'react-native-webview';
+import {ScrollView, TouchableOpacity} from 'react-native';
+import {ArrowCircleLeft} from 'phosphor-react-native';
 
 type PostScreenRouteProp = RouteProp<
   {Posts: {post: any}}, // Substitua 'any' pelo tipo real do seu post
   'Posts'
 >;
 
-const Posts = () => {
+export default function Posts({navigation}: {navigation: any}) {
   const route = useRoute<PostScreenRouteProp>();
   const post = route.params.post;
   const date = new Date(post.date).toLocaleDateString('pt-BR');
@@ -46,17 +50,24 @@ ${post.content.rendered}
 
   return (
     <Container>
-      <ContainerImgPost
-        source={{uri: post.yoast_head_json.og_image[0].url}}
-        style={{width: '100%', height: '30%'}}
-      />
+      <ScrollView>
+        <ContainerImg>
+          <ContainerImgPost
+            source={{uri: post.yoast_head_json.og_image[0].url}}
+            style={{width: '100%', height: '30%'}}
+          />
+        </ContainerImg>
+        <ContainerButton>
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <ArrowCircleLeft color="#9248FF" weight="bold" size={35} />
+          </TouchableOpacity>
+          <TitleText>Publicado em {date}</TitleText>
+        </ContainerButton>
 
-      <TitleText>Publicado em {date}</TitleText>
-      <ContainerWebview>
-        <WebView source={{html: htmlContent}} />
-      </ContainerWebview>
+        <ContainerWebview>
+          <WebView source={{html: htmlContent}} />
+        </ContainerWebview>
+      </ScrollView>
     </Container>
   );
-};
-
-export default Posts;
+}

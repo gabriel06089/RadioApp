@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
+import {StatusBar} from 'react-native';
 
 export const Container = styled(LinearGradient).attrs({
-  colors: ['#FFD700', '#FFFF00'], 
-  start: {x: 0.5, y: 0}, 
+  colors: ['#FFC007', '#F4E72D'],
+  start: {x: 0.5, y: 0},
   end: {x: 0.5, y: 1},
 })`
   flex: 1;
@@ -14,7 +15,7 @@ export const ContainerHeader = styled.View`
 
   height: 70px;
 
-  padding-top: 25px;
+  padding-top: ${StatusBar.currentHeight ? StatusBar.currentHeight + 24 : 24}px;
 
   justify-content: space-between;
   align-items: center;
@@ -31,7 +32,6 @@ export const ContainerHome1 = styled.View`
 `;
 export const ContainerTextRadio = styled.View`
   align-items: center;
-  margin-top: 12px;
 `;
 export const TextRadio = styled.Text`
   font-weight: bold;
@@ -79,7 +79,7 @@ export const ContainerButtons = styled.View`
   align-self: center;
   flex-direction: row;
   justify-content: space-between;
-  padding: 15px;
+
   width: 80%;
   align-items: center;
 `;

@@ -1,14 +1,14 @@
 /* eslint-disable prettier/prettier */
 import {
+  ArrowCircleLeft,
   Browser,
-  CaretDown,
   InstagramLogo,
-  ListBullets,
+  Playlist,
   ShareNetwork,
   WhatsappLogo,
 } from 'phosphor-react-native';
 import React from 'react';
-import {StatusBar, TouchableOpacity} from 'react-native';
+import {Linking, StatusBar, TouchableOpacity} from 'react-native';
 import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 import {
   Container,
@@ -55,7 +55,7 @@ export default function Player({navigation}: {navigation: any}) {
         <ContainerHeader>
           <ContainerHome1>
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-              <CaretDown size={30} weight="bold" color="#541084" />
+              <ArrowCircleLeft size={30} weight="bold" color="#541084" />
             </TouchableOpacity>
           </ContainerHome1>
           <ContainerTextRadio>
@@ -64,8 +64,8 @@ export default function Player({navigation}: {navigation: any}) {
           </ContainerTextRadio>
 
           <ContainerHome>
-            <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
-              <ListBullets size={30} weight="bold" color="#541084" />
+            <TouchableOpacity onPress={() => navigation.navigate('RadioList')}>
+              <Playlist size={30} weight="fill" color="#541084" />
             </TouchableOpacity>
           </ContainerHome>
         </ContainerHeader>
@@ -80,11 +80,27 @@ export default function Player({navigation}: {navigation: any}) {
         </ContainerTextMusic>
 
         <ContainerButtons>
-          <ShareNetwork weight="fill" color="#541084" />
-          <Browser color="#541084" />
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL('https://seu-link-para-share-network')
+            }>
+            <ShareNetwork weight="fill" color="#541084" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL('https://plusfm.com.br/')}>
+            <Browser color="#541084" weight="bold" />
+          </TouchableOpacity>
           {currentTrack && <PlayPauseButton track={currentTrack} />}
-          <WhatsappLogo color="#541084" />
-          <InstagramLogo color="#541084" />
+          <TouchableOpacity
+            onPress={() => Linking.openURL('https://whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A')}>
+            <WhatsappLogo color="#541084" weight="bold" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL('https://www.instagram.com/plusfmrede/')
+            }>
+            <InstagramLogo color="#541084" weight="bold" />
+          </TouchableOpacity>
         </ContainerButtons>
       </Container>
     </PanGestureHandler>

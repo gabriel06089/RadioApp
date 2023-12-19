@@ -10,7 +10,6 @@ export const Container = styled(LinearGradient).attrs({
   end: {x: 0, y: 1}, //
 })`
   flex: 1;
-  align-items: center;
 `;
 export const ContainerHeader = styled.View`
   background-color: #541084;
@@ -91,13 +90,20 @@ export const ContainerLogo = styled.View`
   justify-content: space-between;
   align-items: center;
   padding-top: ${StatusBar.currentHeight}px;
+  
   margin: 24px;
+  
 `;
 export const ImageLogo = styled.Image`
   width: 100px;
   height: 50px;
+  
 `;
-
+export const TextLogo = styled.Text`
+  color: white;
+  font-size: 10px;
+  font-weight: thin;
+`;
 export const ContainerImgPlus = styled.View`
   position: absolute;
   align-items: center;
@@ -194,7 +200,6 @@ export const ContainerPromo = styled.View`
   flex-direction: column;
   border-radius: 8px;
   margin-left: 24px;
-
 `;
 export const ImagePromo = styled.Image`
   height: 100px;
@@ -224,4 +229,21 @@ export const ContainerNoticiasColumn = styled.View`
 
 export const ContainerBottom = styled.View`
   margin-bottom: 80px;
+`;
+export const ContainerLogoContato = styled.View`
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+export const LogoContato = styled.Image`
+  height: 50px;
+  width: 100px;
+  margin-top: 24px;
+`;
+export const ContainerContato = styled.View`
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: row;
 `;

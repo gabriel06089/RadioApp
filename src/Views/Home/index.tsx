@@ -9,8 +9,14 @@ import {
   Linking,
 } from 'react-native';
 
-import {CaretDown} from 'phosphor-react-native';
-
+import {
+  FacebookLogo,
+  InstagramLogo,
+  Playlist,
+  WhatsappLogo,
+  YoutubeLogo,
+} from 'phosphor-react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   ArtistRadioText,
   AudioVisuContainer,
@@ -19,11 +25,13 @@ import {
   Container,
   ContainerBottom,
   ContainerCarrousel,
+  ContainerContato,
   ContainerHeader,
   ContainerHeaderText,
   ContainerImgPlus,
   ContainerLine,
   ContainerLogo,
+  ContainerLogoContato,
   ContainerLogoText,
   ContainerMateria,
   ContainerMenu,
@@ -40,11 +48,13 @@ import {
   Line,
   Line2,
   Line3,
+  LogoContato,
   MateriaTitle,
   MenuText,
   MusicContainer,
   MusicPhotoContainer,
   MusicTextContainer,
+  TextLogo,
   TitleRadioText,
 } from './styles';
 import {
@@ -56,6 +66,7 @@ import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 import DropShadow from 'react-native-drop-shadow';
 import PlayPauseButton from '../Radios/buttonPlayer';
 import AudioVisualizer from './AudioVisualizer';
+import styled from 'styled-components/native';
 
 const HomeScreen = ({navigation}: {navigation: any}) => {
   const [, setVisibleLineIndex] = useState(0);
@@ -123,21 +134,40 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
   };
 
   const [posts, setPosts] = useState<any[]>([]);
-
+  const Logo = styled.View`
+    color: white;
+    margin-right: 12px;
+    margin-left: 12px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  `;
   useEffect(() => {
-    fetch('https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3')
-      .then(response => response.json())
-      .then(data => {
-        console.log('Notícias carregadas:'); // Adiciona log de console para depuração
-        setPosts(data);
-      })
-      .catch(error => console.error(error));
+    const fetchNews = async () => {
+      const storedNews = await AsyncStorage.getItem('news');
+      if (storedNews) {
+        setPosts(JSON.parse(storedNews));
+      } else {
+        fetch('https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3')
+          .then(response => response.json())
+          .then(data => {
+            console.log('Notícias carregadas:'); // Adiciona log de console para depuração
+            setPosts(data);
+            AsyncStorage.setItem('news', JSON.stringify(data));
+          })
+          .catch(error => console.error(error));
+      }
+    };
+
+    fetchNews();
   }, []);
 
   useEffect(() => {
-    fetch('https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=1')
-      .then(response => response.json())
-      .then(data => {
+    const fetchPromotions = async () => {
+      try {
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=1',
+        );
+        const data = await response.json();
         console.log('Promoções carregadas:'); // Adiciona log de console para depuração
         if (data.length > 0) {
           const firstPost = data[0];
@@ -150,8 +180,12 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             setPromoLink(firstPost.link);
           }
         }
-      })
-      .catch(error => console.error(error));
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPromotions();
   }, []);
   return (
     <Container colors={['#000', '#333333']}>
@@ -167,11 +201,11 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
         <ContainerHeader>
           <ContainerLogo>
             <ImageLogo source={require('../../../assets/plus-1.png')} />
-            <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
+            <TouchableOpacity onPress={() => navigation.navigate('RadioList')}>
               <ContainerMenu>
                 <MenuText>{currentTrack?.title}</MenuText>
 
-                <CaretDown color="whitesmoke" weight="bold" size={20} />
+                <Playlist color="whitesmoke" weight="fill" size={30} />
               </ContainerMenu>
             </TouchableOpacity>
           </ContainerLogo>
@@ -290,12 +324,39 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             ))}
           </ContainerCarrousel>
         </ScrollView>
-
+        <ContainerLogoContato>
+          <LogoContato source={require('../../../assets/plus-1.png')} />
+          <TextLogo>Aqui é legal demais</TextLogo>
+        </ContainerLogoContato>
+        <ContainerContato>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL('https://www.instagram.com/plusfmrede/')
+            }>
+            <Logo as={InstagramLogo} size={24} weight="duotone" color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL('https://www.youtube.com/@plusfmrede')
+            }>
+            <Logo as={YoutubeLogo} size={24} weight="duotone" color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Linking.openURL('https://whatsapp.com')}>
+            <Logo as={WhatsappLogo} size={24} weight="duotone" color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              Linking.openURL('https://www.facebook.com/plusfmrede/')
+            }>
+            <Logo as={FacebookLogo} size={24} weight="duotone" color="white" />
+          </TouchableOpacity>
+        </ContainerContato>
         <ContainerBottom />
       </ScrollView>
 
       <MusicContainer colors={['#000', '#333333']}>
-        <TouchableOpacity onPress={() => navigation.navigate('Radio')}>
+        <TouchableOpacity onPress={() => navigation.navigate('RadioList')}>
           <ContainerLogoText>
             <MusicPhotoContainer>
               <ImagePlusPlayer source={require('../../../assets/thumb.png')} />
