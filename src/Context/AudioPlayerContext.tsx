@@ -80,8 +80,13 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
     const setupPlayer = async () => {
       console.log('Configurando o player...');
       setIsLoading(true);
-      await TrackPlayer.setupPlayer();
-      console.log('Player configurado.');
+    
+      try {
+        await TrackPlayer.setupPlayer();
+        console.log('Player configurado.');
+      } catch (error) {
+        console.log('Player já configurado.');
+      }
 
       // Configuração das opções do player para exibir a notificação
       TrackPlayer.updateOptions({
@@ -97,7 +102,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
       const currentHour = new Date().getHours();
       const currentDay = new Date().getDay();
 
-      let artist = 'Radio Plus';
+      let artist = 'Rádio Plus';
 
       if (
         currentDay >= 0 &&
@@ -105,7 +110,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
         currentHour >= 0 &&
         currentHour < 5
       ) {
-        artist = 'Corujao da Plus';
+        artist = 'Corujo da Plus';
       } else if (
         currentDay >= 1 &&
         currentDay <= 5 &&
@@ -126,7 +131,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
         currentHour >= 7 &&
         currentHour < 8
       ) {
-        artist = 'Ceara News';
+        artist = 'Ceará News';
       } else if (
         currentDay >= 1 &&
         currentDay <= 6 &&
@@ -140,7 +145,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
         currentHour >= 9 &&
         currentHour < 11
       ) {
-        artist = 'Manha da Plus';
+        artist = 'Manhã da Plus';
       } else if (
         currentDay >= 1 &&
         currentDay <= 5 &&
@@ -161,7 +166,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
         currentHour >= 17 &&
         currentHour < 18
       ) {
-        artist = 'Ta Todo Mundo Plus';
+        artist = 'Tá Todo Mundo Plus';
       } else if (
         currentDay >= 1 &&
         currentDay <= 5 &&
@@ -189,9 +194,9 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
       ) {
         artist = 'Playlist da Plus';
       } else if (currentDay === 0 && currentHour >= 8 && currentHour < 9) {
-        artist = 'Terço da Misericordia';
+        artist = 'Terço da Misericórdia';
       } else if (currentDay === 0 && currentHour >= 10 && currentHour < 15) {
-        artist = 'Domingao da Plus';
+        artist = 'Domingão da Plus';
       } else if (currentDay === 0 && currentHour >= 15 && currentHour < 19) {
         artist = 'Mega Plus';
       } else if (currentDay === 0 && currentHour >= 19 && currentHour < 20) {
@@ -217,11 +222,11 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
       const plusTrack = {
         id: 2,
         url: 'https://webradio.amsolution.com.br/radio/8020/plus',
-        title: 'Radio Plus',
+        title: 'Rádio Plus',
         artist: artist,
         isPlaying: false,
         artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
-        frequency: '102.3 FM',
+        frequency: 'Rede',
       };
 
       await setTrack(plusTrack);

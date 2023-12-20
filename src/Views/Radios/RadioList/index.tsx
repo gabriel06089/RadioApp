@@ -30,7 +30,8 @@ export default function RadioList({navigation}: {navigation: any}) {
   };
   const currentHour = new Date().getHours();
   const currentDay = new Date().getDay();
-  let artist = 'Radio Plus';
+
+  let artist = 'Rádio Plus';
 
   if (
     currentDay >= 0 &&
@@ -38,7 +39,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     currentHour >= 0 &&
     currentHour < 5
   ) {
-    artist = 'Corujao da Plus';
+    artist = 'Corujo da Plus';
   } else if (
     currentDay >= 1 &&
     currentDay <= 5 &&
@@ -59,7 +60,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     currentHour >= 7 &&
     currentHour < 8
   ) {
-    artist = 'Ceara News';
+    artist = 'Ceará News';
   } else if (
     currentDay >= 1 &&
     currentDay <= 6 &&
@@ -73,7 +74,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     currentHour >= 9 &&
     currentHour < 11
   ) {
-    artist = 'Manha da Plus';
+    artist = 'Manhã da Plus';
   } else if (
     currentDay >= 1 &&
     currentDay <= 5 &&
@@ -94,7 +95,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     currentHour >= 17 &&
     currentHour < 18
   ) {
-    artist = 'Ta Todo Mundo Plus';
+    artist = 'Tá Todo Mundo Plus';
   } else if (
     currentDay >= 1 &&
     currentDay <= 5 &&
@@ -122,9 +123,9 @@ export default function RadioList({navigation}: {navigation: any}) {
   ) {
     artist = 'Playlist da Plus';
   } else if (currentDay === 0 && currentHour >= 8 && currentHour < 9) {
-    artist = 'Terço da Misericordia';
+    artist = 'Terço da Misericórdia';
   } else if (currentDay === 0 && currentHour >= 10 && currentHour < 15) {
-    artist = 'Domingao da Plus';
+    artist = 'Domingão da Plus';
   } else if (currentDay === 0 && currentHour >= 15 && currentHour < 19) {
     artist = 'Mega Plus';
   } else if (currentDay === 0 && currentHour >= 19 && currentHour < 20) {
@@ -146,7 +147,6 @@ export default function RadioList({navigation}: {navigation: any}) {
   ) {
     artist = 'Slow Motion';
   }
-
   const aracatiTrack = {
     id: 1,
     url: 'https://webradio.amsolution.com.br/radio/8180/aracati',
@@ -186,7 +186,7 @@ export default function RadioList({navigation}: {navigation: any}) {
   const crateusTrack = {
     id: 5,
     url: 'https://webradio.amsolution.com.br/radio/8120/crateus',
-    title: 'Plus Crateus',
+    title: 'Plus Crateús',
     artist: artist,
     isPlaying: false,
     artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
@@ -223,7 +223,7 @@ export default function RadioList({navigation}: {navigation: any}) {
   const santaQuiteriaTrack = {
     id: 9,
     url: 'https://webradio.amsolution.com.br/radio/8170/santaquiteria',
-    title: 'Plus SantaQuiteria',
+    title: 'Plus Santa Quitéria',
     artist: artist,
     isPlaying: false,
     artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
@@ -241,7 +241,7 @@ export default function RadioList({navigation}: {navigation: any}) {
   const redencaoTrack = {
     id: 11,
     url: 'https://webradio.amsolution.com.br/radio/8090/redencao',
-    title: 'Plus Redencao',
+    title: 'Plus Redenção',
     artist: artist,
     isPlaying: false,
     artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
@@ -288,6 +288,21 @@ export default function RadioList({navigation}: {navigation: any}) {
           </ContainerRadio>
         </TouchableOpacity>
 
+        <TouchableOpacity onPress={() => handlePlayerNavigation(sobralTrack)}>
+          <ContainerRadio>
+            <ContainerList>
+              <ContainerPlayRadio>
+                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <ContainerText>
+                  <Titulo>Sobral</Titulo>
+                  <Subtitulo>{sobralTrack?.frequency}</Subtitulo>
+                </ContainerText>
+              </ContainerPlayRadio>
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
+            </ContainerList>
+          </ContainerRadio>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={() => handlePlayerNavigation(caririTrack)}>
           <ContainerRadio>
             <ContainerList>
@@ -303,13 +318,58 @@ export default function RadioList({navigation}: {navigation: any}) {
           </ContainerRadio>
         </TouchableOpacity>
 
+        <TouchableOpacity onPress={() => handlePlayerNavigation(aracatiTrack)}>
+          <ContainerRadio>
+            <ContainerList>
+              <ContainerPlayRadio>
+                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <ContainerText>
+                  <Titulo>Aracati</Titulo>
+                  <Subtitulo>{aracatiTrack?.frequency}</Subtitulo>
+                </ContainerText>
+              </ContainerPlayRadio>
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
+            </ContainerList>
+          </ContainerRadio>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handlePlayerNavigation(cascavelTrack)}>
+          <ContainerRadio>
+            <ContainerList>
+              <ContainerPlayRadio>
+                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <ContainerText>
+                  <Titulo>Cascavel</Titulo>
+                  <Subtitulo>{cascavelTrack?.frequency}</Subtitulo>
+                </ContainerText>
+              </ContainerPlayRadio>
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
+            </ContainerList>
+          </ContainerRadio>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handlePlayerNavigation(catarinaTrack)}>
+          <ContainerRadio>
+            <ContainerList>
+              <ContainerPlayRadio>
+                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <ContainerText>
+                  <Titulo>Catarina</Titulo>
+                  <Subtitulo>{catarinaTrack?.frequency}</Subtitulo>
+                </ContainerText>
+              </ContainerPlayRadio>
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
+            </ContainerList>
+          </ContainerRadio>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={() => handlePlayerNavigation(crateusTrack)}>
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
                 <PlayCircle size={40} weight={'bold'} color={'#541084'} />
                 <ContainerText>
-                  <Titulo>Crateus</Titulo>
+                  <Titulo>Crateús</Titulo>
                   <Subtitulo>{crateusTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
@@ -326,6 +386,21 @@ export default function RadioList({navigation}: {navigation: any}) {
                 <ContainerText>
                   <Titulo>Iguatu</Titulo>
                   <Subtitulo>{iguatuTrack?.frequency}</Subtitulo>
+                </ContainerText>
+              </ContainerPlayRadio>
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
+            </ContainerList>
+          </ContainerRadio>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handlePlayerNavigation(pacajusTrack)}>
+          <ContainerRadio>
+            <ContainerList>
+              <ContainerPlayRadio>
+                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <ContainerText>
+                  <Titulo>Pacajus</Titulo>
+                  <Subtitulo>{pacajusTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
               <LogoImg source={require('../../../../assets/plus-1.png')} />
@@ -355,38 +430,8 @@ export default function RadioList({navigation}: {navigation: any}) {
               <ContainerPlayRadio>
                 <PlayCircle size={40} weight={'bold'} color={'#541084'} />
                 <ContainerText>
-                  <Titulo>Redencao</Titulo>
+                  <Titulo>Redenção</Titulo>
                   <Subtitulo>{redencaoTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handlePlayerNavigation(cascavelTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
-                <ContainerText>
-                  <Titulo>Cascavel</Titulo>
-                  <Subtitulo>{cascavelTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handlePlayerNavigation(pacajusTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
-                <ContainerText>
-                  <Titulo>Pacajus</Titulo>
-                  <Subtitulo>{pacajusTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
               <LogoImg source={require('../../../../assets/plus-1.png')} />
@@ -401,53 +446,8 @@ export default function RadioList({navigation}: {navigation: any}) {
               <ContainerPlayRadio>
                 <PlayCircle size={40} weight={'bold'} color={'#541084'} />
                 <ContainerText>
-                  <Titulo>Santa Quiteria</Titulo>
+                  <Titulo>Santa Quitéria</Titulo>
                   <Subtitulo>{santaQuiteriaTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handlePlayerNavigation(sobralTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
-                <ContainerText>
-                  <Titulo>Sobral</Titulo>
-                  <Subtitulo>{sobralTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handlePlayerNavigation(catarinaTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
-                <ContainerText>
-                  <Titulo>Catarina</Titulo>
-                  <Subtitulo>{catarinaTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handlePlayerNavigation(aracatiTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
-                <ContainerText>
-                  <Titulo>Aracati</Titulo>
-                  <Subtitulo>{aracatiTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
               <LogoImg source={require('../../../../assets/plus-1.png')} />

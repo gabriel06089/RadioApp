@@ -20,6 +20,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   ArtistRadioText,
   AudioVisuContainer,
+  BackgroundImG,
   ButtonPlayer,
   ButtonPlayerText,
   Container,
@@ -163,25 +164,38 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
 
   useEffect(() => {
     const fetchPromotions = async () => {
-      try {
-        const response = await fetch(
+      const storedPromotions = await AsyncStorage.getItem('promotions');
+      if (storedPromotions) {
+        const {image, link} = JSON.parse(storedPromotions);
+        setPromoImage(image);
+        setPromoLink(link);
+      } else {
+        fetch(
           'https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=1',
-        );
-        const data = await response.json();
-        console.log('Promoções carregadas:'); // Adiciona log de console para depuração
-        if (data.length > 0) {
-          const firstPost = data[0];
-          if (
-            firstPost.yoast_head_json &&
-            firstPost.yoast_head_json.og_image &&
-            firstPost.yoast_head_json.og_image[0]
-          ) {
-            setPromoImage(firstPost.yoast_head_json.og_image[0].url);
-            setPromoLink(firstPost.link);
-          }
-        }
-      } catch (error) {
-        console.error(error);
+        )
+          .then(response => response.json())
+          .then(data => {
+            console.log('Promoções carregadas:'); // Adiciona log de console para depuração
+            if (data.length > 0) {
+              const firstPost = data[0];
+              if (
+                firstPost.yoast_head_json &&
+                firstPost.yoast_head_json.og_image &&
+                firstPost.yoast_head_json.og_image[0]
+              ) {
+                setPromoImage(firstPost.yoast_head_json.og_image[0].url);
+                setPromoLink(firstPost.link);
+                AsyncStorage.setItem(
+                  'promotions',
+                  JSON.stringify({
+                    image: firstPost.yoast_head_json.og_image[0].url,
+                    link: firstPost.link,
+                  }),
+                );
+              }
+            }
+          })
+          .catch(error => console.error(error));
       }
     };
 
@@ -209,9 +223,13 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
               </ContainerMenu>
             </TouchableOpacity>
           </ContainerLogo>
-
+          <BackgroundImG
+            source={require('../../../assets/FundoSemDetalhes.png')}
+          />
           <ContainerImgPlus>
-            <ImagePlus source={require('../../../assets/pluzinho.png')} />
+            <ImagePlus
+              source={require('../../../assets/PlusSemFundoDetalhes.png')}
+            />
           </ContainerImgPlus>
 
           <ContainerHeaderText>
@@ -283,7 +301,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             alignSelf: 'flex-start',
             color: 'white',
           }}>
-          Noticías
+          Notícias
         </Text>
 
         <ScrollView

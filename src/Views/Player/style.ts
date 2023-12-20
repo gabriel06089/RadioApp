@@ -12,11 +12,7 @@ export const Container = styled(LinearGradient).attrs({
 `;
 export const ContainerHeader = styled.View`
   flex-direction: row;
-
-  height: 70px;
-
   padding-top: ${StatusBar.currentHeight ? StatusBar.currentHeight + 24 : 24}px;
-
   justify-content: space-between;
   align-items: center;
 `;
@@ -32,6 +28,7 @@ export const ContainerHome1 = styled.View`
 `;
 export const ContainerTextRadio = styled.View`
   align-items: center;
+ 
 `;
 export const TextRadio = styled.Text`
   font-weight: bold;

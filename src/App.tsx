@@ -5,7 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 // Importe suas páginas
-import RadioScreen from './Views/Radios';
+
 import HomeScreen from './Views/Home';
 import Player from './Views/Player';
 import {AudioPlayerProvider} from './Context/AudioPlayerContext';
@@ -33,7 +33,6 @@ const App = () => {
           <Stack.Screen name="Posts" component={Posts} />
           <Stack.Screen name="Player" component={Player} />
           <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Radio" component={RadioScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AudioPlayerProvider>

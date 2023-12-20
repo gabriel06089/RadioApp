@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import {
   ArrowCircleLeft,
-  Browser,
+  Globe,
+  
   InstagramLogo,
   Playlist,
   ShareNetwork,
@@ -57,6 +58,7 @@ export default function Player({navigation}: {navigation: any}) {
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
               <ArrowCircleLeft size={30} weight="bold" color="#541084" />
             </TouchableOpacity>
+            
           </ContainerHome1>
           <ContainerTextRadio>
             <TextRadio>{currentTrack?.title || 'PlusFM'}</TextRadio>
@@ -88,7 +90,7 @@ export default function Player({navigation}: {navigation: any}) {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => Linking.openURL('https://plusfm.com.br/')}>
-            <Browser color="#541084" weight="bold" />
+            <Globe color="#541084" weight="bold" />
           </TouchableOpacity>
           {currentTrack && <PlayPauseButton track={currentTrack} />}
           <TouchableOpacity

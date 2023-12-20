@@ -3,7 +3,7 @@ import React from 'react';
 import {View, TouchableOpacity, ActivityIndicator} from 'react-native';
 import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 import {Track, } from 'react-native-track-player';
-import {Stop, Play} from 'phosphor-react-native';
+import { Play, Pause} from 'phosphor-react-native';
 
 export default function PlayPauseButton({track}: {track: Track}) {
   const {isPlaying, isLoading, playTrack, setCurrentTrack, pauseTrack} =
@@ -28,7 +28,7 @@ export default function PlayPauseButton({track}: {track: Track}) {
         {isLoading ? (
           <ActivityIndicator size={44} color="#541084" />
         ) : isPlaying ? (
-          <Stop weight="fill" size={44} color="#541084" />
+          <Pause weight="fill" size={44} color="#541084" />
         ) : (
           <Play weight="fill" size={44} color="#541084" />
         )}

@@ -90,14 +90,12 @@ export const ContainerLogo = styled.View`
   justify-content: space-between;
   align-items: center;
   padding-top: ${StatusBar.currentHeight}px;
-  
+
   margin: 24px;
-  
 `;
 export const ImageLogo = styled.Image`
   width: 100px;
   height: 50px;
-  
 `;
 export const TextLogo = styled.Text`
   color: white;
@@ -246,4 +244,9 @@ export const ContainerContato = styled.View`
   justify-content: center;
 
   flex-direction: row;
+`;
+export const BackgroundImG = styled.Image`
+position: absolute;
+ flex: 1;
+  z-index: -1;
 `;
