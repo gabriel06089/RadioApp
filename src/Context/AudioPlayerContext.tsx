@@ -220,7 +220,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
         title: 'Radio Plus',
         artist: artist,
         isPlaying: false,
-        artwork: require('../../assets/thumb2.png'),
+        artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
         frequency: '102.3 FM',
       };
 

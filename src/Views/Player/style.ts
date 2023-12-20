@@ -2,7 +2,7 @@
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import {StatusBar} from 'react-native';
-
+import normalize from 'react-native-normalize';
 export const Container = styled(LinearGradient).attrs({
   colors: ['#FFC007', '#F4E72D'],
   start: {x: 0.5, y: 0},
@@ -42,16 +42,16 @@ export const TextRadioDesc = styled.Text`
   color: black;
 `;
 export const ContainerPhoto = styled.View`
-  height: 350px;
-  width: 300px;
+  height: 45%;
+  width: 75%;
   background-color: white;
   align-self: center;
   border-radius: 10px;
   margin-top: 50px;
 `;
 export const ImgPlus = styled.Image`
-  width: 300px;
-  height: 350px;
+  width: 100%;
+  height: 100%;
   border-radius: 12px;
 `;
 export const ContainerTextMusic = styled.View`
@@ -61,18 +61,20 @@ export const ContainerTextMusic = styled.View`
 `;
 export const TextMusic = styled.Text`
   font-weight: bold;
-  font-size: 15px;
+  font-size: ${normalize(15)}px;
   color: black;
 `;
+
 export const TextMusicDesc = styled.Text`
   font-weight: bold;
   color: black;
-  font-size: 24px;
+  font-size: ${normalize(24)}px;
 `;
+
 export const TextMusicDescProg = styled.Text`
   font-weight: thin;
   color: black;
-  font-size: 15px;
+  font-size: ${normalize(15)}px;
 `;
 export const ContainerButtons = styled.View`
   margin-top: 50px;

@@ -153,7 +153,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus Aracati',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '98.1',
   };
 
@@ -163,7 +163,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus FM',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
   };
   const caririTrack = {
     id: 3,
@@ -171,7 +171,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus Cariri',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '97.1',
   };
   const cascavelTrack = {
@@ -180,7 +180,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus Catarina',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '106.1',
   };
   const crateusTrack = {
@@ -189,7 +189,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus Crateus',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '93.3',
   };
   const iguatuTrack = {
@@ -198,7 +198,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus Iguatu',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
 
     frequency: '98.5',
   };
@@ -208,7 +208,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus Pacajus',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '99.5',
   };
   const paraipabaTrack = {
@@ -217,7 +217,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus Paraipaba',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '88.7',
   };
   const santaQuiteriaTrack = {
@@ -226,7 +226,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus SantaQuiteria',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '106.5',
   };
   const sobralTrack = {
@@ -235,7 +235,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus Sobral',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '105.1',
   };
   const redencaoTrack = {
@@ -244,7 +244,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus Redencao',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '98.7',
   };
   const catarinaTrack = {
@@ -253,7 +253,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     title: 'Plus Catarina',
     artist: artist,
     isPlaying: false,
-    artwork: require('../../../../assets/thumb2.png'),
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '88.7',
   };
 
@@ -268,7 +268,7 @@ export default function RadioList({navigation}: {navigation: any}) {
       <ContainerHeader>
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <ContainerNavigation>
-            <ArrowCircleLeft color="whitesmoke" weight="bold" size={35}/>
+            <ArrowCircleLeft color="whitesmoke" weight="bold" size={35} />
           </ContainerNavigation>
         </TouchableOpacity>
       </ContainerHeader>
@@ -344,9 +344,7 @@ export default function RadioList({navigation}: {navigation: any}) {
                   <Subtitulo>{paraipabaTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
-              <LogoImg
-                source={require('../../../../assets/PlusLogoCinza.png')}
-              />
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
             </ContainerList>
           </ContainerRadio>
         </TouchableOpacity>
@@ -361,9 +359,7 @@ export default function RadioList({navigation}: {navigation: any}) {
                   <Subtitulo>{redencaoTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
-              <LogoImg
-                source={require('../../../../assets/PlusLogoCinza.png')}
-              />
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
             </ContainerList>
           </ContainerRadio>
         </TouchableOpacity>
@@ -378,9 +374,7 @@ export default function RadioList({navigation}: {navigation: any}) {
                   <Subtitulo>{cascavelTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
-              <LogoImg
-                source={require('../../../../assets/PlusLogoCinza.png')}
-              />
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
             </ContainerList>
           </ContainerRadio>
         </TouchableOpacity>
@@ -395,9 +389,7 @@ export default function RadioList({navigation}: {navigation: any}) {
                   <Subtitulo>{pacajusTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
-              <LogoImg
-                source={require('../../../../assets/PlusLogoCinza.png')}
-              />
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
             </ContainerList>
           </ContainerRadio>
         </TouchableOpacity>
@@ -413,9 +405,7 @@ export default function RadioList({navigation}: {navigation: any}) {
                   <Subtitulo>{santaQuiteriaTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
-              <LogoImg
-                source={require('../../../../assets/PlusLogoCinza.png')}
-              />
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
             </ContainerList>
           </ContainerRadio>
         </TouchableOpacity>
@@ -430,9 +420,7 @@ export default function RadioList({navigation}: {navigation: any}) {
                   <Subtitulo>{sobralTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
-              <LogoImg
-                source={require('../../../../assets/PlusLogoCinza.png')}
-              />
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
             </ContainerList>
           </ContainerRadio>
         </TouchableOpacity>
@@ -447,9 +435,7 @@ export default function RadioList({navigation}: {navigation: any}) {
                   <Subtitulo>{catarinaTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
-              <LogoImg
-                source={require('../../../../assets/PlusLogoCinza.png')}
-              />
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
             </ContainerList>
           </ContainerRadio>
         </TouchableOpacity>
@@ -464,9 +450,7 @@ export default function RadioList({navigation}: {navigation: any}) {
                   <Subtitulo>{aracatiTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
-              <LogoImg
-                source={require('../../../../assets/PlusLogoCinza.png')}
-              />
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
             </ContainerList>
           </ContainerRadio>
         </TouchableOpacity>
