@@ -9,7 +9,7 @@ import {
   WhatsappLogo,
   YoutubeLogo,
 } from 'phosphor-react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
   ArtistRadioText,
   AudioVisuContainer,
@@ -66,59 +66,38 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
   `;
   useEffect(() => {
     const fetchNews = async () => {
-      const storedNews = await AsyncStorage.getItem('news');
-      if (storedNews) {
-        setPosts(JSON.parse(storedNews));
-      } else {
-        fetch('https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3')
-          .then(response => response.json())
-          .then(data => {
-            console.log('Notícias carregadas:'); // Adiciona log de console para depuração
-            setPosts(data);
-            AsyncStorage.setItem('news', JSON.stringify(data));
-          })
-          .catch(error => console.error(error));
-      }
+      fetch('https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3')
+        .then(response => response.json())
+        .then(data => {
+          console.log('Notícias carregadas:'); // Adiciona log de console para depuração
+          setPosts(data);
+        })
+        .catch(error => console.error(error));
     };
 
     fetchNews();
   }, []);
-
   useEffect(() => {
     const fetchPromotions = async () => {
-      const storedPromotions = await AsyncStorage.getItem('promotions');
-      if (storedPromotions) {
-        const {image, link} = JSON.parse(storedPromotions);
-        setPromoImage(image);
-        setPromoLink(link);
-      } else {
-        fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=1',
-        )
-          .then(response => response.json())
-          .then(data => {
-            console.log('Promoções carregadas:'); // Adiciona log de console para depuração
-            if (data.length > 0) {
-              const firstPost = data[0];
-              if (
-                firstPost.yoast_head_json &&
-                firstPost.yoast_head_json.og_image &&
-                firstPost.yoast_head_json.og_image[0]
-              ) {
-                setPromoImage(firstPost.yoast_head_json.og_image[0].url);
-                setPromoLink(firstPost.link);
-                AsyncStorage.setItem(
-                  'promotions',
-                  JSON.stringify({
-                    image: firstPost.yoast_head_json.og_image[0].url,
-                    link: firstPost.link,
-                  }),
-                );
-              }
+      fetch(
+        'https://plusfm.com.br/wp-json/wp/v2/posts?categories=14&per_page=1',
+      )
+        .then(response => response.json())
+        .then(data => {
+          console.log('Promoções carregadas:'); // Adiciona log de console para depuração
+          if (data.length > 0) {
+            const firstPost = data[0];
+            if (
+              firstPost.yoast_head_json &&
+              firstPost.yoast_head_json.og_image &&
+              firstPost.yoast_head_json.og_image[0]
+            ) {
+              setPromoImage(firstPost.yoast_head_json.og_image[0].url);
+              setPromoLink(firstPost.link);
             }
-          })
-          .catch(error => console.error(error));
-      }
+          }
+        })
+        .catch(error => console.error(error));
     };
 
     fetchPromotions();
@@ -228,7 +207,11 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
                       shadowRadius: 3.84,
                     }}>
                     <ContainerMateria>
-                      {post ? (
+                      {post &&
+                      post.yoast_head_json &&
+                      post.yoast_head_json.og_image &&
+                      post.yoast_head_json.og_image[0] &&
+                      post.yoast_head_json.og_image[0].url ? (
                         <ImageMateria
                           source={{
                             uri: post.yoast_head_json.og_image[0].url,
