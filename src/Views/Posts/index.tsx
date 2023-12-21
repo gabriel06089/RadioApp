@@ -21,10 +21,16 @@ type PostScreenRouteProp = RouteProp<
 
 export default function Posts({navigation}: {navigation: any}) {
   const route = useRoute<PostScreenRouteProp>();
+  const [webViewHeight, setWebViewHeight] = React.useState(0);
   const post = route.params.post;
   const {pauseTrack} = useAudioPlayer(); // Obtenha a função pauseTrack do contexto
   const date = new Date(post.date).toLocaleDateString('pt-BR');
   let iframeSrc = '';
+  const runFirst = `
+  window.ReactNativeWebView.postMessage(Math.max(document.documentElement.clientHeight, document.body.scrollHeight, document.documentElement.scrollHeight,
+    document.body.offsetHeight, document.documentElement.offsetHeight));
+  true; // note: this is required, or you'll sometimes get silent failures
+`;
   const match = post.content.rendered.match(
     /<iframe[^>]*src="https:\/\/www\.youtube\.com\/embed\/([^"]*)"[^>]*><\/iframe>/,
   );
@@ -56,11 +62,12 @@ export default function Posts({navigation}: {navigation: any}) {
 
 
 
-${post.content.rendered.replace(
-  /<iframe[^>]*src="https:\/\/www\.youtube\.com\/embed\/([^"]*)"[^>]*><\/iframe>/,
-  '',
-)}
-
+${post.content.rendered
+  .replace(
+    /<iframe[^>]*src="https:\/\/www\.youtube\.com\/embed\/([^"]*)"[^>]*><\/iframe>/,
+    '',
+  )
+  .replace('Assista:', '')}
   `;
 
   return (
@@ -80,9 +87,9 @@ ${post.content.rendered.replace(
         </ContainerButton>
         <View
           style={{
-            width: '100%',
-            padding: 20,
+            borderRadius: 8, // Ajuste este valor para alterar o raio da borda
             overflow: 'hidden',
+            margin: 20,
           }}>
           {match && match[1] ? (
             <YouTube
@@ -98,7 +105,14 @@ ${post.content.rendered.replace(
           ) : null}
         </View>
         <ContainerWebview>
-          <WebView source={{html: htmlContent}} />
+          <WebView
+            source={{html: htmlContent}}
+            style={{height: webViewHeight}}
+            injectedJavaScript={runFirst}
+            onMessage={event => {
+              setWebViewHeight(Number(event.nativeEvent.data));
+            }}
+          />
         </ContainerWebview>
       </ScrollView>
     </Container>
