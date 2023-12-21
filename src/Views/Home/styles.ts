@@ -14,7 +14,7 @@ export const Container = styled(LinearGradient).attrs({
 export const ContainerHeader = styled.View`
   background-color: #541084;
   width: 100%;
-  height: 600px;
+  height: 450px;
   position: relative;
 `;
 export const ContainerHeaderText = styled.View`
@@ -105,15 +105,16 @@ export const TextLogo = styled.Text`
 export const ContainerImgPlus = styled.View`
   position: absolute;
   align-items: center;
-  top: 95px;
+  top: 105px;
   left: 0;
-  right: 0;
+  right: 15px;
 
   z-index: -1;
 `;
 export const ImagePlus = styled.Image`
-  width: 270px;
+  width: 400px;
   height: 380px;
+  padding-top: 14px;
 `;
 
 export const ImagePlusPlayer = styled.Image`
@@ -135,7 +136,7 @@ export const MenuText = styled.Text`
 export const MusicContainer = styled(LinearGradient).attrs({
   colors: ['#ffc007', '#f9e55c'], // Começa com a cor escura e vai para a cor clara
   start: {x: 0, y: 0}, // Começa à esquerda
-  end: {x: 2, y: 0}, // Termina à direita
+  end: {x:3.5, y: 0}, // Termina à direita
 })`
   position: absolute;
 

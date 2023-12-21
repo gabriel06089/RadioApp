@@ -10,9 +10,10 @@ import {
   TitleText,
 } from './style';
 import {WebView} from 'react-native-webview';
-import {ScrollView, TouchableOpacity} from 'react-native';
+import {ScrollView, TouchableOpacity, View} from 'react-native';
+import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 import {ArrowCircleLeft} from 'phosphor-react-native';
-
+import YouTube from 'react-native-youtube-iframe';
 type PostScreenRouteProp = RouteProp<
   {Posts: {post: any}}, // Substitua 'any' pelo tipo real do seu post
   'Posts'
@@ -21,7 +22,15 @@ type PostScreenRouteProp = RouteProp<
 export default function Posts({navigation}: {navigation: any}) {
   const route = useRoute<PostScreenRouteProp>();
   const post = route.params.post;
+  const {pauseTrack} = useAudioPlayer(); // Obtenha a função pauseTrack do contexto
   const date = new Date(post.date).toLocaleDateString('pt-BR');
+  let iframeSrc = '';
+  const match = post.content.rendered.match(
+    /<iframe[^>]*src="https:\/\/www\.youtube\.com\/embed\/([^"]*)"[^>]*><\/iframe>/,
+  );
+  if (match && match.length > 1) {
+    iframeSrc = 'https://www.youtube.com/embed/' + match[1];
+  }
   const htmlContent = `
   <style>
   body {
@@ -45,7 +54,13 @@ export default function Posts({navigation}: {navigation: any}) {
 <h1>${post.yoast_head_json.title}</h1>
 
 
-${post.content.rendered}
+
+
+${post.content.rendered.replace(
+  /<iframe[^>]*src="https:\/\/www\.youtube\.com\/embed\/([^"]*)"[^>]*><\/iframe>/,
+  '',
+)}
+
   `;
 
   return (
@@ -63,7 +78,25 @@ ${post.content.rendered}
           </TouchableOpacity>
           <TitleText>Publicado em {date}</TitleText>
         </ContainerButton>
-
+        <View
+          style={{
+            width: '100%',
+            padding: 20,
+            overflow: 'hidden',
+          }}>
+          {match && match[1] ? (
+            <YouTube
+              videoId={match[1]} // O ID do vídeo do YouTube
+              play={false} // Não reproduza o vídeo automaticamente
+              onChangeState={event => {
+                if (event === 'playing') {
+                  pauseTrack(); // Pausa a rádio quando o vídeo começa a ser reproduzido
+                }
+              }}
+              height={200}
+            />
+          ) : null}
+        </View>
         <ContainerWebview>
           <WebView source={{html: htmlContent}} />
         </ContainerWebview>

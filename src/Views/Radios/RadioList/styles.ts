@@ -40,13 +40,13 @@ export const ContainerText = styled.View`
 export const Titulo = styled.Text`
   font-weight: bold;
   font-size: 26px;
-  color: #541084;
+  color: white;
 `;
 
 export const Subtitulo = styled.Text`
   font-size: 18px;
   opacity: 0.6;
-  color: #541084;
+  color: white;
 `;
 
 export const Line2 = styled.View`
@@ -55,7 +55,7 @@ export const Line2 = styled.View`
   height: 1px;
 
   margin-right: 16px;
-  margin-bottom: 50px;
+  margin-bottom: 64px;
 `;
 
 export const ContainerList = styled.View`
@@ -64,9 +64,9 @@ export const ContainerList = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background-color: white;
-  border-radius: 74.5px;
 
+  border-radius: 74.5px;
+  border: 1px solid #fff;
   margin-top: 24px;
 `;
 export const ContainerPlayRadio = styled.View`
@@ -80,3 +80,4 @@ export const LogoImg = styled.Image`
   width: 60px;
   margin-right: 24px;
 `;
+

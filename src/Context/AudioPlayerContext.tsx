@@ -20,6 +20,7 @@ interface AudioPlayerContextData {
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
   frequency: string | null;
+  stopIfYoutube: (url: string) => Promise<void>; // Adicione esta linha
 }
 
 const AudioPlayerContext = createContext<AudioPlayerContextData>(
@@ -80,7 +81,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
     const setupPlayer = async () => {
       console.log('Configurando o player...');
       setIsLoading(true);
-    
+
       try {
         await TrackPlayer.setupPlayer();
         console.log('Player configurado.');
@@ -91,7 +92,11 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
       // Configuração das opções do player para exibir a notificação
       TrackPlayer.updateOptions({
         capabilities: [Capability.Play, Capability.Pause, Capability.Stop],
-        compactCapabilities: [Capability.Play, Capability.Pause],
+        compactCapabilities: [
+          Capability.Play,
+          Capability.Pause,
+          Capability.Stop,
+        ],
         notificationCapabilities: [
           Capability.Play,
           Capability.Pause,
@@ -237,7 +242,41 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
 
     setupPlayer();
   }, [setTrack, playTrack]);
+  useEffect(() => {
+    const playEventListener = TrackPlayer.addEventListener(
+      Event.RemotePlay,
+      async () => {
+        console.log('Evento RemotePlay acionado');
+        setIsPlaying(true);
+        await TrackPlayer.play();
+      },
+    );
 
+    const pauseEventListener = TrackPlayer.addEventListener(
+      Event.RemotePause,
+      async () => {
+        console.log('Evento RemotePause acionado');
+        setIsPlaying(false);
+        await TrackPlayer.pause();
+      },
+    );
+
+    const stopEventListener = TrackPlayer.addEventListener(
+      Event.RemoteStop,
+      async () => {
+        console.log('Evento RemoteStop acionado');
+        setIsPlaying(false);
+        await TrackPlayer.stop();
+      },
+    );
+
+    return () => {
+      // Remover os ouvintes de eventos quando o componente for desmontado
+      playEventListener.remove();
+      pauseEventListener.remove();
+      stopEventListener.remove();
+    };
+  }, []);
   useEffect(() => {
     const startEventListener = TrackPlayer.addEventListener(
       Event.RemoteDuck,
@@ -257,7 +296,14 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
       startEventListener.remove();
     };
   }, [playTrack, pauseTrack]);
-
+  const stopIfYoutube = useCallback(async (url: string) => {
+    if (url.includes('youtube.com')) {
+      console.log('Parando a reprodução porque o YouTube foi aberto...');
+      setIsPlaying(false);
+      await TrackPlayer.stop();
+      console.log('Reprodução parada.');
+    }
+  }, []);
   return (
     <AudioPlayerContext.Provider
       value={{
@@ -271,6 +317,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
         isLoading,
         setIsLoading,
         frequency,
+        stopIfYoutube,
       }}>
       {children}
     </AudioPlayerContext.Provider>

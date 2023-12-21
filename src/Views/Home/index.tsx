@@ -1,13 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  StatusBar,
-  Animated,
-  Easing,
-  ScrollView,
-  Linking,
-} from 'react-native';
+import {Text, StatusBar, ScrollView, Linking} from 'react-native';
 
 import {
   FacebookLogo,
@@ -21,8 +14,6 @@ import {
   ArtistRadioText,
   AudioVisuContainer,
   BackgroundImG,
-  ButtonPlayer,
-  ButtonPlayerText,
   Container,
   ContainerBottom,
   ContainerCarrousel,
@@ -30,7 +21,6 @@ import {
   ContainerHeader,
   ContainerHeaderText,
   ContainerImgPlus,
-  ContainerLine,
   ContainerLogo,
   ContainerLogoContato,
   ContainerLogoText,
@@ -39,16 +29,11 @@ import {
   ContainerNoticiasColumn,
   ContainerPlayerMusic,
   ContainerPromo,
-  HeaderText,
-  HeaderTitleText,
   ImageLogo,
   ImageMateria,
   ImagePlus,
   ImagePlusPlayer,
   ImagePromo,
-  Line,
-  Line2,
-  Line3,
   LogoContato,
   MateriaTitle,
   MenuText,
@@ -58,11 +43,7 @@ import {
   TextLogo,
   TitleRadioText,
 } from './styles';
-import {
-  PanGestureHandler,
-  State,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 import DropShadow from 'react-native-drop-shadow';
 import PlayPauseButton from '../Radios/buttonPlayer';
@@ -70,69 +51,10 @@ import AudioVisualizer from './AudioVisualizer';
 import styled from 'styled-components/native';
 
 const HomeScreen = ({navigation}: {navigation: any}) => {
-  const [, setVisibleLineIndex] = useState(0);
-  const [lineOpacities, setLineOpacities] = useState([1, 0.5, 0.5]);
-  const [opacity] = useState(new Animated.Value(1));
-  const headerTexts = [
-    'Pediu, Tocou! A Plus toca aquela música favorita e você ainda ganha prêmios.',
-    'Qual é a sua? A sua música favorita vale muitos prêmios.',
-    'Bom demais Plus: O melhor da programação da Plus em uma hora sem qualquer intervalo',
-  ];
-  const headerTitleTexts = ['NO AR', 'NO AR', 'A SEGUIR'];
   const {currentTrack, isPlaying} = useAudioPlayer();
   const [promoImage, setPromoImage] = useState('');
-  const [translateX] = useState(new Animated.Value(0));
-  const [headerTextIndex, setHeaderTextIndex] = useState(0);
+
   const [promoLink, setPromoLink] = useState('');
-  const onGestureEvent = Animated.event(
-    [
-      {
-        nativeEvent: {
-          translationX: translateX,
-        },
-      },
-    ],
-    {useNativeDriver: true},
-  );
-
-  const onHandlerStateChange = ({nativeEvent}: {nativeEvent: any}) => {
-    if (nativeEvent.oldState === State.ACTIVE) {
-      Animated.timing(opacity, {
-        toValue: 0,
-        duration: 200,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }).start(() => {
-        // Atualiza o índice do texto do cabeçalho com base na direção do arrasto
-        const newIndex =
-          ((nativeEvent.velocityX > 0
-            ? headerTextIndex + 1
-            : headerTextIndex - 1) +
-            headerTexts.length) %
-          headerTexts.length;
-        setHeaderTextIndex(newIndex);
-
-        // Atualiza o índice da linha visível
-        setVisibleLineIndex(newIndex);
-
-        // Atualiza as opacidades das linhas com base no novo índice
-        setLineOpacities(prevOpacities =>
-          prevOpacities.map((_, index) => (index === newIndex ? 1 : 0.5)),
-        );
-
-        // Anima a opacidade de volta a 1
-        Animated.timing(opacity, {
-          toValue: 1,
-          duration: 200,
-          easing: Easing.linear,
-          useNativeDriver: true,
-        }).start();
-
-        // Redefine translateX para 0
-        translateX.setValue(0);
-      });
-    }
-  };
 
   const [posts, setPosts] = useState<any[]>([]);
   const Logo = styled.View`
@@ -228,33 +150,14 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
           />
           <ContainerImgPlus>
             <ImagePlus
-              source={require('../../../assets/PlusSemFundoDetalhes.png')}
+              source={require('../../../assets/PlusSemFundoDireita.png')}
             />
           </ContainerImgPlus>
 
           <ContainerHeaderText>
-            <PanGestureHandler
-              onGestureEvent={onGestureEvent}
-              onHandlerStateChange={onHandlerStateChange}>
-              <Animated.View style={{transform: [{translateX}], opacity}}>
-                <HeaderTitleText>
-                  {headerTitleTexts[headerTextIndex]}
-                </HeaderTitleText>
-                <HeaderText>{headerTexts[headerTextIndex]}</HeaderText>
-              </Animated.View>
-            </PanGestureHandler>
-
             <AudioVisuContainer>
-              <ButtonPlayer>
-                <ButtonPlayerText>AO VIVO</ButtonPlayerText>
-              </ButtonPlayer>
               {isPlaying && <AudioVisualizer />}
             </AudioVisuContainer>
-            <ContainerLine>
-              <Line style={{opacity: lineOpacities[0]}} />
-              <Line2 style={{opacity: lineOpacities[1]}} />
-              <Line3 style={{opacity: lineOpacities[2]}} />
-            </ContainerLine>
           </ContainerHeaderText>
         </ContainerHeader>
 

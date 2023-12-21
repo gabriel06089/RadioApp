@@ -277,7 +277,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Plus</Titulo>
                   <Subtitulo>Rede</Subtitulo>
@@ -292,7 +292,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Sobral</Titulo>
                   <Subtitulo>{sobralTrack?.frequency}</Subtitulo>
@@ -307,7 +307,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Cariri</Titulo>
                   <Subtitulo>{caririTrack?.frequency}</Subtitulo>
@@ -322,7 +322,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Aracati</Titulo>
                   <Subtitulo>{aracatiTrack?.frequency}</Subtitulo>
@@ -337,7 +337,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Cascavel</Titulo>
                   <Subtitulo>{cascavelTrack?.frequency}</Subtitulo>
@@ -352,7 +352,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Catarina</Titulo>
                   <Subtitulo>{catarinaTrack?.frequency}</Subtitulo>
@@ -367,7 +367,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Crateús</Titulo>
                   <Subtitulo>{crateusTrack?.frequency}</Subtitulo>
@@ -382,7 +382,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Iguatu</Titulo>
                   <Subtitulo>{iguatuTrack?.frequency}</Subtitulo>
@@ -397,7 +397,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Pacajus</Titulo>
                   <Subtitulo>{pacajusTrack?.frequency}</Subtitulo>
@@ -413,7 +413,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Paraipaba</Titulo>
                   <Subtitulo>{paraipabaTrack?.frequency}</Subtitulo>
@@ -428,7 +428,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Redenção</Titulo>
                   <Subtitulo>{redencaoTrack?.frequency}</Subtitulo>
@@ -444,7 +444,7 @@ export default function RadioList({navigation}: {navigation: any}) {
           <ContainerRadio>
             <ContainerList>
               <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'bold'} color={'#541084'} />
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
                 <ContainerText>
                   <Titulo>Santa Quitéria</Titulo>
                   <Subtitulo>{santaQuiteriaTrack?.frequency}</Subtitulo>

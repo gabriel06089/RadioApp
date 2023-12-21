@@ -9,7 +9,8 @@ export const Container = styled.View`
   /* Adicione um paddingTop que é igual à altura da imagem */
 `;
 export const ContainerWebview = styled.View`
-  height: 700px;
+
+  height: 1100px;
   width: 390px;
 `;
 export const ContainerImgPost = styled.Image`
