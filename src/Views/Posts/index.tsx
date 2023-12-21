@@ -31,7 +31,7 @@ export default function Posts({navigation}: {navigation: any}) {
   const isDarkMode = colorScheme === 'dark';
   const backgroundColor = isDarkMode ? '#1C1C1E' : 'white';
   const textColor = isDarkMode ? '#FFFFFF' : 'black';
-  let iframeSrc = '';
+ 
   const runFirst = `
   window.ReactNativeWebView.postMessage(Math.max(document.documentElement.clientHeight, document.body.scrollHeight, document.documentElement.scrollHeight,
     document.body.offsetHeight, document.documentElement.offsetHeight));

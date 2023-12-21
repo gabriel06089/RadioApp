@@ -43,7 +43,7 @@ export const ContainerPhoto = styled.View`
   width: 75%;
   background-color: white;
   align-self: center;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-top: 50px;
 `;
 export const ImgPlus = styled.Image`
