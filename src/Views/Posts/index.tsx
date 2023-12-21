@@ -29,7 +29,7 @@ export default function Posts({navigation}: {navigation: any}) {
   const colorScheme = useColorScheme();
 
   const isDarkMode = colorScheme === 'dark';
-  const backgroundColor = isDarkMode ? '#121212' : 'white';
+  const backgroundColor = isDarkMode ? '#1C1C1E' : 'white';
   const textColor = isDarkMode ? '#FFFFFF' : 'black';
   let iframeSrc = '';
   const runFirst = `
