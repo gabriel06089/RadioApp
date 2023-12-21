@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, {useEffect, useState} from 'react';
-import {Text, StatusBar, ScrollView, Linking} from 'react-native';
+import {View, Text, StatusBar, ScrollView, Linking, Image} from 'react-native';
 
 import {
   FacebookLogo,
@@ -49,11 +49,12 @@ import DropShadow from 'react-native-drop-shadow';
 import PlayPauseButton from '../Radios/buttonPlayer';
 import AudioVisualizer from './AudioVisualizer';
 import styled from 'styled-components/native';
-
+import * as Animatable from 'react-native-animatable';
 const HomeScreen = ({navigation}: {navigation: any}) => {
   const {currentTrack, isPlaying} = useAudioPlayer();
   const [promoImage, setPromoImage] = useState('');
-
+  const [loading, setLoading] = useState(true);
+  const [pendingOperations, setPendingOperations] = useState(2);
   const [promoLink, setPromoLink] = useState('');
 
   const [posts, setPosts] = useState<any[]>([]);
@@ -73,6 +74,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
         const data = await response.json();
         console.log('Notícias carregadas do servidor:'); // Adiciona log de console para depuração
         setPosts(data);
+        setLoading(false);
         await AsyncStorage.setItem('@posts', JSON.stringify(data));
       } catch (error) {
         console.error(error);
@@ -82,6 +84,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
           setPosts(JSON.parse(storedPosts));
         }
       }
+      setPendingOperations(prev => prev - 1); // Decrementa o contador quando a operação terminar
     };
 
     fetchNews();
@@ -103,6 +106,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             firstPost.yoast_head_json.og_image[0]
           ) {
             setPromoImage(firstPost.yoast_head_json.og_image[0].url);
+            setLoading(false);
             setPromoLink(firstPost.link);
             await AsyncStorage.setItem(
               '@promoImage',
@@ -130,10 +134,72 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
           setPromoLink(storedPromoLink);
         }
       }
+      setPendingOperations(prev => prev - 1); // Decrementa o contador quando a operação terminar
     };
 
     fetchPromotions();
   }, []);
+  if (pendingOperations > 0) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          backgroundColor: '#541084',
+        }}>
+        <View
+          style={{
+            position: 'absolute', // Adiciona posicionamento absoluto
+            zIndex: 1, // Garante que a imagem esteja acima das barras de carregamento
+            height: 100,
+            width: 200,
+            backgroundColor: '#541084',
+          }}>
+          <Image
+            style={{
+              height: 100,
+              width: 200,
+            }}
+            source={require('../../../assets/plus-1.png')}
+          />
+        </View>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            backgroundColor: '#541084',
+          }}>
+          {[...Array(50)].map((_, i) => {
+            // Calcula a distância do elemento até o centro da matriz
+            const distanceToEdge = Math.min(i, 50 - i - 1);
+            return (
+              <Animatable.View
+                key={i}
+                animation={{
+                  0: {height: 10},
+                  0.5: {height: 50},
+                  1: {height: 10},
+                }}
+                iterationCount="infinite"
+                direction="alternate"
+                style={{
+                  width: 3,
+                  height: 20,
+                  backgroundColor: 'white',
+                  margin: 2,
+                }}
+                delay={distanceToEdge * 100} // Usa a distância até a ponta para calcular o atraso
+                duration={500}
+              />
+            );
+          })}
+        </View>
+      </View>
+    );
+  }
   return (
     <Container colors={['#000', '#333333']}>
       <ScrollView

@@ -147,12 +147,15 @@ export const MusicContainer = styled(LinearGradient).attrs({
   align-items: center;
   justify-content: space-between;
   height: 70px;
+
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 `;
 
 export const MusicPhotoContainer = styled.View`
   align-items: center;
   justify-content: center;
-  background-color: #ffc007;
+  
   width: 80px;
   height: 70px;
 `;

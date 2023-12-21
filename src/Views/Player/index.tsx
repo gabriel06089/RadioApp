@@ -9,6 +9,7 @@ import {
   WhatsappLogo,
 } from 'phosphor-react-native';
 import React from 'react';
+
 import {Linking, StatusBar, TouchableOpacity} from 'react-native';
 import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 import {
@@ -43,6 +44,7 @@ export default function Player({navigation}: {navigation: any}) {
     },
     [navigation],
   );
+  
   return (
     <PanGestureHandler
       onGestureEvent={onGestureEvent}
@@ -58,7 +60,7 @@ export default function Player({navigation}: {navigation: any}) {
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
               <ArrowCircleLeft size={30} weight="bold" color="#541084" />
             </TouchableOpacity>
-            
+
           </ContainerHome1>
           <ContainerTextRadio>
             <TextRadio>{currentTrack?.title || 'PlusFM'}</TextRadio>

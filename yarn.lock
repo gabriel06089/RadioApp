@@ -6218,6 +6218,13 @@ react-is@^17.0.1:
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.2.tgz"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
+react-native-animatable@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.npmjs.org/react-native-animatable/-/react-native-animatable-1.4.0.tgz"
+  integrity sha512-DZwaDVWm2NBvBxf7I0wXKXLKb/TxDnkV53sWhCvei1pRyTX3MVFpkvdYBknNBqPrxYuAIlPxEp7gJOidIauUkw==
+  dependencies:
+    prop-types "^15.8.1"
+
 react-native-asset@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/react-native-asset/-/react-native-asset-2.1.1.tgz"
@@ -6230,10 +6237,20 @@ react-native-asset@^2.1.1:
     sha1-file "^1.0.4"
     xcode "^2.0.0"
 
+react-native-audio-analyzer@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/react-native-audio-analyzer/-/react-native-audio-analyzer-1.0.1.tgz"
+  integrity sha512-D+5iHEIrzeT0B4TOdDFt7RUA+nVVz8EJIpLhylEErGD9dtH2wrEqRVgVGe5RWEeuV3uf6Ay3EgAn7M1QvuvrtA==
+
 react-native-audio-session@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/react-native-audio-session/-/react-native-audio-session-0.0.6.tgz"
   integrity sha512-JKhfYhJXExdp29sRNGG/RKy9e9XlXUTIdx8QCBtIFGEJ62ADW9kHJmChu97qdZveVgyYzjoolE/XZFBNk2Zm0g==
+
+react-native-audio-visualizer@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/react-native-audio-visualizer/-/react-native-audio-visualizer-0.0.1.tgz"
+  integrity sha512-QQyaU3UdRpUjagKw8qK6rmjS+cXHtQEQHTQeNW1OaK6zmikJLplAKSNxaGpj1vfj4BkFmE4XOMWclurwFOhbKA==
 
 react-native-drop-shadow@^1.0.0:
   version "1.0.0"
