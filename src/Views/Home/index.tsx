@@ -427,7 +427,11 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             <Logo as={YoutubeLogo} size={24} weight="duotone" color="white" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => Linking.openURL('https://whatsapp.com')}>
+            onPress={() =>
+              Linking.openURL(
+                'https://whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A',
+              )
+            }>
             <Logo as={WhatsappLogo} size={24} weight="duotone" color="white" />
           </TouchableOpacity>
           <TouchableOpacity
