@@ -348,21 +348,6 @@ export default function RadioList({navigation}: {navigation: any}) {
           </ContainerRadio>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(catarinaTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Catarina</Titulo>
-                  <Subtitulo>{catarinaTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
-
         <TouchableOpacity onPress={() => handlePlayerNavigation(crateusTrack)}>
           <ContainerRadio>
             <ContainerList>
@@ -448,6 +433,21 @@ export default function RadioList({navigation}: {navigation: any}) {
                 <ContainerText>
                   <Titulo>Santa Quitéria</Titulo>
                   <Subtitulo>{santaQuiteriaTrack?.frequency}</Subtitulo>
+                </ContainerText>
+              </ContainerPlayRadio>
+              <LogoImg source={require('../../../../assets/plus-1.png')} />
+            </ContainerList>
+          </ContainerRadio>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handlePlayerNavigation(catarinaTrack)}>
+          <ContainerRadio>
+            <ContainerList>
+              <ContainerPlayRadio>
+                <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                <ContainerText>
+                  <Titulo>Catarina</Titulo>
+                  <Subtitulo>{catarinaTrack?.frequency}</Subtitulo>
                 </ContainerText>
               </ContainerPlayRadio>
               <LogoImg source={require('../../../../assets/plus-1.png')} />

@@ -50,13 +50,22 @@ import PlayPauseButton from '../Radios/buttonPlayer';
 import AudioVisualizer from './AudioVisualizer';
 import styled from 'styled-components/native';
 import * as Animatable from 'react-native-animatable';
+interface Drop {
+  yoast_head_json: {
+    og_image: {
+      url: string;
+    }[];
+    title: string;
+  };
+}
 const HomeScreen = ({navigation}: {navigation: any}) => {
   const {currentTrack, isPlaying} = useAudioPlayer();
   const [promoImage, setPromoImage] = useState('');
   const [loading, setLoading] = useState(true);
   const [pendingOperations, setPendingOperations] = useState(2);
   const [promoLink, setPromoLink] = useState('');
-
+  const [drops, setDrops] = useState<Drop[]>([]);
+  const [loadingDrops, setLoadingDrops] = useState(true);
   const [posts, setPosts] = useState<any[]>([]);
   const Logo = styled.View`
     color: white;
@@ -69,7 +78,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
     const fetchNews = async () => {
       try {
         const response = await fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3',
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2685&per_page=3',
         );
         const data = await response.json();
         console.log('Notícias carregadas do servidor:'); // Adiciona log de console para depuração
@@ -89,7 +98,30 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
 
     fetchNews();
   }, []);
+  useEffect(() => {
+    const fetchDrops = async () => {
+      try {
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3&tags_exclude=2007',
+        );
+        const data = await response.json();
+        console.log('Drops carregadas do servidor:'); // Adiciona log de console para depuração
+        setDrops(data);
+        setLoadingDrops(false);
+        await AsyncStorage.setItem('@drops', JSON.stringify(data));
+      } catch (error) {
+        console.error(error);
+        const storedDrops = await AsyncStorage.getItem('@drops');
+        if (storedDrops) {
+          console.log('Drops carregadas do AsyncStorage:'); // Adiciona log de console para depuração
+          setDrops(JSON.parse(storedDrops));
+        }
+      }
+      setPendingOperations(prev => prev - 1); // Decrementa o contador quando a operação terminar
+    };
 
+    fetchDrops();
+  }, []);
   useEffect(() => {
     const fetchPromotions = async () => {
       try {
@@ -281,9 +313,60 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             alignSelf: 'flex-start',
             color: 'white',
           }}>
+          Drops
+        </Text>
+        <ScrollView
+          horizontal
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}>
+          <ContainerCarrousel>
+            {drops.map((drop, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => navigation.navigate('Posts', {post: drop})}>
+                <ContainerNoticiasColumn>
+                  <DropShadow
+                    style={{
+                      shadowColor: '#000',
+                      shadowOffset: {
+                        width: 1,
+                        height: 5,
+                      },
+                      shadowOpacity: 0.45,
+                      shadowRadius: 3.84,
+                    }}>
+                    <ContainerMateria>
+                      {drop &&
+                      drop.yoast_head_json &&
+                      drop.yoast_head_json.og_image &&
+                      drop.yoast_head_json.og_image[0] &&
+                      drop.yoast_head_json.og_image[0].url ? (
+                        <ImageMateria
+                          source={{
+                            uri: drop.yoast_head_json.og_image[0].url,
+                          }}
+                        />
+                      ) : null}
+                    </ContainerMateria>
+                  </DropShadow>
+                  <MateriaTitle>
+                    {drop ? drop.yoast_head_json.title : 'Carregando...'}
+                  </MateriaTitle>
+                </ContainerNoticiasColumn>
+              </TouchableOpacity>
+            ))}
+          </ContainerCarrousel>
+        </ScrollView>
+        <Text
+          style={{
+            paddingTop: 12,
+            paddingLeft: 24,
+            paddingBottom: 12,
+            alignSelf: 'flex-start',
+            color: 'white',
+          }}>
           Notícias
         </Text>
-
         <ScrollView
           horizontal
           showsVerticalScrollIndicator={false}
