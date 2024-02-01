@@ -176,8 +176,8 @@ export default function RadioList({navigation}: {navigation: any}) {
   };
   const cascavelTrack = {
     id: 4,
-    url: 'https://webradio.amsolution.com.br/radio/8110/catarina',
-    title: 'Plus Catarina',
+    url: 'https://webradio.amsolution.com.br/radio/8160/cascavel',
+    title: 'Plus Cascavel',
     artist: artist,
     isPlaying: false,
     artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
