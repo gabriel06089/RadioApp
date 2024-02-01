@@ -64,3 +64,5 @@ yarn-error.log
 
 # testing
 /coverage
+upload-keystore.jks
+upload_certificate.pemt
