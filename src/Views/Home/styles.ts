@@ -172,10 +172,17 @@ export const TitleRadioText = styled.Text`
   color: white;
   color: #541084;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
 `;
 
 export const ArtistRadioText = styled.Text`
+
+  color: white;
+  color: #541084;
+`;
+export const ArtistRadioText1 = styled.Text`
+
+margin-top: 5px;
   color: white;
   color: #541084;
 `;

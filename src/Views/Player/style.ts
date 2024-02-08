@@ -45,9 +45,11 @@ export const ContainerPhoto = styled.View`
   align-self: center;
   border-radius: 12px;
   margin-top: 50px;
+  justify-content: center;
+  align-items: center;
 `;
 export const ImgPlus = styled.Image`
-  width: 100%;
+ width: 100%;
   height: 100%;
   border-radius: 12px;
 `;

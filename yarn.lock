@@ -15,6 +15,11 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
+"@animatereactnative/marquee@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/@animatereactnative/marquee/-/marquee-0.2.0.tgz"
+  integrity sha512-pwdKnBr+0JzaKZ4eNmfiALQxNCxN0XkDyW0h+h90x5tSYaMAn/0H9lpF7nNum2JR7LYDgp0hfEl7Y1uVRRKdjA==
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.23.5":
   version "7.23.5"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.23.5.tgz"
@@ -6188,6 +6193,11 @@ react-is@^18.2.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.2.0.tgz"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-marquee-slider@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.npmjs.org/react-marquee-slider/-/react-marquee-slider-1.1.5.tgz"
+  integrity sha512-eta0DSKMu8F+82O3zF4jlWdTTlsmJg3h8n12trqCndBYo5DAc07odVlfxSfSsEGcBEHYli12RehrK3EYc4LwrQ==
+
 react-native-animatable@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/react-native-animatable/-/react-native-animatable-1.4.0.tgz"
@@ -6255,6 +6265,11 @@ react-native-linear-gradient@^2.8.3:
   resolved "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz"
   integrity sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==
 
+react-native-marquee-view@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/react-native-marquee-view/-/react-native-marquee-view-1.0.5.tgz"
+  integrity sha512-KNiJTbieGrASTs6/ECT3lV4fnGwm9HIe68wT+XNGvrwA/ICoS9Ayhr+Yx17PL+xnCyojqiEmXVUcmIfBcqjD+A==
+
 react-native-multi-slider@^0.3.6:
   version "0.3.6"
   resolved "https://registry.npmjs.org/react-native-multi-slider/-/react-native-multi-slider-0.3.6.tgz"
@@ -6270,7 +6285,7 @@ react-native-normalize@^1.0.1:
   resolved "https://registry.npmjs.org/react-native-normalize/-/react-native-normalize-1.0.1.tgz"
   integrity sha512-QYs95xhARhlcWWcDC77r4nVfxa3pDSfIBx2gdYZ+DOcLhSdPzRHFivWbGu3mL01JcvE69pMK7BmbPCda28vXwA==
 
-react-native-reanimated@^3.6.1:
+react-native-reanimated@^3.6.2, react-native-reanimated@>=2.2.0:
   version "3.6.2"
   resolved "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-3.6.2.tgz"
   integrity sha512-IIMREMOrxhtK35drfpzh2UhxNqAOHnuvGgtMofj7yHcMj16tmWZR2zFvMUf6z2MfmXv+aVgFQ6TRZ6yKYf7LNA==
@@ -7143,7 +7158,7 @@ strnum@^1.0.5:
   resolved "https://registry.npmjs.org/strnum/-/strnum-1.0.5.tgz"
   integrity sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==
 
-styled-components@^6.1.1, "styled-components@>= 2":
+styled-components@^6.1.1, "styled-components@>= 2", styled-components@>=4.0.0:
   version "6.1.8"
   resolved "https://registry.npmjs.org/styled-components/-/styled-components-6.1.8.tgz"
   integrity sha512-PQ6Dn+QxlWyEGCKDS71NGsXoVLKfE1c3vApkvDYS5KAK+V8fNWGhbSUEo9Gg2iaID2tjLXegEW3bZDUGpofRWw==

@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, {useEffect, useState} from 'react';
 import {View, Text, StatusBar, ScrollView, Linking, Image} from 'react-native';
-
+import MarqueeView from 'react-native-marquee-view';
 import {
   FacebookLogo,
   InstagramLogo,
@@ -59,8 +59,9 @@ interface Drop {
   };
 }
 const HomeScreen = ({navigation}: {navigation: any}) => {
-  const {currentTrack, isPlaying} = useAudioPlayer();
+  const {currentTrack, isPlaying, currentSong} = useAudioPlayer();
   const [promoImage, setPromoImage] = useState('');
+  const [isMarquee, setIsMarquee] = useState(false);
   const [loading, setLoading] = useState(true);
   const [pendingOperations, setPendingOperations] = useState(2);
   const [promoLink, setPromoLink] = useState('');
@@ -74,6 +75,17 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
     margin-top: 24px;
     margin-bottom: 24px;
   `;
+  const text = currentSong
+    ? `${currentSong.artist} - ${currentSong.title}`
+    : '';
+
+  useEffect(() => {
+    const textLength = text.length; // Conta o número de caracteres no texto
+
+    console.log('Comprimento do texto:', textLength); // Log do comprimento do texto
+
+    setIsMarquee(textLength > 24); // Altere o número 50 para o comprimento que justifica o uso do marquee
+  }, [text]);
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -122,6 +134,144 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
 
     fetchDrops();
   }, []);
+  const currentHour = new Date().getHours();
+  const currentDay = new Date().getDay();
+
+  let artist = 'Rádio Plus';
+
+  if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 5 &&
+    currentHour < 6
+  ) {
+    artist = 'Clube Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 6 &&
+    currentHour < 7
+  ) {
+    artist = 'Deu B.O.';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 7 &&
+    currentHour < 8
+  ) {
+    artist = 'Ceará News';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 6 &&
+    currentHour >= 8 &&
+    currentHour < 9
+  ) {
+    artist = 'No Colo de Jesus e de Maria';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 6 &&
+    currentHour >= 9 &&
+    currentHour < 11
+  ) {
+    artist = 'Manhã da Plus';
+  } else if (
+    currentTrack &&
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 12 &&
+    currentHour < 13 &&
+    (currentTrack.title === 'Plus FM' ||
+      currentTrack.title === 'Plus Cariri' ||
+      currentTrack.title === 'Plus Iguatu')
+  ) {
+    artist = 'Sem Limites Para Amar';
+  } else if (
+    currentTrack &&
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 13 &&
+    currentHour < 14 &&
+    (currentTrack.title === 'Plus FM' ||
+      currentTrack.title === 'Plus Cariri' ||
+      currentTrack.title === 'Plus Iguatu')
+  ) {
+    artist = 'Plus FM';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 12 &&
+    currentHour < 14 &&
+    (!currentTrack ||
+      (currentTrack.title !== 'Plus FM' &&
+        currentTrack.title !== 'Plus Cariri' &&
+        currentTrack.title !== 'Plus Iguatu'))
+  ) {
+    artist = 'Redação da Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 14 &&
+    currentHour < 17
+  ) {
+    artist = 'Tarde Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 17 &&
+    currentHour < 18
+  ) {
+    artist = 'Tá Todo Mundo Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 18 &&
+    currentHour < 19
+  ) {
+    artist = 'As Mais Pedidas';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 20 &&
+    currentHour < 22
+  ) {
+    artist = 'Plus Mania';
+  } else if (currentDay === 6 && currentHour >= 12 && currentHour < 14) {
+    artist = 'Festa Plus';
+  } else if (currentDay === 6 && currentHour >= 21 && currentHour < 22) {
+    artist = 'Time Machine';
+  } else if (currentDay === 6 && currentHour >= 22 && currentHour < 24) {
+    artist = 'Upgrade';
+  } else if (
+    currentDay === 0 &&
+    ((currentHour >= 5 && currentHour < 8) ||
+      (currentHour >= 20 && currentHour < 22))
+  ) {
+    artist = 'Playlist da Plus';
+  } else if (currentDay === 0 && currentHour >= 8 && currentHour < 9) {
+    artist = 'Terço da Misericórdia';
+  } else if (currentDay === 0 && currentHour >= 10 && currentHour < 15) {
+    artist = 'Domingão da Plus';
+  } else if (currentDay === 0 && currentHour >= 15 && currentHour < 19) {
+    artist = 'Mega Plus';
+  } else if (currentDay === 0 && currentHour >= 19 && currentHour < 20) {
+    artist = 'A Grande Hora';
+  } else if (currentDay === 0 && currentHour >= 22 && currentHour < 24) {
+    artist = 'Sem Limites Para Amar';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 6 &&
+    currentHour >= 11 &&
+    currentHour < 12
+  ) {
+    artist = 'As melhores da Plus';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 22 &&
+    currentHour < 24
+  ) {
+    artist = 'Slow Motion';
+  }
   useEffect(() => {
     const fetchPromotions = async () => {
       try {
@@ -451,8 +601,19 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
               <ImagePlusPlayer source={require('../../../assets/thumb.png')} />
             </MusicPhotoContainer>
             <MusicTextContainer>
-              <TitleRadioText>{currentTrack?.title}</TitleRadioText>
-              <ArtistRadioText>{currentTrack?.artist}</ArtistRadioText>
+              <TitleRadioText>{artist}</TitleRadioText>
+
+              {isMarquee ? (
+                <MarqueeView speed={0.11} style={{width: 180}}>
+                  <View>
+                    <ArtistRadioText>{text}</ArtistRadioText>
+                  </View>
+                </MarqueeView>
+              ) : (
+                <View>
+                  <ArtistRadioText>{text}</ArtistRadioText>
+                </View>
+              )}
             </MusicTextContainer>
           </ContainerLogoText>
         </TouchableOpacity>

@@ -21,7 +21,7 @@ export const ContainerNavigation = styled.View`
   top: -3px;
   left: 46px;
   align-items: center;
-
+width: 100%;
   justify-content: center;
 `;
 

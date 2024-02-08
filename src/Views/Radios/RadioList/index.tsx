@@ -30,16 +30,60 @@ export default function RadioList({navigation}: {navigation: any}) {
   };
   const currentHour = new Date().getHours();
   const currentDay = new Date().getDay();
-
   let artist = 'Rádio Plus';
 
+  const plusTrack = {
+    id: 2,
+    url: 'https://webradio.amsolution.com.br/radio/8020/plus',
+    title: 'Plus FM',
+    artist: artist,
+    isPlaying: false,
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
+    frequency: 'Rede',
+  };
+  const caririTrack = {
+    id: 3,
+    url: 'https://webradio.amsolution.com.br/radio/8140/cariri',
+    title: 'Plus Cariri',
+    artist: artist,
+    isPlaying: false,
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
+    frequency: '97.1',
+  };
+  const iguatuTrack = {
+    id: 6,
+    url: 'https://webradio.amsolution.com.br/radio/8070/iguatu',
+    title: 'Plus Iguatu',
+    artist: artist,
+    isPlaying: false,
+    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
+
+    frequency: '91.5',
+  };
+
   if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 12 &&
+    currentHour < 13 &&
+    (plusTrack.isPlaying || iguatuTrack.isPlaying || caririTrack.isPlaying)
+  ) {
+    artist = 'Sem Limites Para Amar';
+  } else if (
+    currentDay >= 1 &&
+    currentDay <= 5 &&
+    currentHour >= 13 &&
+    currentHour < 14 &&
+    (plusTrack.isPlaying || iguatuTrack.isPlaying || caririTrack.isPlaying)
+  ) {
+    artist = 'Plus FM';
+  } else if (
     currentDay >= 0 &&
     currentDay <= 6 &&
     currentHour >= 0 &&
     currentHour < 5
   ) {
-    artist = 'Corujo da Plus';
+    artist = 'Corujão da Plus';
   } else if (
     currentDay >= 1 &&
     currentDay <= 5 &&
@@ -157,23 +201,6 @@ export default function RadioList({navigation}: {navigation: any}) {
     frequency: '98.1',
   };
 
-  const plusTrack = {
-    id: 2,
-    url: 'https://webradio.amsolution.com.br/radio/8020/plus',
-    title: 'Plus FM',
-    artist: artist,
-    isPlaying: false,
-    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
-  };
-  const caririTrack = {
-    id: 3,
-    url: 'https://webradio.amsolution.com.br/radio/8140/cariri',
-    title: 'Plus Cariri',
-    artist: artist,
-    isPlaying: false,
-    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
-    frequency: '97.1',
-  };
   const cascavelTrack = {
     id: 4,
     url: 'https://webradio.amsolution.com.br/radio/8160/cascavel',
@@ -192,16 +219,7 @@ export default function RadioList({navigation}: {navigation: any}) {
     artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
     frequency: '93.3',
   };
-  const iguatuTrack = {
-    id: 6,
-    url: 'https://webradio.amsolution.com.br/radio/8070/iguatu',
-    title: 'Plus Iguatu',
-    artist: artist,
-    isPlaying: false,
-    artwork: 'https://plusfm.com.br/Imagens/artwork.jpeg',
 
-    frequency: '98.5',
-  };
   const pacajusTrack = {
     id: 7,
     url: 'https://webradio.amsolution.com.br/radio/8130/pacajus',
@@ -266,7 +284,9 @@ export default function RadioList({navigation}: {navigation: any}) {
       />
 
       <ContainerHeader>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Home')}
+          hitSlop={{top: 10, left: 50, bottom: 10, right: 50}}>
           <ContainerNavigation>
             <ArrowCircleLeft color="whitesmoke" weight="bold" size={35} />
           </ContainerNavigation>

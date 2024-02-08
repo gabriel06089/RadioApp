@@ -21,6 +21,8 @@ interface AudioPlayerContextData {
   setIsLoading: (isLoading: boolean) => void;
   frequency: string | null;
   stopIfYoutube: (url: string) => Promise<void>; // Adicione esta linha
+  currentSong: any; // Substitua 'any' pelo tipo correto
+  setCurrentSong: (song: any) => void;
 }
 
 const AudioPlayerContext = createContext<AudioPlayerContextData>(
@@ -30,6 +32,7 @@ const AudioPlayerContext = createContext<AudioPlayerContextData>(
 export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
   children,
 }) => {
+  const [currentSong, setCurrentSong] = useState<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
@@ -108,14 +111,13 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
       const currentDay = new Date().getDay();
 
       let artist = 'Rádio Plus';
-
       if (
         currentDay >= 0 &&
         currentDay <= 6 &&
         currentHour >= 0 &&
         currentHour < 5
       ) {
-        artist = 'Corujo da Plus';
+        artist = 'Corujão da Plus';
       } else if (
         currentDay >= 1 &&
         currentDay <= 5 &&
@@ -304,9 +306,35 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
       console.log('Reprodução parada.');
     }
   }, []);
+  useEffect(() => {
+    const fetchSong = () => {
+      fetch('https://webradio.amsolution.com.br/api/nowplaying/plus', {
+        headers: {
+          Authorization: 'ec1e12625c87f3fd:3522595694202dccc04b294711eb85cd',
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          setCurrentSong(data.now_playing.song);
+          console.log(
+            `Tocando agora: ${data.now_playing.song.title} por ${data.now_playing.song.artist}`,
+          ); // Adicione esta linha
+        })
+        .catch(error => {
+          console.error('Erro:', error);
+        });
+    };
+
+    fetchSong();
+    const intervalId = setInterval(fetchSong, 10000);
+
+    return () => clearInterval(intervalId);
+  }, []);
   return (
     <AudioPlayerContext.Provider
       value={{
+        currentSong,
+        setCurrentSong,
         isPlaying,
         setIsPlaying,
         currentTrack,
