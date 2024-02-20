@@ -606,12 +606,26 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
               {isMarquee ? (
                 <MarqueeView speed={0.11} style={{width: 180}}>
                   <View>
-                    <ArtistRadioText>{text}</ArtistRadioText>
+                    {currentTrack &&
+                      (currentTrack.title === 'Plus FM' || currentHour >= 14 ? (
+                        <ArtistRadioText>{text}</ArtistRadioText>
+                      ) : (
+                        <ArtistRadioText>
+                          PLUS FM - AQUI É LEGAL DEMAIS!
+                        </ArtistRadioText>
+                      ))}
                   </View>
                 </MarqueeView>
               ) : (
                 <View>
-                  <ArtistRadioText>{text}</ArtistRadioText>
+                  {currentTrack &&
+                    (currentTrack.title === 'Plus FM' || currentHour >= 14 ? (
+                      <ArtistRadioText>{text}</ArtistRadioText>
+                    ) : (
+                      <ArtistRadioText>
+                        PLUS FM - AQUI É LEGAL DEMAIS!
+                      </ArtistRadioText>
+                    ))}
                 </View>
               )}
             </MusicTextContainer>

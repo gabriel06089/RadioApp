@@ -33,7 +33,7 @@ import {
   TextMusicDescProg,
 } from './style';
 import PlayPauseButton from '../Radios/buttonPlayer';
-
+import {format} from 'date-fns';
 import {
   PanGestureHandler,
   State,
@@ -45,7 +45,7 @@ import {ArtistRadioText, ArtistRadioText1} from '../Home/styles';
 export default function Player({navigation}: {navigation: any}) {
   const {currentTrack, currentSong} = useAudioPlayer();
 
-  console.log(currentTrack);
+  // console.log(currentTrack);
 
   const onGestureEvent = React.useCallback(
     ({nativeEvent}: GestureHandlerGestureEvent) => {
@@ -200,7 +200,7 @@ export default function Player({navigation}: {navigation: any}) {
     'Clube Plus': 'https://plusfm.com.br/imagemprogamacao/clubeplus.png',
     'Deu B.O.': 'https://plusfm.com.br/imagemprogamacao/deubo.png',
     'Ceará News': 'https://plusfm.com.br/imagemprogamacao/cearanews.png',
-    'Ao Colo de Jesus e de Maria':
+    'No Colo de Jesus e de Maria':
       'https://plusfm.com.br/imagemprogamacao/nocolodejesusedemaria.png',
     'Manhã da Plus': 'https://plusfm.com.br/imagemprogamacao/manhadaplus.png',
     'Redação da Plus': 'https://plusfm.com.br/imagemprogamacao/redacaoplus.png',
@@ -247,6 +247,7 @@ export default function Player({navigation}: {navigation: any}) {
 
     setIsMarquee(textLength > 46); // Altere o número 50 para o comprimento que justifica o uso do marquee
   }, [text]);
+
   return (
     <PanGestureHandler
       onGestureEvent={onGestureEvent}
@@ -284,20 +285,32 @@ export default function Player({navigation}: {navigation: any}) {
         </ContainerPhoto>
         <ContainerTextMusic>
           <TextMusicDescProg>Você está escutando</TextMusicDescProg>
-          {/* <TextMusicDesc>{artist || 'PlusFM'}</TextMusicDesc> */}
           {isMarquee ? (
             <MarqueeView speed={0.11} style={{width: '80%'}}>
               <View>
-                <ArtistRadioText1>{text}</ArtistRadioText1>
+                {currentTrack &&
+                  (currentTrack.title === 'Plus FM' || currentHour >= 14 ? (
+                    <ArtistRadioText1>{text}</ArtistRadioText1>
+                  ) : (
+                    <ArtistRadioText1>
+                      PLUS FM - AQUI É LEGAL DEMAIS!
+                    </ArtistRadioText1>
+                  ))}
               </View>
             </MarqueeView>
           ) : (
             <View>
-              <ArtistRadioText1>{text}</ArtistRadioText1>
+              {currentTrack &&
+                (currentTrack.title === 'Plus FM' || currentHour >= 14 ? (
+                  <ArtistRadioText1>{text}</ArtistRadioText1>
+                ) : (
+                  <ArtistRadioText1>
+                    PLUS FM - AQUI É LEGAL DEMAIS!
+                  </ArtistRadioText1>
+                ))}
             </View>
           )}
         </ContainerTextMusic>
-
         <ContainerButtons>
           <TouchableOpacity
             onPress={() =>
