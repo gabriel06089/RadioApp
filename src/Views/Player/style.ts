@@ -41,7 +41,8 @@ export const TextRadioDesc = styled.Text`
 export const ContainerPhoto = styled.View`
   height: 45%;
   width: 75%;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.3);
+  
   align-self: center;
   border-radius: 12px;
   margin-top: 50px;
