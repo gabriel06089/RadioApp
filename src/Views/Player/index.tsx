@@ -44,7 +44,9 @@ import {View} from 'react-native-animatable';
 import {ArtistRadioText, ArtistRadioText1} from '../Home/styles';
 export default function Player({navigation}: {navigation: any}) {
   const {currentTrack, currentSong} = useAudioPlayer();
-
+  const currentDate = new Date();
+  console.log(`Dia atual: ${currentDate.getDay()}`);
+  console.log(`Hora atual: ${currentDate.getHours()}`);
   // console.log(currentTrack);
 
   const onGestureEvent = React.useCallback(
@@ -96,28 +98,6 @@ export default function Player({navigation}: {navigation: any}) {
     currentHour < 11
   ) {
     artist = 'Manhã da Plus';
-  } else if (
-    currentTrack &&
-    currentDay >= 1 &&
-    currentDay <= 5 &&
-    currentHour >= 12 &&
-    currentHour < 13 &&
-    (currentTrack.title === 'Plus FM' ||
-      currentTrack.title === 'Plus Cariri' ||
-      currentTrack.title === 'Plus Iguatu')
-  ) {
-    artist = 'Sem Limites Para Amar';
-  } else if (
-    currentTrack &&
-    currentDay >= 1 &&
-    currentDay <= 5 &&
-    currentHour >= 13 &&
-    currentHour < 14 &&
-    (currentTrack.title === 'Plus FM' ||
-      currentTrack.title === 'Plus Cariri' ||
-      currentTrack.title === 'Plus Iguatu')
-  ) {
-    artist = 'Plus FM';
   } else if (
     currentDay >= 1 &&
     currentDay <= 5 &&
@@ -193,6 +173,9 @@ export default function Player({navigation}: {navigation: any}) {
     currentHour < 24
   ) {
     artist = 'Slow Motion';
+  }
+  if (currentHour >= 0 && currentHour < 5) {
+    artist = 'Corujão da Plus';
   }
   const programImages: Record<string, string> = {
     'Corujão da Plus':
@@ -278,7 +261,7 @@ export default function Player({navigation}: {navigation: any}) {
 
         <ContainerPhoto>
           <Image
-            style={{width: '90%', height: '100%'}}
+            style={{width: '90%', height: '100%', opacity: 1}}
             source={{uri: programImage}}
             resizeMode="contain"
           />

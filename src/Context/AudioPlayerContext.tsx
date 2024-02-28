@@ -145,7 +145,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
         currentHour >= 8 &&
         currentHour < 9
       ) {
-        artist = 'Ao Colo de Jesus e Maria';
+        artist = 'No Colo de Jesus e Maria';
       } else if (
         currentDay >= 1 &&
         currentDay <= 6 &&
