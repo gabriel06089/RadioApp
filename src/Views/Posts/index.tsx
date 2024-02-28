@@ -31,7 +31,7 @@ export default function Posts({navigation}: {navigation: any}) {
   const isDarkMode = colorScheme === 'dark';
   const backgroundColor = isDarkMode ? '#1C1C1E' : 'white';
   const textColor = isDarkMode ? '#FFFFFF' : 'black';
- 
+
   const runFirst = `
   window.ReactNativeWebView.postMessage(Math.max(document.documentElement.clientHeight, document.body.scrollHeight, document.documentElement.scrollHeight,
     document.body.offsetHeight, document.documentElement.offsetHeight));
@@ -79,7 +79,15 @@ ${post.content.rendered
       <ScrollView>
         <ContainerImg>
           <ContainerImgPost
-            source={{uri: post.yoast_head_json.og_image[0].url}}
+            source={{
+              uri:
+                post &&
+                post.yoast_head_json &&
+                post.yoast_head_json.og_image &&
+                post.yoast_head_json.og_image[0]
+                  ? post.yoast_head_json.og_image[0].url
+                  : 'https://plusfm.com.br/Imagens/artwork.jpeg',
+            }}
             style={{width: '100%', height: '30%'}}
           />
         </ContainerImg>
