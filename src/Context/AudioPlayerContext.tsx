@@ -48,7 +48,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
     );
     console.log(`Reprodução iniciada. Tocando: ${track?.title}`);
   }, []);
-  Sound.setCategory('Playback');
+  Sound.setCategory('Playback', true);
   const pauseTrack = useCallback(async () => {
     console.log('Pausando a reprodução...');
     setIsPlaying(false);
