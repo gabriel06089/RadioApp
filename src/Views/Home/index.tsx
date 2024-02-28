@@ -496,17 +496,17 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
                           shadowRadius: 3.84,
                         }}>
                         <ContainerMateria>
-                          {drop &&
-                          drop.yoast_head_json &&
-                          drop.yoast_head_json.og_image &&
-                          drop.yoast_head_json.og_image[0] &&
-                          drop.yoast_head_json.og_image[0].url ? (
-                            <ImageMateria
-                              source={{
-                                uri: drop.yoast_head_json.og_image[0].url,
-                              }}
-                            />
-                          ) : null}
+                          <ImageMateria
+                            source={{
+                              uri:
+                                drop &&
+                                drop.yoast_head_json &&
+                                drop.yoast_head_json.og_image &&
+                                drop.yoast_head_json.og_image[0]
+                                  ? drop.yoast_head_json.og_image[0].url
+                                  : 'https://plusfm.com.br/Imagens/artwork.jpeg',
+                            }}
+                          />
                         </ContainerMateria>
                       </DropShadow>
                       <MateriaTitle>
