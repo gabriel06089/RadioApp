@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1210"
+   LastUpgradeVersion = "1520"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "RadioApp.app"
-               BlueprintName = "RadioApp"
-               ReferencedContainer = "container:RadioApp.xcodeproj">
+               BuildableName = "Plus FM.app"
+               BlueprintName = "Plus FM"
+               ReferencedContainer = "container:Plus FM.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "RadioAppTests.xctest"
-               BlueprintName = "RadioAppTests"
-               ReferencedContainer = "container:RadioApp.xcodeproj">
+               BuildableName = "Plus FMTests.xctest"
+               BlueprintName = "Plus FMTests"
+               ReferencedContainer = "container:Plus FM.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RadioApp.app"
-            BlueprintName = "RadioApp"
-            ReferencedContainer = "container:RadioApp.xcodeproj">
+            BuildableName = "Plus FM.app"
+            BlueprintName = "Plus FM"
+            ReferencedContainer = "container:Plus FM.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "RadioApp.app"
-            BlueprintName = "RadioApp"
-            ReferencedContainer = "container:RadioApp.xcodeproj">
+            BuildableName = "Plus FM.app"
+            BlueprintName = "Plus FM"
+            ReferencedContainer = "container:Plus FM.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
