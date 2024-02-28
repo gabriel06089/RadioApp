@@ -345,7 +345,6 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             zIndex: 1, // Garante que a imagem esteja acima das barras de carregamento
             height: 320,
             width: 220,
-           
           }}>
           <Image
             style={{
@@ -391,234 +390,242 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
     );
   }
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Container colors={['#000', '#333333']}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}>
-          <StatusBar
-            animated={true}
-            backgroundColor="transparent"
-            translucent={true}
-          />
-
-          <ContainerHeader>
-            <ContainerLogo>
-              <ImageLogo source={require('../../../assets/plus-1.png')} />
-              <TouchableOpacity
-                onPress={() => navigation.navigate('RadioList')}>
-                <ContainerMenu>
-                  <MenuText>{currentTrack?.title}</MenuText>
-
-                  <Playlist color="whitesmoke" weight="fill" size={30} />
-                </ContainerMenu>
-              </TouchableOpacity>
-            </ContainerLogo>
-            <BackgroundImG
-              source={require('../../../assets/FundoSemDetalhes.png')}
+    <>
+      <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
+        <Container colors={['#000', '#333333']}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}>
+            <StatusBar
+              animated={true}
+              backgroundColor="transparent"
+              translucent={true}
             />
-            <ContainerImgPlus>
-              <ImagePlus
-                source={require('../../../assets/PlusSemFundoDireita.png')}
+
+            <ContainerHeader>
+              <ContainerLogo>
+                <ImageLogo source={require('../../../assets/plus-1.png')} />
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('RadioList')}>
+                  <ContainerMenu>
+                    <MenuText>{currentTrack?.title}</MenuText>
+
+                    <Playlist color="whitesmoke" weight="fill" size={30} />
+                  </ContainerMenu>
+                </TouchableOpacity>
+              </ContainerLogo>
+              <BackgroundImG
+                source={require('../../../assets/FundoSemDetalhes.png')}
               />
-            </ContainerImgPlus>
+              <ContainerImgPlus>
+                <ImagePlus
+                  source={require('../../../assets/PlusSemFundoDireita.png')}
+                />
+              </ContainerImgPlus>
 
-            <ContainerHeaderText>
-              <AudioVisuContainer>
-                {isPlaying && <AudioVisualizer />}
-              </AudioVisuContainer>
-            </ContainerHeaderText>
-          </ContainerHeader>
+              <ContainerHeaderText>
+                <AudioVisuContainer>
+                  {isPlaying && <AudioVisualizer />}
+                </AudioVisuContainer>
+              </ContainerHeaderText>
+            </ContainerHeader>
 
-          <Text
-            style={{
-              paddingTop: 12,
-              paddingLeft: 24,
-              paddingBottom: 12,
-              alignSelf: 'flex-start',
-              color: 'white',
-            }}>
-            Promoções
-          </Text>
-          <ScrollView
-            horizontal
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}>
-            <ContainerCarrousel>
-              <TouchableOpacity onPress={() => Linking.openURL(promoLink)}>
-                <DropShadow
-                  style={{
-                    shadowColor: '#000',
-                    shadowOffset: {
-                      width: 0,
-                      height: 5,
-                    },
-                    shadowOpacity: 0.55,
-                    shadowRadius: 3.84,
-                  }}>
-                  <ContainerPromo>
-                    {promoImage !== '' && (
-                      <ImagePromo source={{uri: promoImage}} />
-                    )}
-                  </ContainerPromo>
-                </DropShadow>
+            <Text
+              style={{
+                paddingTop: 12,
+                paddingLeft: 24,
+                paddingBottom: 12,
+                alignSelf: 'flex-start',
+                color: 'white',
+              }}>
+              Promoções
+            </Text>
+            <ScrollView
+              horizontal
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}>
+              <ContainerCarrousel>
+                <TouchableOpacity onPress={() => Linking.openURL(promoLink)}>
+                  <DropShadow
+                    style={{
+                      shadowColor: '#000',
+                      shadowOffset: {
+                        width: 0,
+                        height: 5,
+                      },
+                      shadowOpacity: 0.55,
+                      shadowRadius: 3.84,
+                    }}>
+                    <ContainerPromo>
+                      {promoImage !== '' && (
+                        <ImagePromo source={{uri: promoImage}} />
+                      )}
+                    </ContainerPromo>
+                  </DropShadow>
+                </TouchableOpacity>
+              </ContainerCarrousel>
+            </ScrollView>
+            <Text
+              style={{
+                paddingTop: 12,
+                paddingLeft: 24,
+                paddingBottom: 12,
+                alignSelf: 'flex-start',
+                color: 'white',
+              }}>
+              Drops
+            </Text>
+            <ScrollView
+              horizontal
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}>
+              <ContainerCarrousel>
+                {drops.map((drop, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() => navigation.navigate('Posts', {post: drop})}>
+                    <ContainerNoticiasColumn>
+                      <DropShadow
+                        style={{
+                          shadowColor: '#000',
+                          shadowOffset: {
+                            width: 1,
+                            height: 5,
+                          },
+                          shadowOpacity: 0.45,
+                          shadowRadius: 3.84,
+                        }}>
+                        <ContainerMateria>
+                          {drop &&
+                          drop.yoast_head_json &&
+                          drop.yoast_head_json.og_image &&
+                          drop.yoast_head_json.og_image[0] &&
+                          drop.yoast_head_json.og_image[0].url ? (
+                            <ImageMateria
+                              source={{
+                                uri: drop.yoast_head_json.og_image[0].url,
+                              }}
+                            />
+                          ) : null}
+                        </ContainerMateria>
+                      </DropShadow>
+                      <MateriaTitle>
+                        {drop ? drop.yoast_head_json.title : 'Carregando...'}
+                      </MateriaTitle>
+                    </ContainerNoticiasColumn>
+                  </TouchableOpacity>
+                ))}
+              </ContainerCarrousel>
+            </ScrollView>
+            <Text
+              style={{
+                paddingTop: 12,
+                paddingLeft: 24,
+                paddingBottom: 12,
+                alignSelf: 'flex-start',
+                color: 'white',
+              }}>
+              Notícias
+            </Text>
+            <ScrollView
+              horizontal
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}>
+              <ContainerCarrousel>
+                {posts.map((post, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() => navigation.navigate('Posts', {post})}>
+                    <ContainerNoticiasColumn>
+                      <DropShadow
+                        style={{
+                          shadowColor: '#000',
+                          shadowOffset: {
+                            width: 1,
+                            height: 5,
+                          },
+                          shadowOpacity: 0.45,
+                          shadowRadius: 3.84,
+                        }}>
+                        <ContainerMateria>
+                          {post &&
+                          post.yoast_head_json &&
+                          post.yoast_head_json.og_image &&
+                          post.yoast_head_json.og_image[0] &&
+                          post.yoast_head_json.og_image[0].url ? (
+                            <ImageMateria
+                              source={{
+                                uri: post.yoast_head_json.og_image[0].url,
+                              }}
+                            />
+                          ) : null}
+                        </ContainerMateria>
+                      </DropShadow>
+                      <MateriaTitle>
+                        {post ? post.yoast_head_json.title : 'Carregando...'}
+                      </MateriaTitle>
+                    </ContainerNoticiasColumn>
+                  </TouchableOpacity>
+                ))}
+              </ContainerCarrousel>
+            </ScrollView>
+            <ContainerLogoContato>
+              <LogoContato source={require('../../../assets/plus-1.png')} />
+              <TextLogo>Aqui é legal demais</TextLogo>
+            </ContainerLogoContato>
+            <ContainerContato>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL('https://www.instagram.com/plusfmrede/')
+                }>
+                <Logo
+                  as={InstagramLogo}
+                  size={24}
+                  weight="duotone"
+                  color="white"
+                />
               </TouchableOpacity>
-            </ContainerCarrousel>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL('https://www.youtube.com/@plusfmrede')
+                }>
+                <Logo
+                  as={YoutubeLogo}
+                  size={24}
+                  weight="duotone"
+                  color="white"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL(
+                    'https://whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A',
+                  )
+                }>
+                <Logo
+                  as={WhatsappLogo}
+                  size={24}
+                  weight="duotone"
+                  color="white"
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  Linking.openURL('https://www.facebook.com/plusfmrede/')
+                }>
+                <Logo
+                  as={FacebookLogo}
+                  size={24}
+                  weight="duotone"
+                  color="white"
+                />
+              </TouchableOpacity>
+            </ContainerContato>
+            <ContainerBottom />
           </ScrollView>
-          <Text
-            style={{
-              paddingTop: 12,
-              paddingLeft: 24,
-              paddingBottom: 12,
-              alignSelf: 'flex-start',
-              color: 'white',
-            }}>
-            Drops
-          </Text>
-          <ScrollView
-            horizontal
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}>
-            <ContainerCarrousel>
-              {drops.map((drop, index) => (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => navigation.navigate('Posts', {post: drop})}>
-                  <ContainerNoticiasColumn>
-                    <DropShadow
-                      style={{
-                        shadowColor: '#000',
-                        shadowOffset: {
-                          width: 1,
-                          height: 5,
-                        },
-                        shadowOpacity: 0.45,
-                        shadowRadius: 3.84,
-                      }}>
-                      <ContainerMateria>
-                        {drop &&
-                        drop.yoast_head_json &&
-                        drop.yoast_head_json.og_image &&
-                        drop.yoast_head_json.og_image[0] &&
-                        drop.yoast_head_json.og_image[0].url ? (
-                          <ImageMateria
-                            source={{
-                              uri: drop.yoast_head_json.og_image[0].url,
-                            }}
-                          />
-                        ) : null}
-                      </ContainerMateria>
-                    </DropShadow>
-                    <MateriaTitle>
-                      {drop ? drop.yoast_head_json.title : 'Carregando...'}
-                    </MateriaTitle>
-                  </ContainerNoticiasColumn>
-                </TouchableOpacity>
-              ))}
-            </ContainerCarrousel>
-          </ScrollView>
-          <Text
-            style={{
-              paddingTop: 12,
-              paddingLeft: 24,
-              paddingBottom: 12,
-              alignSelf: 'flex-start',
-              color: 'white',
-            }}>
-            Notícias
-          </Text>
-          <ScrollView
-            horizontal
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}>
-            <ContainerCarrousel>
-              {posts.map((post, index) => (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => navigation.navigate('Posts', {post})}>
-                  <ContainerNoticiasColumn>
-                    <DropShadow
-                      style={{
-                        shadowColor: '#000',
-                        shadowOffset: {
-                          width: 1,
-                          height: 5,
-                        },
-                        shadowOpacity: 0.45,
-                        shadowRadius: 3.84,
-                      }}>
-                      <ContainerMateria>
-                        {post &&
-                        post.yoast_head_json &&
-                        post.yoast_head_json.og_image &&
-                        post.yoast_head_json.og_image[0] &&
-                        post.yoast_head_json.og_image[0].url ? (
-                          <ImageMateria
-                            source={{
-                              uri: post.yoast_head_json.og_image[0].url,
-                            }}
-                          />
-                        ) : null}
-                      </ContainerMateria>
-                    </DropShadow>
-                    <MateriaTitle>
-                      {post ? post.yoast_head_json.title : 'Carregando...'}
-                    </MateriaTitle>
-                  </ContainerNoticiasColumn>
-                </TouchableOpacity>
-              ))}
-            </ContainerCarrousel>
-          </ScrollView>
-          <ContainerLogoContato>
-            <LogoContato source={require('../../../assets/plus-1.png')} />
-            <TextLogo>Aqui é legal demais</TextLogo>
-          </ContainerLogoContato>
-          <ContainerContato>
-            <TouchableOpacity
-              onPress={() =>
-                Linking.openURL('https://www.instagram.com/plusfmrede/')
-              }>
-              <Logo
-                as={InstagramLogo}
-                size={24}
-                weight="duotone"
-                color="white"
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() =>
-                Linking.openURL('https://www.youtube.com/@plusfmrede')
-              }>
-              <Logo as={YoutubeLogo} size={24} weight="duotone" color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() =>
-                Linking.openURL(
-                  'https://whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A',
-                )
-              }>
-              <Logo
-                as={WhatsappLogo}
-                size={24}
-                weight="duotone"
-                color="white"
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() =>
-                Linking.openURL('https://www.facebook.com/plusfmrede/')
-              }>
-              <Logo
-                as={FacebookLogo}
-                size={24}
-                weight="duotone"
-                color="white"
-              />
-            </TouchableOpacity>
-          </ContainerContato>
-          <ContainerBottom />
-        </ScrollView>
-
+        </Container>
+      </SafeAreaView>
+      <>
         <MusicContainer colors={['#000', '#333333']}>
           <TouchableOpacity onPress={() => navigation.navigate('RadioList')}>
             <ContainerLogoText>
@@ -663,8 +670,8 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
             {currentTrack && <PlayPauseButton track={currentTrack} />}
           </ContainerPlayerMusic>
         </MusicContainer>
-      </Container>
-    </SafeAreaView>
+      </>
+    </>
   );
 };
 

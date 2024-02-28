@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, SafeAreaView} from 'react-native';
 import {useAudioPlayer} from '../../../Context/AudioPlayerContext';
 import {TouchableOpacity, ScrollView} from 'react-native';
 import {
@@ -276,207 +276,215 @@ export default function RadioList({navigation}: {navigation: any}) {
   };
 
   return (
-    <Container colors={['#000', '#333333']}>
-      <StatusBar
-        animated={true}
-        backgroundColor="transparent"
-        translucent={true}
-      />
+    <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
+      <Container colors={['#000', '#333333']}>
+        <StatusBar
+          animated={true}
+          backgroundColor="transparent"
+          translucent={true}
+        />
 
-      <ContainerHeader>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Home')}
-          hitSlop={{top: 10, left: 50, bottom: 10, right: 50}}>
-          <ContainerNavigation>
-            <ArrowCircleLeft color="whitesmoke" weight="bold" size={35} />
-          </ContainerNavigation>
-        </TouchableOpacity>
-      </ContainerHeader>
-      <ScrollView>
-        <TouchableOpacity onPress={() => handlePlayerNavigation(plusTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Plus</Titulo>
-                  <Subtitulo>Rede</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+        <ContainerHeader>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Home')}
+            hitSlop={{top: 10, left: 50, bottom: 10, right: 50}}>
+            <ContainerNavigation>
+              <ArrowCircleLeft color="whitesmoke" weight="bold" size={35} />
+            </ContainerNavigation>
+          </TouchableOpacity>
+        </ContainerHeader>
+        <ScrollView>
+          <TouchableOpacity onPress={() => handlePlayerNavigation(plusTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Plus</Titulo>
+                    <Subtitulo>Rede</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(sobralTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Sobral</Titulo>
-                  <Subtitulo>{sobralTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => handlePlayerNavigation(sobralTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Sobral</Titulo>
+                    <Subtitulo>{sobralTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(caririTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Cariri</Titulo>
-                  <Subtitulo>{caririTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => handlePlayerNavigation(caririTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Cariri</Titulo>
+                    <Subtitulo>{caririTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(aracatiTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Aracati</Titulo>
-                  <Subtitulo>{aracatiTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handlePlayerNavigation(aracatiTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Aracati</Titulo>
+                    <Subtitulo>{aracatiTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(cascavelTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Cascavel</Titulo>
-                  <Subtitulo>{cascavelTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handlePlayerNavigation(cascavelTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Cascavel</Titulo>
+                    <Subtitulo>{cascavelTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(crateusTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Crateús</Titulo>
-                  <Subtitulo>{crateusTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handlePlayerNavigation(crateusTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Crateús</Titulo>
+                    <Subtitulo>{crateusTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(iguatuTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Iguatu</Titulo>
-                  <Subtitulo>{iguatuTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => handlePlayerNavigation(iguatuTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Iguatu</Titulo>
+                    <Subtitulo>{iguatuTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(pacajusTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Pacajus</Titulo>
-                  <Subtitulo>{pacajusTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handlePlayerNavigation(pacajusTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Pacajus</Titulo>
+                    <Subtitulo>{pacajusTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => handlePlayerNavigation(paraipabaTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Paraipaba</Titulo>
-                  <Subtitulo>{paraipabaTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handlePlayerNavigation(paraipabaTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Paraipaba</Titulo>
+                    <Subtitulo>{paraipabaTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(redencaoTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Redenção</Titulo>
-                  <Subtitulo>{redencaoTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handlePlayerNavigation(redencaoTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Redenção</Titulo>
+                    <Subtitulo>{redencaoTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => handlePlayerNavigation(santaQuiteriaTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Santa Quitéria</Titulo>
-                  <Subtitulo>{santaQuiteriaTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handlePlayerNavigation(santaQuiteriaTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Santa Quitéria</Titulo>
+                    <Subtitulo>{santaQuiteriaTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => handlePlayerNavigation(catarinaTrack)}>
-          <ContainerRadio>
-            <ContainerList>
-              <ContainerPlayRadio>
-                <PlayCircle size={40} weight={'duotone'} color={'white'} />
-                <ContainerText>
-                  <Titulo>Catarina</Titulo>
-                  <Subtitulo>{catarinaTrack?.frequency}</Subtitulo>
-                </ContainerText>
-              </ContainerPlayRadio>
-              <LogoImg source={require('../../../../assets/plus-1.png')} />
-            </ContainerList>
-          </ContainerRadio>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => handlePlayerNavigation(catarinaTrack)}>
+            <ContainerRadio>
+              <ContainerList>
+                <ContainerPlayRadio>
+                  <PlayCircle size={40} weight={'duotone'} color={'white'} />
+                  <ContainerText>
+                    <Titulo>Catarina</Titulo>
+                    <Subtitulo>{catarinaTrack?.frequency}</Subtitulo>
+                  </ContainerText>
+                </ContainerPlayRadio>
+                <LogoImg source={require('../../../../assets/plus-1.png')} />
+              </ContainerList>
+            </ContainerRadio>
+          </TouchableOpacity>
 
-        <Line2 />
-      </ScrollView>
-    </Container>
+          <Line2 />
+        </ScrollView>
+      </Container>
+    </SafeAreaView>
   );
 }

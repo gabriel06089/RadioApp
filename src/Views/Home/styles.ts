@@ -2,14 +2,14 @@
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import {StatusBar} from 'react-native';
+import {StatusBar, Platform, Dimensions} from 'react-native';
 
 export const Container = styled(LinearGradient).attrs({
   colors: ['#541084', '#9248FF'],
   start: {x: 0, y: 0.7}, //
   end: {x: 0, y: 1}, //
 })`
-  flex: 1;
+  flex: 1.2;
 `;
 export const ContainerHeader = styled.View`
   background-color: #541084;
@@ -118,8 +118,8 @@ export const ImagePlus = styled.Image`
 `;
 
 export const ImagePlusPlayer = styled.Image`
-  width: 80px;
-  height: 60px;
+  width: ${Platform.OS === 'ios' ? '60px' : '80px'};
+  height: ${Platform.OS === 'ios' ? '70px' : '60px'};
 `;
 export const ContainerMenu = styled.View`
   flex-direction: row;
@@ -146,7 +146,7 @@ export const MusicContainer = styled(LinearGradient).attrs({
   background-color: #f9e55c;
   align-items: center;
   justify-content: space-between;
-  height: 70px;
+  height: ${Platform.OS === 'ios' ? '90px' : '70px'};
 
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;

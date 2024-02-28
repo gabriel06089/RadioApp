@@ -15,6 +15,7 @@ import {
   StatusBar,
   TouchableOpacity,
   Image,
+  SafeAreaView,
 } from 'react-native';
 import {useAudioPlayer} from '../../Context/AudioPlayerContext';
 import {
@@ -232,44 +233,60 @@ export default function Player({navigation}: {navigation: any}) {
   }, [text]);
 
   return (
-    <PanGestureHandler
-      onGestureEvent={onGestureEvent}
-      onHandlerStateChange={onGestureEvent}>
-      <Container colors={['#000', '#333333']}>
-        <StatusBar
-          animated={true}
-          backgroundColor="transparent"
-          translucent={true}
-        />
-        <ContainerHeader>
-          <ContainerHome1>
-            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-              <ArrowCircleLeft size={30} weight="bold" color="#541084" />
-            </TouchableOpacity>
-          </ContainerHome1>
-          <ContainerTextRadio>
-            <TextRadio>{currentTrack?.title || 'PlusFM'}</TextRadio>
-            <TextRadioDesc>{currentTrack?.frequency || 'PlusFM'}</TextRadioDesc>
-          </ContainerTextRadio>
-
-          <ContainerHome>
-            <TouchableOpacity onPress={() => navigation.navigate('RadioList')}>
-              <Playlist size={30} weight="fill" color="#541084" />
-            </TouchableOpacity>
-          </ContainerHome>
-        </ContainerHeader>
-
-        <ContainerPhoto>
-          <Image
-            style={{width: '90%', height: '100%', opacity: 1}}
-            source={{uri: programImage}}
-            resizeMode="contain"
+    <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
+      <PanGestureHandler
+        onGestureEvent={onGestureEvent}
+        onHandlerStateChange={onGestureEvent}>
+        <Container colors={['#000', '#333333']}>
+          <StatusBar
+            animated={true}
+            backgroundColor="transparent"
+            translucent={true}
           />
-        </ContainerPhoto>
-        <ContainerTextMusic>
-          <TextMusicDescProg>Você está escutando</TextMusicDescProg>
-          {isMarquee ? (
-            <MarqueeView speed={0.11} style={{width: '80%'}}>
+          <ContainerHeader>
+            <ContainerHome1>
+              <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <ArrowCircleLeft size={30} weight="bold" color="#541084" />
+              </TouchableOpacity>
+            </ContainerHome1>
+            <ContainerTextRadio>
+              <TextRadio>{currentTrack?.title || 'PlusFM'}</TextRadio>
+              <TextRadioDesc>
+                {currentTrack?.frequency || 'PlusFM'}
+              </TextRadioDesc>
+            </ContainerTextRadio>
+
+            <ContainerHome>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('RadioList')}>
+                <Playlist size={30} weight="fill" color="#541084" />
+              </TouchableOpacity>
+            </ContainerHome>
+          </ContainerHeader>
+
+          <ContainerPhoto>
+            <Image
+              style={{width: '90%', height: '100%', opacity: 1}}
+              source={{uri: programImage}}
+              resizeMode="contain"
+            />
+          </ContainerPhoto>
+          <ContainerTextMusic>
+            <TextMusicDescProg>Você está escutando</TextMusicDescProg>
+            {isMarquee ? (
+              <MarqueeView speed={0.11} style={{width: '80%'}}>
+                <View>
+                  {currentTrack &&
+                    (currentTrack.title === 'Plus FM' || currentHour >= 14 ? (
+                      <ArtistRadioText1>{text}</ArtistRadioText1>
+                    ) : (
+                      <ArtistRadioText1>
+                        PLUS FM - AQUI É LEGAL DEMAIS!
+                      </ArtistRadioText1>
+                    ))}
+                </View>
+              </MarqueeView>
+            ) : (
               <View>
                 {currentTrack &&
                   (currentTrack.title === 'Plus FM' || currentHour >= 14 ? (
@@ -280,50 +297,39 @@ export default function Player({navigation}: {navigation: any}) {
                     </ArtistRadioText1>
                   ))}
               </View>
-            </MarqueeView>
-          ) : (
-            <View>
-              {currentTrack &&
-                (currentTrack.title === 'Plus FM' || currentHour >= 14 ? (
-                  <ArtistRadioText1>{text}</ArtistRadioText1>
-                ) : (
-                  <ArtistRadioText1>
-                    PLUS FM - AQUI É LEGAL DEMAIS!
-                  </ArtistRadioText1>
-                ))}
-            </View>
-          )}
-        </ContainerTextMusic>
-        <ContainerButtons>
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(
-                'https://play.google.com/store/apps/details?id=com.johnallreal.PLUSFM',
-              )
-            }>
-            <ShareNetwork weight="fill" color="#541084" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => Linking.openURL('https://plusfm.com.br/')}>
-            <Globe color="#541084" weight="bold" />
-          </TouchableOpacity>
-          {currentTrack && <PlayPauseButton track={currentTrack} />}
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL(
-                'https://whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A',
-              )
-            }>
-            <WhatsappLogo color="#541084" weight="bold" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              Linking.openURL('https://www.instagram.com/plusfmrede/')
-            }>
-            <InstagramLogo color="#541084" weight="bold" />
-          </TouchableOpacity>
-        </ContainerButtons>
-      </Container>
-    </PanGestureHandler>
+            )}
+          </ContainerTextMusic>
+          <ContainerButtons>
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL(
+                  'https://play.google.com/store/apps/details?id=com.johnallreal.PLUSFM',
+                )
+              }>
+              <ShareNetwork weight="fill" color="#541084" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => Linking.openURL('https://plusfm.com.br/')}>
+              <Globe color="#541084" weight="bold" />
+            </TouchableOpacity>
+            {currentTrack && <PlayPauseButton track={currentTrack} />}
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL(
+                  'https://whatsapp.com/channel/0029VaDSwXYA89MeJrPw1p1A',
+                )
+              }>
+              <WhatsappLogo color="#541084" weight="bold" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL('https://www.instagram.com/plusfmrede/')
+              }>
+              <InstagramLogo color="#541084" weight="bold" />
+            </TouchableOpacity>
+          </ContainerButtons>
+        </Container>
+      </PanGestureHandler>
+    </SafeAreaView>
   );
 }
