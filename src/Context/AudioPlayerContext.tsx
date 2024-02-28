@@ -8,6 +8,8 @@ import React, {
 } from 'react';
 import TrackPlayer, {Capability, Track, Event} from 'react-native-track-player';
 TrackPlayer.registerPlaybackService(() => require('./service.js'));
+import Sound from 'react-native-sound';
+
 
 interface AudioPlayerContextData {
   isPlaying: boolean;
@@ -46,7 +48,7 @@ export const AudioPlayerProvider: React.FC<{children: React.ReactNode}> = ({
     );
     console.log(`Reprodução iniciada. Tocando: ${track?.title}`);
   }, []);
-
+  Sound.setCategory('Playback');
   const pauseTrack = useCallback(async () => {
     console.log('Pausando a reprodução...');
     setIsPlaying(false);
