@@ -100,7 +100,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
     const fetchNews = async () => {
       try {
         const response = await fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2685&per_page=3',
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2685&per_page=2',
         );
         const data = await response.json();
         console.log('Notícias carregadas do servidor:'); // Adiciona log de console para depuração
@@ -124,7 +124,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
     const fetchDrops = async () => {
       try {
         const response = await fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?status&per_page=3&tags_exclude=2007',
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2&per_page=3',
         );
         const data = await response.json();
         console.log('Drops carregadas do servidor:'); // Adiciona log de console para depuração
@@ -171,7 +171,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
     const fetchPlusnews2 = async () => {
       try {
         const response = await fetch(
-          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2698&per_page=4',
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2698&per_page=3',
         );
         const data = await response.json();
         console.log('Plusnews2 carregadas do servidor:'); // Adiciona log de console para depuração
@@ -625,100 +625,50 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
                 alignSelf: 'flex-start',
                 color: 'white',
               }}>
-              News + Brasil
+              + News
             </Text>
             <ScrollView
               horizontal
               showsVerticalScrollIndicator={false}
               showsHorizontalScrollIndicator={false}>
               <ContainerCarrousel>
-                {(plusnews1 || []).map((post: any, index: number) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => navigation.navigate('Posts', {post})}>
-                    <ContainerNoticiasColumn>
-                      <DropShadow
-                        style={{
-                          shadowColor: '#000',
-                          shadowOffset: {
-                            width: 1,
-                            height: 5,
-                          },
-                          shadowOpacity: 0.45,
-                          shadowRadius: 3.84,
-                        }}>
-                        <ContainerMateria>
-                          {post &&
-                          post.yoast_head_json &&
-                          post.yoast_head_json.og_image &&
-                          post.yoast_head_json.og_image[0] &&
-                          post.yoast_head_json.og_image[0].url ? (
-                            <ImageMateria
-                              source={{
-                                uri: post.yoast_head_json.og_image[0].url,
-                              }}
-                            />
-                          ) : null}
-                        </ContainerMateria>
-                      </DropShadow>
-                      <MateriaTitle>
-                        {post ? post.yoast_head_json.title : 'Carregando...'}
-                      </MateriaTitle>
-                    </ContainerNoticiasColumn>
-                  </TouchableOpacity>
-                ))}
-              </ContainerCarrousel>
-            </ScrollView>
-            <Text
-              style={{
-                paddingTop: 12,
-                paddingLeft: 24,
-                paddingBottom: 12,
-                alignSelf: 'flex-start',
-                color: 'white',
-              }}>
-              News + Ceará
-            </Text>
-            <ScrollView
-              horizontal
-              showsVerticalScrollIndicator={false}
-              showsHorizontalScrollIndicator={false}>
-              <ContainerCarrousel>
-                {(plusnews2 || []).map((post: any, index: number) => (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => navigation.navigate('Posts', {post})}>
-                    <ContainerNoticiasColumn>
-                      <DropShadow
-                        style={{
-                          shadowColor: '#000',
-                          shadowOffset: {
-                            width: 1,
-                            height: 5,
-                          },
-                          shadowOpacity: 0.45,
-                          shadowRadius: 3.84,
-                        }}>
-                        <ContainerMateria>
-                          {post &&
-                          post.yoast_head_json &&
-                          post.yoast_head_json.og_image &&
-                          post.yoast_head_json.og_image[0] &&
-                          post.yoast_head_json.og_image[0].url ? (
-                            <ImageMateria
-                              source={{
-                                uri: post.yoast_head_json.og_image[0].url,
-                              }}
-                            />
-                          ) : null}
-                        </ContainerMateria>
-                      </DropShadow>
-                      <MateriaTitle>
-                        {post ? post.yoast_head_json.title : 'Carregando...'}
-                      </MateriaTitle>
-                    </ContainerNoticiasColumn>
-                  </TouchableOpacity>
-                ))}
+                {(plusnews1.concat(plusnews2) || []).map(
+                  (post: any, index: number) => (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => navigation.navigate('Posts', {post})}>
+                      <ContainerNoticiasColumn>
+                        <DropShadow
+                          style={{
+                            shadowColor: '#000',
+                            shadowOffset: {
+                              width: 1,
+                              height: 5,
+                            },
+                            shadowOpacity: 0.45,
+                            shadowRadius: 3.84,
+                          }}>
+                          <ContainerMateria>
+                            {post &&
+                            post.yoast_head_json &&
+                            post.yoast_head_json.og_image &&
+                            post.yoast_head_json.og_image[0] &&
+                            post.yoast_head_json.og_image[0].url ? (
+                              <ImageMateria
+                                source={{
+                                  uri: post.yoast_head_json.og_image[0].url,
+                                }}
+                              />
+                            ) : null}
+                          </ContainerMateria>
+                        </DropShadow>
+                        <MateriaTitle>
+                          {post ? post.yoast_head_json.title : 'Carregando...'}
+                        </MateriaTitle>
+                      </ContainerNoticiasColumn>
+                    </TouchableOpacity>
+                  ),
+                )}
               </ContainerCarrousel>
             </ScrollView>
             <ContainerLogoContato>

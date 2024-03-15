@@ -20,7 +20,7 @@ export const ContainerNavigation = styled.View`
   position: relative;
   top: -3px;
   left: 46px;
-  align-items: center;
+  align-items: flex-start;
 width: 100%;
   justify-content: center;
 `;
