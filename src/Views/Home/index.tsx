@@ -67,8 +67,9 @@ interface Drop {
   };
 }
 const HomeScreen = ({navigation}: {navigation: any}) => {
-  const [plusnews1, setPlusnews1] = useState(null);
+  const [plusnews1, setPlusnews1] = useState([]);
   const [plusnews2, setPlusnews2] = useState([]);
+  const [plusnews3, setPlusnews3] = useState([]);
   const {currentTrack, isPlaying, currentSong} = useAudioPlayer();
   const [promoImage, setPromoImage] = useState('');
   const [isMarquee, setIsMarquee] = useState(false);
@@ -189,6 +190,29 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
     };
 
     fetchPlusnews2();
+  }, []);
+  useEffect(() => {
+    const fetchPlusnews3 = async () => {
+      try {
+        const response = await fetch(
+          'https://plusfm.com.br/wp-json/wp/v2/posts?categories=2697&per_page=3',
+        );
+        const data = await response.json();
+        console.log('Plusnews3 carregadas do servidor:'); // Adiciona log de console para depuração
+        setPlusnews3(data);
+        await AsyncStorage.setItem('@plusnews3', JSON.stringify(data));
+      } catch (error) {
+        console.error(error);
+        const storedPlusnews3 = await AsyncStorage.getItem('@plusnews3');
+        if (storedPlusnews3) {
+          console.log('Plusnews3 carregadas do AsyncStorage:'); // Adiciona log de console para depuração
+          setPlusnews3(JSON.parse(storedPlusnews3));
+        }
+      }
+      setPendingOperations(prev => prev - 1); // Decrementa o contador quando a operação terminar
+    };
+
+    fetchPlusnews3();
   }, []);
   const currentHour = new Date().getHours();
   const currentDay = new Date().getDay();
@@ -632,7 +656,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
               showsVerticalScrollIndicator={false}
               showsHorizontalScrollIndicator={false}>
               <ContainerCarrousel>
-                {(plusnews1.concat(plusnews2) || []).map(
+                {(plusnews1.concat(plusnews2).concat(plusnews3) || []).map(
                   (post: any, index: number) => (
                     <TouchableOpacity
                       key={index}
