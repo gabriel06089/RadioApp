@@ -287,7 +287,7 @@ export default function RadioList({navigation}: {navigation: any}) {
         <ContainerHeader>
           <TouchableOpacity
             onPress={() => navigation.navigate('Home')}
-            hitSlop={{top: 10, left: 50, bottom: 10, right: 50}}>
+            style={{width: '100%'}}>
             <ContainerNavigation>
               <ArrowCircleLeft color="whitesmoke" weight="bold" size={35} />
             </ContainerNavigation>
